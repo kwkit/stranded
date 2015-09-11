@@ -45,3 +45,6 @@ end
 
 # Use devise for user authentication
 gem 'devise'
+
+# Resolve TZInfo::DataSourceNotFound errors on Windows
+gem 'tzinfo-data'
