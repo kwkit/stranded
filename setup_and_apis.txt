@@ -1,0 +1,80 @@
+Hello
+
+Install Ruby and Rails
+Install the Gems using 'bundle install'
+Install PostgreSQL(you need to run the db locally)
+Set a user(role) called 'rails'. This is so that rails can access the db as needed
+Run rake db:setup
+
+All REST APIs have a subdomain of api. e.g. if you are running the server on lvh.me:3000 apis
+are located at api.lvh.me:3000
+
+Currently available APIs(can move to a better place when the time comes)
+
+
+Users
+
+show user
+GET /users/:id
+{
+  "id":,
+  "email":
+  "created_at":,
+  "updated_at":,
+  "auth_token":
+}
+
+create new user
+POST /users
+{
+  "user" : {
+    "email":,
+    "password":,
+    "password_confirmation":
+  }
+}
+response
+user with status 201 if success
+errors with status 422 if failure
+
+update user
+include auth token in header: Authorization:<auth_token>
+POST /users/:id
+{
+  "user" : {
+    "email":,
+    "password":,
+    "password_confirmation":
+  }
+}
+response
+user with status 200 if success
+errors with status 422 if failure
+
+delete user
+include auth token in header: Authorization:<auth_token>
+DESTROY /users/:id
+
+
+Sessions
+
+create session
+POST /sessions
+{
+  "session": {
+    "email":,
+    "password":
+  }
+}
+response
+{
+  "id":,
+  "email":,
+  "created_at":,
+  "updated_at":,
+  "auth_token":,
+}
+!Copy the auth token and put in header for subsequent requests
+
+delete session
+DESTROY /sessions/:id
