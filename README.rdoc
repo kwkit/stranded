@@ -1,3 +1,5 @@
+= Stranded-api
+
 Install Ruby and Rails
 
 Install the Gems using 
