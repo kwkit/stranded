@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :bottles
+
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token
