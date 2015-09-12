@@ -410,6 +410,17 @@ module.exports = function (grunt) {
           dest: '.temp/concat/<%= yeoman.scripts %>'
         }]
       }
+    },
+
+    sass_globbing: {
+      stranded: {
+        files: {
+          '<%= yeoman.app %>/styles/_importMap.scss': '<%= yeoman.app %>/styles/partial/**/*.scss',
+        },
+        options: {
+          useSingleQuotes: false
+        }
+      }
     }
 
   });
@@ -506,9 +517,8 @@ module.exports = function (grunt) {
     if (target === 'compress') {
       return grunt.task.run(['compress', 'ionic:serve']);
     }
-
     grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
-    grunt.task.run(['wiredep', 'init', 'concurrent:ionic']);
+    grunt.task.run(['wiredep', 'sass_globbing', 'newer:jshint', 'init', 'concurrent:ionic']);
   });
   grunt.registerTask('emulate', function() {
     grunt.config('concurrent.ionic.tasks', ['ionic:emulate:' + this.args.join(), 'watch']);
@@ -537,6 +547,7 @@ module.exports = function (grunt) {
     'clean',
     'ngconstant:production',
     'wiredep',
+    'sass_globbing',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -560,4 +571,6 @@ module.exports = function (grunt) {
     'karma:continuous',
     'compress'
   ]);
+
+  grunt.loadNpmTasks('grunt-sass-globbing');
 };
