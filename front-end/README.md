@@ -11,9 +11,18 @@ you might need to install Cordova CLI
 
     $ sudo npm install -g cordova
     
+and grunt CLI
+
+    $ npm install -g grunt-cli
+    
+and compass
+
+    $ gem update --system
+    $ gem install compass
+    
 start the server
 
-    $ grunt serve:compress
+    $ grunt serve
     
 and check `http://localhost:8100/`
 
