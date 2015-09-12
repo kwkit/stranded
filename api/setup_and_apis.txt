@@ -78,3 +78,15 @@ response
 
 delete session
 DESTROY /sessions/:id
+
+
+Bottles
+
+create bottle
+include auth token in header: Authorization:<auth_token>
+POST /bottles
+{
+  "bottle": {
+    "message":,
+  }
+}
