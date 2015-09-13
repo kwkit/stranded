@@ -9,11 +9,22 @@
 .page-landing {
   background-color: $theme-color; 
   min-height: 100vh;
+  overflow: hidden;
 
   .title {
     text-align: center;
     font-size: 75px;
     padding-top: 90px;
+  }
+
+  .login-btn {
+    text-align: center;
+    margin-top: 40px;
+
+    .button-login {
+      z-index: 2;
+      background-color: $bottle-color;
+    }
   }
 
   .animated-background {
