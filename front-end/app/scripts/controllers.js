@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doSignUp = function() {
     console.log('Doing signup', $scope.signUpData);
-    console.log(sessionsApi.createSession($scope.signUpData))
+    console.log(sessionsApi.createSession($scope.signUpData));
   };
 })
 
