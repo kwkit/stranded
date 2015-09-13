@@ -3,13 +3,14 @@
     <form ng-submit="doLogin()">
       <div class="list list-inset">
         <label class="item item-input">
-          <input type="text" placeholder="Username" ng-model="loginData.username">
+          <input type="text" placeholder="your email address" ng-model="loginData.email">
         </label>
         <label class="item item-input">
-          <input type="password" placeholder="Password" ng-model="loginData.password">
+          <input type="password" placeholder="your password" ng-model="loginData.password">
         </label>
       </div>
       <button class="button button-block button-calm" type="submit">Log In!</button>
     </form>
+    <a class="button button-positive button-clear button-block" href="#/app/signup">Or create an account!</a>
   </ion-content>
 </ion-view>
