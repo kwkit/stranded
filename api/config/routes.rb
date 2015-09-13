@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :sessions, :only => [:create, :destroy]
       resources :bottles, :only => [:create]
       get "bottles/fish" => "bottles#fish"
+      put "bottles/release" => "bottles#release"
     end
 
   end

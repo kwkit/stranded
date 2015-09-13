@@ -1,5 +1,5 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release]
   respond_to :json
 
   def fish
@@ -27,6 +27,15 @@ class Api::V1::BottlesController < ApplicationController
     end
   end
 
+  def release
+    if current_user.open_bottle_id
+      Bottle.find(current_user.open_bottle_id).update(opened: false)
+      current_user.update(open_bottle_id: nil)
+      render json: {"response": "success", "message": "released bottle"}
+    else
+      render json: {"response": "success", "message": "not holding any bottle"}
+    end
+  end
   private
 
   def bottle_params
