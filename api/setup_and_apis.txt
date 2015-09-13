@@ -36,6 +36,13 @@ POST /users
 response
 user with status 201 if success
 errors with status 422 if failure
+{
+  "errors": {
+    "email":["has already been taken"],
+    "password_confirmation":["doesn't match Password"],
+    "password":["is too short (minimum is 8 characters)"]
+  }
+}
 
 update user
 include auth token in header: Authorization:<auth_token>
@@ -50,6 +57,13 @@ PATCH /users/:id
 response
 user with status 200 if success
 errors with status 422 if failure
+{
+  "errors": {
+    "email":["has already been taken"],
+    "password_confirmation":["doesn't match Password"],
+    "password":["is too short (minimum is 8 characters)"]
+  }
+}
 
 delete user
 include auth token in header: Authorization:<auth_token>
