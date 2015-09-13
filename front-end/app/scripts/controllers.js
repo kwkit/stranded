@@ -13,22 +13,23 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope){
+.controller('LoginCtrl', function($scope, sessionsApi){
   $scope.loginData = {};
-
-  // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
+    $scope.session = sessionsApi.createSession($scope.signUpData);
+    console.log($scope.session);
   };
 })
 
-.controller('SignUpCtrl', function($scope, sessionsApi){
+.controller('SignUpCtrl', function($scope, usersApi){
   $scope.signUpData = {};
-
-  // Perform the login action when the user submits the login form
   $scope.doSignUp = function() {
     console.log('Doing signup', $scope.signUpData);
-    console.log(sessionsApi.createSession($scope.signUpData));
+
+    // TODO: Authentication code here
+    var user = usersApi.createUser($scope.signUpData);
+    console.log(user);
   };
 })
 
