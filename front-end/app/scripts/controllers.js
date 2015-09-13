@@ -11,12 +11,23 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for login
+})
+
+.controller('LoginCtrl', function($scope){
   $scope.loginData = {};
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
+  };
+})
+
+.controller('SignUpCtrl', function($scope){
+  $scope.signUpData = {};
+
+  // Perform the login action when the user submits the login form
+  $scope.doSignUp = function() {
+    console.log('Doing signup', $scope.signUpData);
   };
 })
 
