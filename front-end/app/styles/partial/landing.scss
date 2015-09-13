@@ -38,4 +38,10 @@
       animation: sprite .1s steps(47) infinite;
     }
   }
+
+  @media (min-width: 769px) {
+    .animated-background {
+      display: none;
+    }
+  }
 }
