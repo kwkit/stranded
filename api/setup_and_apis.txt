@@ -39,7 +39,7 @@ errors with status 422 if failure
 
 update user
 include auth token in header: Authorization:<auth_token>
-POST /users/:id
+PATCH /users/:id
 {
   "user" : {
     "email":,
