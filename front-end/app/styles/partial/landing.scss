@@ -1,0 +1,28 @@
+@keyframes sprite {
+ 100% {
+   background-position: -8420px;
+ }
+}
+
+.page-landing {
+  .title {
+    text-align: center;
+    font-size: 75px;
+    margin-top: 90px;
+  }
+
+  .animated-background {
+    text-align: center;
+
+    #background-sprite {
+      margin: auto;
+      width: 400px;
+      height: 426px;
+      display: block;
+      background-image: url("/images/sprite.png");
+      background-size: cover;
+      animation: sprite 2.5s steps(21) infinite;
+      animation-direction: alternate;
+    }
+  }
+}
