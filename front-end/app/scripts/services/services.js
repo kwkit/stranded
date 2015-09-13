@@ -5,12 +5,12 @@ angular.module('starter.services', ['ngResource'])
     var sessionsApi = $resource('', {}, {
       'createSession': {
         method: 'POST',
-        url: 'http://api.localhost:3000/sessions',
+        url: 'http://api.lvh.me:3000/sessions',
         isArray: true
       },
       'destroySession': {
         method: 'DELETE',
-        url: 'http://api.localhost:3000/sessions/:id'
+        url: 'http://api.lvh.me:3000/sessions/:id'
       }
     });
     return {
