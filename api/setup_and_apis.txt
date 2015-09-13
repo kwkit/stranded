@@ -90,3 +90,16 @@ POST /bottles
     "message":,
   }
 }
+
+fish bottle
+include auth token in header: Authorization:<auth_token>
+GET /bottles/fish
+response
+{
+  "id":,
+  "message":,
+  "opened":,
+  "user_id":,
+  "created_at":,
+  "updated_at":
+}
