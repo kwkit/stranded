@@ -1,28 +1,49 @@
+@import 'color_constant';
+
 @keyframes sprite {
- 100% {
-   background-position: -8420px;
- }
+  100% {
+   background-position: -100%;
+  }
 }
 
 .page-landing {
+  background-color: $theme-color; 
+  min-height: 100vh;
+
   .title {
     text-align: center;
     font-size: 75px;
-    margin-top: 90px;
+    padding-top: 90px;
   }
 
   .animated-background {
-    text-align: center;
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+
+    &:after {
+      padding-top: 106.5%;
+      display: block;
+      content: '';
+    }
 
     #background-sprite {
       margin: auto;
-      width: 400px;
-      height: 426px;
-      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
       background-image: url("/images/sprite.png");
       background-size: cover;
-      animation: sprite 2.5s steps(21) infinite;
-      animation-direction: alternate;
+      animation: sprite .1s steps(47) infinite;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .animated-background {
+      display: none;
     }
   }
 }

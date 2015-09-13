@@ -90,3 +90,25 @@ POST /bottles
     "message":,
   }
 }
+
+fish bottle
+include auth token in header: Authorization:<auth_token>
+GET /bottles/fish
+response
+{
+  "id":,
+  "message":,
+  "opened":,
+  "user_id":,
+  "created_at":,
+  "updated_at":
+}
+
+release current bottle
+include auth token in header: Authorization:<auth_token>
+PUT /bottles/release
+response
+{
+  "response": "success",
+  "message": "released bottle"/"not holding any bottle"
+}
