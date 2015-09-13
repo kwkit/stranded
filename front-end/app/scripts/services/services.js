@@ -1,5 +1,6 @@
 'use strict';
-angular.module('starter.services', [])
+
+angular.module('starter.services', ['ngResource'])
   .factory('sessionsApi', function($resource){
     var sessionsApi = $resource('', {}, {
       'createSession': {
