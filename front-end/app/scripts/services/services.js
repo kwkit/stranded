@@ -6,7 +6,10 @@ angular.module('starter.services', ['ngResource'])
       'createSession': {
         method: 'POST',
         url: 'http://api.lvh.me:3000/sessions',
-        isArray: true
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json'
+        }
       },
       'destroySession': {
         method: 'DELETE',
@@ -15,7 +18,11 @@ angular.module('starter.services', ['ngResource'])
     });
     return {
       createSession: function(data){
-        return sessionsApi.createSession(data);
+        return sessionsApi.createSession(
+            {
+              'session': data
+            }
+        );
       },
       destroySession: function(data){
         return sessionsApi.destroySession(data);
