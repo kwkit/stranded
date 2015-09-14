@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $scope.session = sessionsApi.createSession($scope.signUpData);
+    $scope.session = sessionsApi.createSession($scope.loginData);
     console.log($scope.session);
   };
 })
