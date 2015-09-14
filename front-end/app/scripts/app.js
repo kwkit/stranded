@@ -53,12 +53,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
+
   .state('app.signup', {
     url: '/signup',
     views: {
       'menuContent': {
         templateUrl: 'templates/signup.html',
         controller: 'SignUpCtrl'
+      }
+    }
+  })
+
+  .state('app.main', {
+    url: '/main',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/main.html',
+        controller: 'MainCtrl'
       }
     }
   });

@@ -13,12 +13,22 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, sessionsApi){
+.controller('LoginCtrl', function($scope, $state, sessionsApi){
   $scope.loginData = {};
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $scope.session = sessionsApi.createSession($scope.loginData);
-    console.log($scope.session);
+
+    sessionsApi.createSession($scope.loginData).$promise.then(
+        function(response){
+          $scope.session = response;
+          console.log($scope.session);
+          $state.go('app.main');
+        },
+        function(error){
+          console.log("Error:");
+          console.log(error);
+        }
+    );
   };
 })
 
@@ -31,4 +41,8 @@ angular.module('starter.controllers', [])
     var user = usersApi.createUser($scope.signUpData);
     console.log(user);
   };
+})
+
+.controller('MainCtrl', function($scope){
+  console.log($scope.session);
 });
