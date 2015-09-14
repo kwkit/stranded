@@ -56,4 +56,9 @@ angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope){
   console.log($scope.session);
+})
+
+.controller('ProfileCtrl', function($scope, $rootScope){
+  console.log('Session', $rootScope.session);
+  $scope.email = $rootScope.session.email;
 });
