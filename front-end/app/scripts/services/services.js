@@ -49,11 +49,6 @@ angular.module('starter.services', ['ngResource'])
             'Accept' : 'application/json'
           }
         },
-        'updateUser': {
-          method: 'PATCH',
-          url: 'http://api.lvh.me:3000/users/:id',
-          isArray: true
-        },
         'deleteUser': {
           method: 'DELETE',
           url: 'http://api.lvh.me:3000/users/:id',
@@ -70,8 +65,19 @@ angular.module('starter.services', ['ngResource'])
               }
           );
         },
-        updateUser: function(data){
-          return usersApi.updateUser(data);
+        updateUser: function(data, auth_token){
+          var updateUserApi = $resource('http://api.lvh.me:3000/users/', {'user': data}, {
+            'updateUser': {
+              method: 'PATCH',
+              url: 'http://api.lvh.me:3000/users/:id',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept' : 'application/json',
+                'Authorization': auth_token
+              }
+            }
+          });
+          return updateUserApi.updateUser();
         },
         deleteUser: function(data){
           return usersApi.deleteUser(data);
