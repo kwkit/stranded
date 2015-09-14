@@ -25,7 +25,11 @@ angular.module('starter.services', ['ngResource'])
         );
       },
       destroySession: function(data){
-        return sessionsApi.destroySession(data);
+        return sessionsApi.destroySession(
+            {
+              'id': data.auth_token
+            }
+        );
       }
     };
   })

@@ -2,7 +2,7 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function() {
+.controller('AppCtrl', function($scope, $rootScope, $state, sessionsApi) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,23 +10,34 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+  $scope.doLogout = function() {
+    console.log('Doing logout');
+    console.log($rootScope.session);
+    sessionsApi.destroySession($rootScope.session).$promise.then(
+        function(response){
+          console.log(response);
+          $state.go('app.landing');
+        },
+        function(error){
+          console.log('Error:', error);
+        }
+    );
+  };
 })
 
-.controller('LoginCtrl', function($scope, $state, sessionsApi){
+.controller('LoginCtrl', function($scope, $rootScope, $state, sessionsApi){
   $scope.loginData = {};
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
     sessionsApi.createSession($scope.loginData).$promise.then(
         function(response){
-          $scope.session = response;
+          $rootScope.session = response;
           console.log($scope.session);
           $state.go('app.main');
         },
         function(error){
-          console.log("Error:");
-          console.log(error);
+          console.log('Error:', error);
         }
     );
   };
