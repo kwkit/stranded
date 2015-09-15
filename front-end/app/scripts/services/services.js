@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('starter.services', ['ngResource'])
-  .factory('sessionsApi', function($resource){
+  .factory('sessionsApi', function($resource, ENV){
     var sessionsApi = $resource('', {}, {
       'createSession': {
         method: 'POST',
-        url: 'http://api.lvh.me:3000/sessions',
+        url: ENV.apiEndpoint + 'api/sessions',
         headers: {
           'Content-Type': 'application/json',
           'Accept' : 'application/json'
@@ -13,7 +13,7 @@ angular.module('starter.services', ['ngResource'])
       },
       'destroySession': {
         method: 'DELETE',
-        url: 'http://api.lvh.me:3000/sessions/:id'
+        url: ENV.apiEndpoint + 'api/sessions/:id'
       }
     });
     return {
@@ -34,16 +34,16 @@ angular.module('starter.services', ['ngResource'])
     };
   })
 
-  .factory('usersApi', function($resource){
+  .factory('usersApi', function($resource, ENV){
       var usersApi = $resource('', {}, {
         'viewUser': {
           method: 'GET',
-          url: 'http://api.lvh.me:3000/users/:id',
+          url: ENV.apiEndpoint + 'api/users/:id',
           isArray: true
         },
         'createUser': {
           method: 'POST',
-          url: 'http://api.lvh.me:3000/users',
+          url: ENV.apiEndpoint + 'api/users',
           headers: {
             'Content-Type': 'application/json',
             'Accept' : 'application/json'
@@ -56,7 +56,7 @@ angular.module('starter.services', ['ngResource'])
         },
         'deleteUser': {
           method: 'DELETE',
-          url: 'http://api.lvh.me:3000/users/:id',
+          url: ENV.apiEndpoint + 'api/users/:id',
         }
       });
       return {
@@ -70,8 +70,19 @@ angular.module('starter.services', ['ngResource'])
               }
           );
         },
-        updateUser: function(data){
-          return usersApi.updateUser(data);
+        updateUser: function(data, auth_token){
+          var updateUserApi = $resource('http://api.lvh.me:3000/users/', {'user': data}, {
+            'updateUser': {
+              method: 'PATCH',
+              url: ENV.apiEndpoint + 'api/users/:id',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept' : 'application/json',
+                'Authorization': auth_token
+              }
+            }
+          });
+          return updateUserApi.updateUser();
         },
         deleteUser: function(data){
           return usersApi.deleteUser(data);
