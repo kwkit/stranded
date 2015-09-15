@@ -8,7 +8,7 @@ angular.module('starter.services', ['ngResource'])
         url: ENV.apiEndpoint + 'api/sessions',
         headers: {
           'Content-Type': 'application/json',
-          'Accept' : 'application/json'
+          'Accept': 'application/json'
         }
       },
       'destroySession': {
@@ -51,7 +51,7 @@ angular.module('starter.services', ['ngResource'])
         },
         'updateUser': {
           method: 'PATCH',
-          url: 'http://api.lvh.me:3000/users/:id',
+          url: ENV.apiEndpoint + 'app/users/:id',
           isArray: true
         },
         'deleteUser': {

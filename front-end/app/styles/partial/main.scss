@@ -1,4 +1,10 @@
 // Your application styles go here
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300italic,100,100italic,300,400italic,500italic,700italic,900italic);
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .button {
   border-radius: 5px;
   border: 0px;
