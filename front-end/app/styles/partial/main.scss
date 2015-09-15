@@ -1,11 +1,27 @@
 // Your application styles go here
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300italic,100,100italic,300,400italic,500italic,700italic,900italic);
+@import 'color_constant';
 
 * {
   font-family: 'Roboto', sans-serif;
 }
 
+$common-border-radius: 10px;
+
 .button {
-  border-radius: 5px;
+  border-radius: $common-border-radius;
   border: 0px;
+}
+
+.item-input {
+  border-radius: $common-border-radius !important; // use important to override more specific rule
+  border: 0px;
+}
+
+.button-normal {
+  background-color: $theme-color-blue !important;
+}
+
+.bar.bar-calm {
+  background-color: $theme-color-blue;
 }

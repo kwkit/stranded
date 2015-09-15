@@ -1,0 +1,17 @@
+@import 'color_constant';
+
+.page-login, .page-signup {
+  background-color: $theme-color;
+
+  form {
+    margin-top: 40px;
+
+    .list {
+      background-color: transparent;
+
+      .item {
+        margin: 20px 0;
+      }
+    }
+  }
+}
