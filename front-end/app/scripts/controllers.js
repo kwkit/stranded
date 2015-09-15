@@ -52,8 +52,4 @@ angular.module('starter.controllers', [])
     var user = usersApi.createUser($scope.signUpData);
     console.log(user);
   };
-})
-
-.controller('MainCtrl', function($scope){
-  console.log($scope.session);
 });

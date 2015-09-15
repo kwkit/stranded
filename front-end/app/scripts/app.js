@@ -64,12 +64,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('app.main', {
-    url: '/main',
+  .state('app.home', {
+    url: '/home',
     views: {
       'menuContent': {
-        templateUrl: 'templates/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
       }
     }
   });
