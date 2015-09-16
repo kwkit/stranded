@@ -43,19 +43,15 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('SignUpCtrl', function($scope, usersApi){
+.controller('SignUpCtrl', function($scope, usersApi) {
   $scope.signUpData = {};
-  $scope.doSignUp = function() {
+  $scope.doSignUp = function () {
     console.log('Doing signup', $scope.signUpData);
 
     // TODO: Authentication code here
     var user = usersApi.createUser($scope.signUpData);
     console.log(user);
   };
-})
-
-.controller('MainCtrl', function($scope){
-  console.log($scope.session);
 })
 
 .controller('ProfileCtrl', function($scope, $rootScope){

@@ -30,7 +30,9 @@ gem 'bcrypt', '3.1.10'
 gem 'rack-cors', :require => 'rack/cors'
 
 # Use Unicorn as the app server
-gem 'unicorn'
+platforms :ruby do # linux
+  gem 'unicorn'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
