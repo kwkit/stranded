@@ -27,52 +27,76 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  .state('landing', {
+    url: '/landing',
+    templateUrl: 'templates/landing.html',
+    controller: 'LandingCtrl'
+  })
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
+  })
+
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'templates/signup.html',
+    controller: 'SignUpCtrl'
+  })
+
+  .state('home', {
+    url: '/home',
+    templateUrl: 'templates/home.html',
+    controller: 'HomeCtrl'
+  })
+
   .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/app.html',
     controller: 'AppCtrl'
   })
 
-  .state('app.landing', {
-    url: '/landing',
+  .state('app.grab', {
+    url: '/grab',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/landing.html',
-        controller: 'LandingCtrl'
+      'tab-grab': {
+        templateUrl: 'templates/grab.html',
+        controller: 'GrabCtrl'
       }
     }
   })
 
-  .state('app.login', {
-    url: '/login',
+  .state('app.throw', {
+    url: '/throw',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/login.html',
-        controller: 'LoginCtrl'
+      'tab-throw': {
+        templateUrl: 'templates/throw.html',
+        controller: 'ThrowCtrl'
       }
     }
   })
 
-  .state('app.signup', {
-    url: '/signup',
+  .state('app.message', {
+    url: '/message',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/signup.html',
-        controller: 'SignUpCtrl'
+      'tab-message': {
+        templateUrl: 'templates/message.html',
+        controller: 'MessageCtrl'
       }
     }
   })
 
-  .state('app.home', {
-    url: '/home',
+  .state('app.setting', {
+    url: '/setting',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/home.html',
-        controller: 'HomeCtrl'
+      'tab-setting': {
+        templateUrl: 'templates/setting.html',
+        controller: 'SettingCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
+  $urlRouterProvider.otherwise('/landing');
 });
