@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
         function(response){
           $rootScope.session = response;
           console.log($scope.session);
-          $state.go('app.main');
+          $state.go('app.home');
         },
         function(error){
           console.log('Error:', error);
