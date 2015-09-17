@@ -7,18 +7,18 @@ class Api::V1::BottlesController < ApplicationController
       bottle = Bottle.find(current_user.open_bottle_id)
       conversation = bottle.build_conversation
       conversation.conversation_participations.build(user_id: bottle.user_id,
-                                                     conversation_name: "Talk to responder")
+                                                     conversation_name: 'Talk to responder')
       responder = conversation.conversation_participations.build(user_id: current_user.id,
-                                                                 conversation_name: "Talk to sender")
+                                                                 conversation_name: 'Talk to sender')
       responder.messages.build(reply_params)
       if bottle.save
         current_user.update(open_bottle_id: nil)
-        render json: { "response": "success", "message": "conversation created"}
+        render json: { response: 'success', message: 'conversation created'}
       else
         render json: { errors: bottle.errors }
       end
     else
-      render json: { errors: "not holding any bottles"}
+      render json: { errors: 'not holding any bottles'}
     end
   end
 
@@ -33,7 +33,7 @@ class Api::V1::BottlesController < ApplicationController
       respond_with bottle
     else
       current_user.update(open_bottle_id: nil)
-      render json: { errors: "failed to get a bottle"}
+      render json: { errors: 'failed to get a bottle'}
     end
   end
 
@@ -51,9 +51,9 @@ class Api::V1::BottlesController < ApplicationController
     if current_user.open_bottle_id
       Bottle.find(current_user.open_bottle_id).update(opened: false)
       current_user.update(open_bottle_id: nil)
-      render json: {"response": "success", "message": "released bottle"}
+      render json: {response: 'success', message: 'released bottle'}
     else
-      render json: {"response": "success", "message": "not holding any bottle"}
+      render json: {response: 'success', message: 'not holding any bottle'}
     end
   end
   private
