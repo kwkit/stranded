@@ -3,7 +3,23 @@ class Api::V1::BottlesController < ApplicationController
   respond_to :json
 
   def reply
-
+    if current_user.open_bottle_id
+      bottle = Bottle.find(current_user.open_bottle_id)
+      conversation = bottle.build_conversation
+      conversation.conversation_participations.build(user_id: bottle.user_id,
+                                                     conversation_name: "Talk to responder")
+      responder = conversation.conversation_participations.build(user_id: current_user.id,
+                                                                 conversation_name: "Talk to sender")
+      responder.messages.build(reply_params)
+      if bottle.save
+        current_user.update(open_bottle_id: nil)
+        render json: { "response": "success", "message": "conversation created"}
+      else
+        render json: { errors: bottle.errors }
+      end
+    else
+      render json: { errors: "not holding any bottles"}
+    end
   end
 
   def fish
@@ -44,5 +60,9 @@ class Api::V1::BottlesController < ApplicationController
 
   def bottle_params
     params.require(:bottle).permit(:message)
+  end
+
+  def reply_params
+    params.require(:reply).permit(:message)
   end
 end

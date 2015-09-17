@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :bottles, :only => [:create]
       get "bottles/fish" => "bottles#fish"
       put "bottles/release" => "bottles#release"
+      put "bottles/reply" => "bottles#reply"
     end
 
   end
