@@ -126,3 +126,15 @@ response
   "response": "success",
   "message": "released bottle"/"not holding any bottle"
 }
+
+reply current bottle
+include auth token in header: Authorization:<auth_token>
+PUT /bottles/reply
+{
+  "reply": {
+    "message":"blahblah"
+  }
+}
+response
+{ "response": "success", "message": "conversation created" }
+{ "errors":}
