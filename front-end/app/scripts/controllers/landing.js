@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter')
+angular.module('stranded.controllers')
   .controller('LandingCtrl', function ($scope) {
     console.log($scope);
   });

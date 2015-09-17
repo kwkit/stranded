@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', [])
+angular.module('stranded.controllers', [])
 
 .controller('AppCtrl', function($scope, $rootScope, $state, sessionsApi) {
 

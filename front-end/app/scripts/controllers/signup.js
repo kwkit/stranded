@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter')
+angular.module('stranded.controllers')
   .controller('SignUpCtrl', function ($scope, usersApi) {
     $scope.signUpData = {};
     $scope.doSignUp = function () {

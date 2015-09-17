@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter')
+angular.module('stranded.controllers')
   .controller('LoginCtrl', function ($scope, $rootScope, $state, sessionsApi) {
     $scope.loginData = {};
     $scope.doLogin = function () {

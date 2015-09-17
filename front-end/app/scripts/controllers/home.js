@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter')
+angular.module('stranded.controllers')
   .controller('HomeCtrl', function($scope){
     console.log($scope.session);
   });
