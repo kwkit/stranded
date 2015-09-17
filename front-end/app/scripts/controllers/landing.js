@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('starter')
-  .controller('LandingCtrl', function ($scope, $ionicSideMenuDelegate) {
-     $ionicSideMenuDelegate.canDragContent(false);
+  .controller('LandingCtrl', function ($scope) {
+    console.log($scope);
   });

@@ -1,12 +1,13 @@
 @import 'color_constant';
 
 .page-home {
+  padding-top: 80px;
   background-color: $theme-color;
 
   .section-btn {
     margin: 40px 0;
 
-    button {
+    a {
       height: 100px;
 
       .col {

@@ -22,6 +22,13 @@ $common-border-radius: 10px;
   background-color: $theme-color-blue !important;
 }
 
-.bar.bar-calm {
-  background-color: $theme-color-blue;
+.bar {
+  background-color: $theme-color-blue !important;
+  .title {
+    color: white !important;
+  }
+}
+
+.tab-nav {
+  top: 0px !important;
 }
