@@ -66,7 +66,7 @@ angular.module('stranded.services', ['ngResource'])
           );
         },
         updateUser: function(data, auth_token){
-          var updateUserApi = $resource('http://api.lvh.me:3000/users/', {'user': data}, {
+          var updateUserApi = $resource(ENV.apiEndpoint + 'api/users/', {'user': data}, {
             'updateUser': {
               method: 'PATCH',
               url: ENV.apiEndpoint + 'api/users/:id',
@@ -83,4 +83,48 @@ angular.module('stranded.services', ['ngResource'])
           return usersApi.deleteUser(data);
         }
       };
+    })
+
+  .factory('bottlesApi', function($resource, $rootScope, ENV){
+    var auth_token = $rootScope.session.auth_token;
+    var bottlesApi = $resource('', {}, {
+      'fishBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/bottles/fish',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'createBottle': {
+        method: 'POST',
+        url: ENV.apiEndpoint + 'api/bottles',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'releaseBottle': {
+        method: 'PUT',
+        url: ENV.apiEndpoint + 'api/bottles/release',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      }
     });
+    return {
+      fishBottle: function(){
+        return bottlesApi.fishBottle();
+      },
+      createBottle: function(message){
+        return bottlesApi.createBottle(message);
+      },
+      releaseBottle: function(){
+        return bottlesApi.releaseBottle();
+      }
+    };
+  });
