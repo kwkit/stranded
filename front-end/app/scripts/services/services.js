@@ -85,21 +85,46 @@ angular.module('stranded.services', ['ngResource'])
       };
     })
 
-  .factory('bottlesApi', function($resource, ENV){
+  .factory('bottlesApi', function($resource, $rootScope, ENV){
+    var auth_token = $rootScope.session.auth_token;
+    var bottlesApi = $resource('', {}, {
+      'fishBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/bottles/fish',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'createBottle': {
+        method: 'POST',
+        url: ENV.apiEndpoint + 'api/bottles',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'releaseBottle': {
+        method: 'PUT',
+        url: ENV.apiEndpoint + 'api/bottles/release',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      }
+    });
     return {
-      fishBottle: function(auth_token){
-        var fishBottleApi = $resource(ENV.apiEndpoint + 'api/bottles/', {}, {
-          'fishBottle': {
-            method: 'GET',
-            url: ENV.apiEndpoint + 'api/bottles/fish',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept' : 'application/json',
-              'Authorization': auth_token
-            }
-          }
-        });
-        return fishBottleApi.fishBottle();
+      fishBottle: function(){
+        return bottlesApi.fishBottle();
+      },
+      createBottle: function(message){
+        return bottlesApi.createBottle(message);
+      },
+      releaseBottle: function(){
+        return bottlesApi.releaseBottle();
       }
     };
   });
