@@ -66,7 +66,7 @@ angular.module('stranded.services', ['ngResource'])
           );
         },
         updateUser: function(data, auth_token){
-          var updateUserApi = $resource('http://api.lvh.me:3000/users/', {'user': data}, {
+          var updateUserApi = $resource(ENV.apiEndpoint + 'api/users/', {'user': data}, {
             'updateUser': {
               method: 'PATCH',
               url: ENV.apiEndpoint + 'api/users/:id',
@@ -83,4 +83,23 @@ angular.module('stranded.services', ['ngResource'])
           return usersApi.deleteUser(data);
         }
       };
-    });
+    })
+
+  .factory('bottlesApi', function($resource, ENV){
+    return {
+      fishBottle: function(auth_token){
+        var fishBottleApi = $resource(ENV.apiEndpoint + 'api/bottles/', {}, {
+          'fishBottle': {
+            method: 'GET',
+            url: ENV.apiEndpoint + 'api/bottles/fish',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept' : 'application/json',
+              'Authorization': auth_token
+            }
+          }
+        });
+        return fishBottleApi.fishBottle();
+      }
+    };
+  });
