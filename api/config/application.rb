@@ -21,7 +21,7 @@ module Stranded
     # config.i18n.default_locale = :de
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins 'localhost:8100'
+        origins 'localhost:8100', 'http://ec2-54-255-184-0.ap-southeast-1.compute.amazonaws.com'
         resource '*',
                  :headers => :any,
                  :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
