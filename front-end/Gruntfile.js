@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://api.yoursite.com/'
+            apiEndpoint: 'http://ec2-54-255-184-0.ap-southeast-1.compute.amazonaws.com/'
           }
         }
       }
