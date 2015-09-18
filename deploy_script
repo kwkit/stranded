@@ -1,0 +1,10 @@
+#!/bin/bash
+echo Stopping services
+service nginx stop
+service unicorn_stranded stop
+echo Setting up
+(cd api; rake db:migrate RAILS_ENV=production)
+(cd front-end; grunt build)
+echo Starting services
+service unicorn_stranded start
+service nginx start
