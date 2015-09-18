@@ -102,6 +102,7 @@ POST /bottles
 {
   "bottle": {
     "message":,
+    "author":
   }
 }
 
@@ -112,6 +113,8 @@ response
 {
   "bottle": {
     "message":"Hello is anyone out there?", //THIS IS THE MAIN MESSAGE OF THE BOTTLE
+    "author": "Timon and Pumba",
+    "created_at": DATETIME,
     "messages":[ //THIS IS FOR TEH CHAIN OF MESSAGES
         {"message": "Who are you?"},
         {"message": "LOL im lost too"}
