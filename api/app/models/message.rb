@@ -1,4 +1,4 @@
 class Message < ActiveRecord::Base
   validates :message, presence: true
-  belongs_to :conversation_participation
+  belongs_to :bottle
 end

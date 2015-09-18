@@ -1,19 +1,16 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release]
   respond_to :json
 
   def reply
     if current_user.open_bottle_id
       bottle = Bottle.find(current_user.open_bottle_id)
-      conversation = bottle.build_conversation
-      conversation.conversation_participations.build(user_id: bottle.user_id,
-                                                     conversation_name: 'Talk to responder')
-      responder = conversation.conversation_participations.build(user_id: current_user.id,
-                                                                 conversation_name: 'Talk to sender')
-      responder.messages.build(reply_params)
+      message = bottle.messages.build(reply_params)
+      message.user_id = current_user.id
+      bottle.opened = false
       if bottle.save
         current_user.update(open_bottle_id: nil)
-        render json: { response: 'success', message: 'conversation created'}
+        render json: { response: 'success', message: 'reply posted'}
       else
         render json: { errors: bottle.errors }
       end
@@ -30,7 +27,7 @@ class Api::V1::BottlesController < ApplicationController
     if bottle
       bottle.update(opened: true)
       current_user.update(open_bottle_id: bottle.id)
-      respond_with bottle
+      render json: BottleSerializer.new(bottle).as_json
     else
       current_user.update(open_bottle_id: nil)
       render json: { errors: 'failed to get a bottle'}

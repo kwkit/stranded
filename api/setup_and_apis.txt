@@ -110,12 +110,13 @@ include auth token in header: Authorization:<auth_token>
 GET /bottles/fish
 response
 {
-  "id":,
-  "message":,
-  "opened":,
-  "user_id":,
-  "created_at":,
-  "updated_at":
+  "bottle": {
+    "message":"Hello is anyone out there?", //THIS IS THE MAIN MESSAGE OF THE BOTTLE
+    "messages":[ //THIS IS FOR TEH CHAIN OF MESSAGES
+        {"message": "Who are you?"},
+        {"message": "LOL im lost too"}
+    ]
+  }
 }
 
 release current bottle
@@ -129,12 +130,12 @@ response
 
 reply current bottle
 include auth token in header: Authorization:<auth_token>
-PUT /bottles/reply
+POST /bottles/reply
 {
   "reply": {
     "message":"blahblah"
   }
 }
 response
-{ "response": "success", "message": "conversation created" }
+{ "response": "success", "message": "reply posted" }
 { "errors":}
