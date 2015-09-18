@@ -13,6 +13,18 @@
   }
 }
 
+@keyframes bottle-x {
+  100% {
+    background-position-x: 150%;
+  }
+}
+
+@keyframes bottle-y {
+  100% {
+    background-position-y: 30px;
+  }
+}
+
 .page-landing {
   background-color: $theme-color; 
   min-height: 100vh;
@@ -83,6 +95,16 @@
       height: 108px;
     }
 
+    .bottle {
+      width: 150%;
+      margin-left: -50%;
+      height: 200px;
+      background: url("/images/bottle.svg") no-repeat;
+      animation: bottle-x 11.5s linear infinite, bottle-y 1s cubic-bezier(0.45, 0.02, 0.58, 1) infinite alternate;
+      bottom: 30px;
+      position: absolute;
+    }
+
     #wave-1 {
       background: url("/images/wave1.svg") repeat;
       animation: wave 50s linear infinite;
@@ -126,5 +148,9 @@
     // .animated-background {
     //   display: none;
     // }
+
+    .animated-wave {
+      display: none;
+    }
   }
 }

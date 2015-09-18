@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="41.291271mm"
-   height="42.429314mm"
-   viewBox="0 0 146.30765 150.34009"
+   width="146"
+   height="150"
+   viewBox="0 0 146 150"
    id="svg6447"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -79,7 +79,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     units="px" />
   <metadata
      id="metadata6452">
     <rdf:RDF>
@@ -96,7 +97,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-859.22624,-280.9387)">
+     transform="translate(-859.22624,-281.27879)">
     <g
        style="display:inline"
        id="g6371"
