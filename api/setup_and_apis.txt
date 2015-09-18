@@ -116,8 +116,16 @@ response
     "author": "Timon and Pumba",
     "created_at": DATETIME,
     "messages":[ //THIS IS FOR TEH CHAIN OF MESSAGES
-        {"message": "Who are you?"},
-        {"message": "LOL im lost too"}
+        {
+          "message": "Who are you?",
+          "author": "Simba",
+          "created_at": DATETIME
+        },
+        {
+          "message": "LOL im lost too",
+          "author": "Mike Tyson",
+          "created_at": DATETIME
+        }
     ]
   }
 }
