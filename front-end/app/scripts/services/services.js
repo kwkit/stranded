@@ -86,7 +86,11 @@ angular.module('stranded.services', ['ngResource'])
     })
 
   .factory('bottlesApi', function($resource, $rootScope, ENV){
-    var auth_token = $rootScope.session.auth_token;
+    var auth_token;
+    if($rootScope.session) {
+      auth_token = $rootScope.session.auth_token;
+    }
+
     var bottlesApi = $resource('', {}, {
       'fishBottle': {
         method: 'GET',
@@ -121,7 +125,12 @@ angular.module('stranded.services', ['ngResource'])
         return bottlesApi.fishBottle();
       },
       createBottle: function(message){
-        return bottlesApi.createBottle(message);
+        var bottle = {
+          bottle: {
+            message: message
+          }
+        };
+        return bottlesApi.createBottle(bottle);
       },
       releaseBottle: function(){
         return bottlesApi.releaseBottle();
