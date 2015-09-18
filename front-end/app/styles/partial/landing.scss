@@ -6,6 +6,13 @@
   }
 }
 
+@keyframes wave {
+  100% {
+    // some hack to avoid flicking
+    background-position-x: -1000%;
+  }
+}
+
 .page-landing {
   background-color: $theme-color; 
   min-height: 100vh;
@@ -45,28 +52,56 @@
     display: none;
   }
 
-  .animated-background {
-    width: 100%;
-    display: inline-block;
-    position: absolute;
-    bottom: 0px;
+  // .animated-background {
+  //   width: 100%;
+  //   display: inline-block;
+  //   position: absolute;
+  //   bottom: 0px;
 
-    &:after {
-      padding-top: 106.5%;
-      display: block;
-      content: '';
+  //   &:after {
+  //     padding-top: 106.5%;
+  //     display: block;
+  //     content: '';
+  //   }
+
+  //   #background-sprite {
+  //     margin: auto;
+  //     position: absolute;
+  //     top: 0;
+  //     bottom: 0;
+  //     right: 0;
+  //     left: 0;
+  //     background-image: url("/images/sprite.png");
+  //     background-size: cover;
+  //     animation: sprite 3s steps(47) infinite;
+  //   }
+  // }
+
+  .animated-wave {
+    .wave {
+      width: 100%;
+      height: 108px;
     }
 
-    #background-sprite {
-      margin: auto;
+    #wave-1 {
+      background: url("/images/wave1.svg") repeat;
+      animation: wave 50s linear infinite;
+      bottom: 0px;
       position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background-image: url("/images/sprite.png");
-      background-size: cover;
-      animation: sprite 3s steps(47) infinite;
+    }
+
+    #wave-2 {
+      background: url("/images/wave2.svg") repeat;
+      animation: wave 80s linear infinite;
+      bottom: 50px;
+      position: absolute;
+    }
+
+    #wave-3 {
+      background: url("/images/wave3.svg") repeat;
+      animation: wave 110s linear infinite;
+      bottom: 100px;
+      position: absolute;
     }
   }
 
@@ -88,8 +123,8 @@
       display: block;
     }
 
-    .animated-background {
-      display: none;
-    }
+    // .animated-background {
+    //   display: none;
+    // }
   }
 }
