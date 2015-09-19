@@ -50,7 +50,14 @@
   }
 
   .slogan {
-    
+    text-align: center;
+    margin-top: 20px;
+    opacity: 1;
+    transition: all .3s ease-in-out;
+  }
+
+  .hidden-slogan {
+    opacity: 0;
   }
 
   .login-btn {
