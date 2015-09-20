@@ -17,7 +17,7 @@ angular.module('stranded.controllers')
       $timeout(function () {
         $scope.slogan = $scope.slogans[i];
         $scope.showSlogan = true;
-      }, 500)
+      }, 500);
     }, 3000);
 
   });
