@@ -1,31 +1,46 @@
 @import 'color_constant';
 
 .page-home {
-  padding-top: 80px;
   background-color: $theme-color;
 
-  .section-btn {
-    margin: 40px 0;
+  // .section-btn {
+  //   margin: 40px 0;
 
-    a {
-      height: 100px;
+  //   a {
+  //     height: 100px;
 
-      .col {
-        display: flex;
-      }
+  //     .col {
+  //       display: flex;
+  //     }
 
-      .btn-text-wrapper {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        margin-left: 30px;
+  //     .btn-text-wrapper {
+  //       display: flex;
+  //       align-items: center;
+  //       text-align: center;
+  //       margin-left: 30px;
 
-        .btn-text {
-          margin-top: -5px;
-          font-size: 26px;
-          font-weight: 900;
-        }
-      }
+  //       .btn-text {
+  //         margin-top: -5px;
+  //         font-size: 26px;
+  //         font-weight: 900;
+  //       }
+  //     }
+  //   }
+  // }
+
+  .background-sprite {
+    & > div {
+      position: absolute;
+    }
+
+    #cloud-1 {
+      top: 0px;
+      right: 20px;
+    }
+
+    #cloud-2 {
+      top: 60px;
+      left: 0px;
     }
   }
 }

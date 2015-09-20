@@ -35,7 +35,7 @@
     position: absolute;
     height: 450px;
     width: calc(100vw + 60px);
-    background-image: url("/images/wave.svg");
+    background-image: url("/images/landing/wave.svg");
     background-position-y: -140px;
     margin-left: -30px;
     margin-right: -30px;
@@ -97,7 +97,7 @@
   //     bottom: 0;
   //     right: 0;
   //     left: 0;
-  //     background-image: url("/images/sprite.png");
+  //     background-image: url("/images/landing/sprite.png");
   //     background-size: cover;
   //     animation: sprite 3s steps(47) infinite;
   //   }
@@ -113,28 +113,28 @@
       width: 150%;
       margin-left: -50%;
       height: 200px;
-      background: url("/images/bottle.svg") no-repeat;
+      background: url("/images/landing/bottle.svg") no-repeat;
       animation: bottle-x 11.5s linear infinite, bottle-y 1s cubic-bezier(0.45, 0.02, 0.58, 1) infinite alternate;
       bottom: 30px;
       position: absolute;
     }
 
     #wave-1 {
-      background: url("/images/wave1.svg") repeat;
+      background: url("/images/landing/wave1.svg") repeat;
       animation: wave 50s linear infinite;
       bottom: 0px;
       position: absolute;
     }
 
     #wave-2 {
-      background: url("/images/wave2.svg") repeat;
+      background: url("/images/landing/wave2.svg") repeat;
       animation: wave 80s linear infinite;
       bottom: 50px;
       position: absolute;
     }
 
     #wave-3 {
-      background: url("/images/wave3.svg") repeat;
+      background: url("/images/landing/wave3.svg") repeat;
       animation: wave 110s linear infinite;
       bottom: 100px;
       position: absolute;
