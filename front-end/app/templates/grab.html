@@ -6,6 +6,22 @@
       </a>
     </div>
     <div ng-if="currentBottle" class="list list-inset">
+      <div class="card">
+        <div class="item item-divider">
+          {{currentBottle.author}}
+        </div>
+        <div class="item item-text-wrap">
+          {{currentBottle.message}}
+        </div>
+      </div>
+      <div class="card" data-ng-repeat="message in currentBottle.messages">
+        <div class="item item-divider">
+          {{message.author}}
+        </div>
+        <div class="item item-text-wrap">
+          {{message.message}}
+        </div>
+      </div>
       <form ng-submit="replyBottle()">
         <label class="item item-input">
           <input type="textarea" placeholder="what will you say today?" ng-model="newMessageData.message">
