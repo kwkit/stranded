@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get "bottles/fish" => "bottles#fish"
       put "bottles/release" => "bottles#release"
       post "bottles/reply" => "bottles#reply"
+      get "bottles/current_bottle" => "bottles#current_bottle"
     end
 
   end
