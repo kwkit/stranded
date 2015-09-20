@@ -56,7 +56,7 @@ class Api::V1::BottlesController < ApplicationController
   private
 
   def bottle_params
-    params.require(:bottle).permit(:message, :author)
+    params.require(:bottle).permit(:message, :author, :latitude, :longitude)
   end
 
   def reply_params
