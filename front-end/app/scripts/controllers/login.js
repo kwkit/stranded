@@ -15,7 +15,7 @@ angular.module('stranded.controllers')
           $rootScope.session = response;
           localStorageService.set('toolBoxAnimated', false);
           console.log($scope.session);
-          $state.go('app.grab');
+          $state.go('home');
         },
         function (error) {
           console.log('Error:', error);

@@ -51,61 +51,61 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     controller: 'HomeCtrl'
   })
 
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/app.html',
-    controller: 'AppCtrl'
-  })
+//  .state('app', {
+//    url: '/app',
+//    abstract: true,
+//    templateUrl: 'templates/app.html',
+//    controller: 'AppCtrl'
+//  })
 
-  .state('app.grab', {
+  .state('grab', {
     url: '/grab',
-    views: {
-      'tab-grab': {
+//    views: {
+//      'tab-grab': {
         templateUrl: 'templates/grab.html',
         controller: 'GrabCtrl'
-      }
-    }
+//      }
+//    }
   })
 
-  .state('app.throw', {
+  .state('throw', {
     url: '/throw',
-    views: {
-      'tab-throw': {
+//    views: {
+//      'tab-throw': {
         templateUrl: 'templates/throw.html',
         controller: 'ThrowCtrl'
-      }
-    }
+//      }
+//    }
   })
 
-  .state('app.message', {
+  .state('message', {
     url: '/message',
-    views: {
-      'tab-message': {
+//    views: {
+//      'tab-message': {
         templateUrl: 'templates/message.html',
         controller: 'MessageCtrl'
-      }
-    }
+//      }
+//    }
   })
 
-  .state('app.settings', {
+  .state('settings', {
     url: '/settings',
-    views: {
-      'tab-settings': {
+//    views: {
+//      'tab-settings': {
         templateUrl: 'templates/settings.html',
         controller: 'SettingCtrl'
-      }
-    }
+//      }
+//    }
   })
 
-  .state('app.profile', {
+  .state('profile', {
     url: '/profile',
-    views: {
-      'menuContent': {
+//    views: {
+//      'menuContent': {
         templateUrl: 'templates/profile.html',
         controller: 'ProfileCtrl'
-      }
-    }
+//      }
+//    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/landing');
