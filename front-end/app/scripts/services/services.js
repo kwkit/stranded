@@ -134,11 +134,9 @@ angular.module('stranded.services', ['ngResource'])
       fishBottle: function(){
         return bottlesApi.fishBottle();
       },
-      createBottle: function(message){
+      createBottle: function(data){
         var bottle = {
-          bottle: {
-            message: message
-          }
+          bottle: data
         };
         return bottlesApi.createBottle(bottle);
       },
