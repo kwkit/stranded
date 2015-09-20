@@ -1,4 +1,5 @@
-<ion-view view-title="Fish for a bottle!">
+<ion-view>
+  <ion-nav-title>{{currentBottle ? 'Add reply in the bottle!' : 'Fish for a bottle!'}}</ion-nav-title>
   <ion-content class="padding">
     <div ng-if="!currentBottle">
       <a class="button button-block button-positive button-normal" data-ng-click="grabBottle()">
