@@ -14,7 +14,7 @@ angular.module('stranded.controllers')
 
           $rootScope.session = response;
           console.log($scope.session);
-          $state.go('home');
+          $state.go('app.grab');
         },
         function (error) {
           console.log('Error:', error);
