@@ -8,7 +8,7 @@ angular.module('stranded.controllers')
       'Log in and experience a whole new type of anonymous messaging!'
     ];
 
-    let i = 0;
+    var i = 0;
     $scope.showSlogan = true;
     $scope.slogan = $scope.slogans[0];
     $interval(function () {
