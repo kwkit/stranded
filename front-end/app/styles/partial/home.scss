@@ -37,6 +37,20 @@
   }
 }
 
+@keyframes text-animation {
+  0% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .page-home {
   background-color: $theme-color;
   overflow: hidden;
@@ -80,6 +94,10 @@
 
       #write-button {
         animation: move-right-button .5s cubic-bezier(0.88, 0.8, 0.6, 1.49);
+      }
+
+      .button-text {
+        animation: text-animation 1s linear;
       }
     }
 
