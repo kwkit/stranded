@@ -71,9 +71,9 @@
      inkscape:document-units="px"
      inkscape:current-layer="g6371"
      showgrid="false"
-     inkscape:window-width="1276"
-     inkscape:window-height="755"
-     inkscape:window-x="4"
+     inkscape:window-width="1280"
+     inkscape:window-height="702"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -105,7 +105,8 @@
       <g
          inkscape:export-ydpi="301.52682"
          inkscape:export-xdpi="301.52682"
-         id="g6330">
+         id="g6330"
+         transform="matrix(1.0000679,0,0,1,-0.00538978,0)">
         <path
            inkscape:export-ydpi="339.87195"
            inkscape:export-xdpi="339.87195"

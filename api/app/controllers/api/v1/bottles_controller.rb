@@ -1,5 +1,5 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle]
   respond_to :json
 
   def reply
@@ -34,6 +34,15 @@ class Api::V1::BottlesController < ApplicationController
     end
   end
 
+  def current_bottle
+    if current_user.open_bottle_id
+      bottle = Bottle.find(current_user.open_bottle_id)
+      render json: BottleSerializer.new(bottle).as_json
+    else
+      render json: {response: 'success', message: 'not holding any bottle'}
+    end
+  end
+
   def create
     bottle = current_user.bottles.build(bottle_params)
     bottle.opened = false
@@ -56,10 +65,10 @@ class Api::V1::BottlesController < ApplicationController
   private
 
   def bottle_params
-    params.require(:bottle).permit(:message, :author)
+    params.require(:bottle).permit(:message, :author, :latitude, :longitude)
   end
 
   def reply_params
-    params.require(:reply).permit(:message, :author)
+    params.require(:reply).permit(:message, :author, :latitude, :longitude)
   end
 end
