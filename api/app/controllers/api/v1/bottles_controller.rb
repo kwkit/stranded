@@ -60,6 +60,6 @@ class Api::V1::BottlesController < ApplicationController
   end
 
   def reply_params
-    params.require(:reply).permit(:message, :author)
+    params.require(:reply).permit(:message, :author, :latitude, :longitude)
   end
 end
