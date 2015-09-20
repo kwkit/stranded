@@ -1,5 +1,5 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle]
   respond_to :json
 
   def reply
@@ -31,6 +31,15 @@ class Api::V1::BottlesController < ApplicationController
     else
       current_user.update(open_bottle_id: nil)
       render json: { errors: 'failed to get a bottle'}
+    end
+  end
+
+  def current_bottle
+    if current_user.open_bottle_id
+      bottle = Bottle.find(current_user.open_bottle_id)
+      render json: BottleSerializer.new(bottle).as_json
+    else
+      render json: {response: 'success', message: 'not holding any bottle'}
     end
   end
 

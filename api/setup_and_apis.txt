@@ -161,3 +161,38 @@ POST /bottles/reply
 response
 { "response": "success", "message": "reply posted" }
 { "errors":}
+
+get current bottle
+include auth token in header: Authorization:<auth_token>
+GET /bottles/current_bottle
+holding bottle
+{
+  "bottle": {
+    "message":"Hello is anyone out there?", //THIS IS THE MAIN MESSAGE OF THE BOTTLE
+    "author": "Timon and Pumba",
+    "created_at": DATETIME,
+    "latitude":,
+    "longitude":,
+    "messages":[ //THIS IS FOR TEH CHAIN OF MESSAGES
+        {
+          "message": "Who are you?",
+          "author": "Simba",
+          "created_at": DATETIME,
+          "latitude":,
+          "longitude":
+        },
+        {
+          "message": "LOL im lost too",
+          "author": "Mike Tyson",
+          "created_at": DATETIME,
+          "latitude":,
+          "longitude":
+        }
+    ]
+  }
+}
+not holding bottle
+{
+  "response": "success",
+  "message": "not holding any bottle"
+}
