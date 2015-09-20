@@ -1,0 +1,17 @@
+@import 'color_constant';
+
+.new-message {
+  background-color: $theme-color;
+
+  form {
+    margin-top: 40px;
+
+    .list {
+      background-color: transparent;
+
+      .item {
+        margin: 20px 0;
+      }
+    }
+  }
+}
