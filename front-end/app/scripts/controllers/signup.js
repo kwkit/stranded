@@ -22,7 +22,15 @@ angular.module('stranded.controllers')
           });
         },
         function (error) {
+          $ionicLoading.hide();
           console.log('Error:', error);
+          var errors = 'Email ' + error.data.errors.email +
+            ', Password ' + error.data.errors.password +
+            ', Password Confirmation ' + error.data.errors.password_confirmation;
+          $ionicPopup.alert({
+            title: 'Error!',
+            template: errors
+          });
         }
       );
       console.log(user);
