@@ -3,22 +3,18 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+<ion-tabs class="tabs-striped tabs-top tabs-icon-top tabs-background-positive tabs-color-light">
 
-  <ion-tab title="Grab Bottle" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/app/grab">
+  <ion-tab title="Grab Bottle" icon-on="ion-ios-download" icon-off="ion-ios-download-outline" href="#/app/grab">
     <ion-nav-view name="tab-grab"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Throw Bottle" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/app/throw">
+  <ion-tab title="Throw Bottle" icon-on="ion-ios-upload" icon-off="ion-ios-upload-outline" href="#/app/throw">
     <ion-nav-view name="tab-throw"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Message" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/app/message">
-    <ion-nav-view name="tab-message"></ion-nav-view>
-  </ion-tab>
-
-  <ion-tab title="Setting" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/app/setting">
-    <ion-nav-view name="tab-setting"></ion-nav-view>
+  <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline" href="#/app/settings">
+    <ion-nav-view name="tab-settings"></ion-nav-view>
   </ion-tab>
 
 </ion-tabs>

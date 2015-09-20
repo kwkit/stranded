@@ -88,11 +88,11 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     }
   })
 
-  .state('app.setting', {
-    url: '/setting',
+  .state('app.settings', {
+    url: '/settings',
     views: {
-      'tab-setting': {
-        templateUrl: 'templates/setting.html',
+      'tab-settings': {
+        templateUrl: 'templates/settings.html',
         controller: 'SettingCtrl'
       }
     }
