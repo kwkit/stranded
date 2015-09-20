@@ -6,7 +6,7 @@
 // 'stranded' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'stranded.controllers' is found in app.js
-angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'ngResource', 'config'])
+angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'ngResource', 'config', 'LocalStorageModule'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
