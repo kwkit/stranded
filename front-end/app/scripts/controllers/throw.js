@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('ThrowCtrl', function ($scope, bottlesApi) {
+  .controller('ThrowCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
     $scope.newMessageData = {};
     $scope.doCreateBottle = function () {
+      $ionicLoading.show();
+      
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           function (position) {
@@ -18,6 +20,15 @@ angular.module('stranded.controllers')
       bottlesApi.createBottle($scope.newMessageData).$promise.then(
         function (response) {
           console.log(response);
+          $scope.newMessageData = {};
+          $ionicLoading.hide();
+
+          $ionicPopup.alert({
+            title: 'Bottle creation successful!',
+            template: 'Bottle thrown back into the sea.'
+          }).then(function() {
+            $state.go('home');
+          });
         },
         function (error) {
           console.log('Error:', error.errors);
