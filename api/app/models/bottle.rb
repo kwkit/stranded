@@ -1,6 +1,7 @@
 class Bottle < ActiveRecord::Base
   validates :message, presence: true
-  validates_associated :conversation
+  validates :author, presence: true
   belongs_to :user
-  has_one :conversation
+  has_many :messages
+  validates_associated :messages
 end
