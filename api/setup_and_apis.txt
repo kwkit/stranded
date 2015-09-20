@@ -86,7 +86,7 @@ response
   "email":,
   "created_at":,
   "updated_at":,
-  "auth_token":,
+  "auth_token":
 }
 !Copy the auth token and put in header for subsequent requests
 
@@ -102,7 +102,9 @@ POST /bottles
 {
   "bottle": {
     "message":,
-    "author":
+    "author":,
+    "latitude":,
+    "longitude":
   }
 }
 
@@ -115,16 +117,22 @@ response
     "message":"Hello is anyone out there?", //THIS IS THE MAIN MESSAGE OF THE BOTTLE
     "author": "Timon and Pumba",
     "created_at": DATETIME,
+    "latitude":,
+    "longitude":,
     "messages":[ //THIS IS FOR TEH CHAIN OF MESSAGES
         {
           "message": "Who are you?",
           "author": "Simba",
-          "created_at": DATETIME
+          "created_at": DATETIME,
+          "latitude":,
+          "longitude":
         },
         {
           "message": "LOL im lost too",
           "author": "Mike Tyson",
-          "created_at": DATETIME
+          "created_at": DATETIME,
+          "latitude":,
+          "longitude":
         }
     ]
   }
@@ -144,7 +152,10 @@ include auth token in header: Authorization:<auth_token>
 POST /bottles/reply
 {
   "reply": {
-    "message":"blahblah"
+    "message":"blahblah",
+    "author":"Obama",
+    "latitude":,
+    "longitude":
   }
 }
 response
