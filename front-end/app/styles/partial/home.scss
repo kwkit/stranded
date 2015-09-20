@@ -2,6 +2,13 @@
 
 .page-home {
   background-color: $theme-color;
+  overflow: hidden;
+
+  .scroll {
+    height: calc(100vh - 104px);
+    padding-bottom: 0px;
+    overflow: hidden;
+  }
 
   // .section-btn {
   //   margin: 40px 0;
@@ -41,6 +48,28 @@
     #cloud-2 {
       top: 60px;
       left: 0px;
+    }
+  }
+
+  .toolbox-section {
+    .toolbox {
+      & > div {
+        left: 0px;
+        right: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .toolbox-body {
+        position: absolute;
+        bottom: 10px;
+      }
+
+      .toolbox-cover {
+        position: absolute;
+        bottom: 97px;
+      }
     }
   }
 }
