@@ -12,7 +12,7 @@ angular.module('stranded.controllers')
           }
         );
       } else {
-        console.log("Geolocation is not supported by this browser.");
+        console.log('Geolocation is not supported by this browser.');
       }
 
       bottlesApi.createBottle($scope.newMessageData).$promise.then(
