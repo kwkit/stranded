@@ -13,7 +13,7 @@ angular.module('stranded.controllers')
           $ionicLoading.hide();
 
           $rootScope.session = response;
-          localStorageService.set('ToolBoxAnimated', false);
+          localStorageService.set('toolBoxAnimated', false);
           console.log($scope.session);
           $state.go('home');
         },
