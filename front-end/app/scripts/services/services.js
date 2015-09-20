@@ -92,6 +92,15 @@ angular.module('stranded.services', ['ngResource'])
     }
 
     var bottlesApi = $resource('', {}, {
+      'getCurrentBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/bottles/current_bottle',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
       'fishBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/fish',
@@ -121,6 +130,7 @@ angular.module('stranded.services', ['ngResource'])
       }
     });
     return {
+      getCurrentBottle: bottlesApi.getCurrentBottle,
       fishBottle: function(){
         return bottlesApi.fishBottle();
       },
