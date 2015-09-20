@@ -63,4 +63,33 @@ angular.module('stranded.controllers')
         );
       }
     };
+
+    $scope.releaseBottle = function () {
+      console.log('releasing bottle');
+
+      $ionicLoading.show();
+
+      if (!$scope.currentBottle) {
+        console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
+      } else {
+        bottlesApi.releaseBottle().$promise.then(
+          function (response) {
+            console.log(response);
+            $scope.currentBottle = null;
+            $scope.newMessageData = {};
+            $ionicLoading.hide();
+
+            $ionicPopup.alert({
+              title: 'Return successful!',
+              template: 'Bottle thrown back into the sea without a new reply.'
+            }).then(function() {
+              $state.go('home');
+            });
+          },
+          function (error) {
+            console.log('Error:', error.errors);
+          }
+        );
+      }
+    }
   });
