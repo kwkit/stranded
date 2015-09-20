@@ -101,6 +101,15 @@ angular.module('stranded.services', ['ngResource'])
           'Authorization': auth_token
         }
       },
+      'replyCurrentBottle': {
+        method: 'POST',
+        url: ENV.apiEndpoint + 'api/bottles/reply',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
       'fishBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/fish',
@@ -131,6 +140,12 @@ angular.module('stranded.services', ['ngResource'])
     });
     return {
       getCurrentBottle: bottlesApi.getCurrentBottle,
+      replyCurrentBottle: function(data){
+        var reply = {
+          reply: data
+        };
+        return bottlesApi.replyCurrentBottle(reply);
+      },
       fishBottle: function(){
         return bottlesApi.fishBottle();
       },

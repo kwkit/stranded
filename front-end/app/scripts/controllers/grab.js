@@ -1,26 +1,61 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('GrabCtrl', function ($scope, $rootScope, bottlesApi) {
-    bottlesApi.getCurrentBottle().$promise.then(
-      function (response) {
-        $rootScope.currentBottle = response.bottle ? response.bottle : null;
-        console.log($rootScope.currentBottle);
-      },
-      function (error) {
-        console.log('Error:', error.errors);
-      }
-    );
+  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
+    $scope.newMessageData = {};
+
+    $scope.getCurrentBottle = function() {
+      bottlesApi.getCurrentBottle().$promise.then(
+        function (response) {
+          $scope.currentBottle = response.bottle ? response.bottle : null;
+          console.log($scope.currentBottle);
+        },
+        function (error) {
+          console.log('Error:', error.errors);
+        }
+      );
+    };
+
+    $scope.getCurrentBottle();
 
     $scope.grabBottle = function () {
       console.log('grabbing bottle');
-      if ($rootScope.currentBottle) {
+      if ($scope.currentBottle) {
         console.log('you already have a bottle, this function shouldn\'t be called');
       } else {
         bottlesApi.fishBottle().$promise.then(
           function (response) {
-            $rootScope.currentBottle = response.bottle;
+            $scope.currentBottle = response.bottle;
             console.log(response);
+          },
+          function (error) {
+            console.log('Error:', error.errors);
+          }
+        );
+      }
+    };
+
+    $scope.replyBottle = function () {
+      console.log('replying bottle');
+
+      $ionicLoading.show();
+
+      if (!$scope.currentBottle) {
+        console.log('you don\'t have a bottle to reply, this function shouldn\'t be called');
+      } else {
+        bottlesApi.replyCurrentBottle($scope.newMessageData).$promise.then(
+          function (response) {
+            console.log(response);
+            $scope.currentBottle = null;
+            $scope.newMessageData = {};
+            $ionicLoading.hide();
+
+            $ionicPopup.alert({
+              title: 'Reply successful!',
+              template: 'Bottle thrown back into the sea.'
+            }).then(function() {
+              $state.go('home');
+            });
           },
           function (error) {
             console.log('Error:', error.errors);
