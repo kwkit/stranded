@@ -1,14 +1,19 @@
 <ion-view view-title="Create new bottle!">
+  <ion-nav-buttons side="right">
+    <button class="button-clear button-light" ng-click="clearMessageData()">
+      <i class="icon ion-close-round"></i> Clear
+    </button>
+  </ion-nav-buttons>
   <ion-content class="padding new-message">
     <form ng-submit="doCreateBottle()">
       <div class="card">
         <label class="item card-top">
-          <textarea class="message-textarea col col-100" type="textarea" placeholder="what will you say today?" ng-model="newMessageData.message"></textarea>
+          <textarea class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message"></textarea>
         </label>
-        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm" class="card-bottom">Send location (for fun!)</ion-toggle>
+        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm" class="card-bottom">Enable location data to add to the bottle's path!</ion-toggle>
       </div>
       <label class="item item-input">
-        <input type="text" placeholder="your creative name" ng-model="newMessageData.author">
+        <input class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author">
       </label>
       <button class="button button-block button-positive button-normal" type="submit">Throw it into the sea!</button>
     </form>

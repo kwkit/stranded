@@ -3,6 +3,9 @@
 angular.module('stranded.controllers')
   .controller('ThrowCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
     $scope.newMessageData = {};
+    $scope.clearMessageData = function () {
+      $scope.newMessageData = {};
+    };
     $scope.doCreateBottle = function () {
       $ionicLoading.show();
       
