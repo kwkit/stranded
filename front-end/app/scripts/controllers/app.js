@@ -12,11 +12,10 @@ angular.module('stranded.controllers', [])
   //});
   $scope.doLogout = function() {
     console.log('Doing logout');
-    console.log($rootScope.session);
-    sessionsApi.destroySession($rootScope.session).$promise.then(
+    sessionsApi.destroySession().$promise.then(
         function(response){
           console.log(response);
-          $state.go('app.landing');
+          $state.go('landing');
         },
         function(error){
           console.log('Error:', error);

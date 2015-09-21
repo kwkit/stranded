@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.services', ['ngResource'])
-  .factory('sessionsApi', function($resource, ENV){
+  .factory('sessionsApi', function($resource, $window, ENV){
     var sessionsApi = $resource('', {}, {
       'createSession': {
         method: 'POST',
@@ -24,10 +24,12 @@ angular.module('stranded.services', ['ngResource'])
             }
         );
       },
-      destroySession: function(data){
+      destroySession: function(){
+        var auth_token = $window.sessionStorage.auth_token;
+        delete $window.sessionStorage.auth_token;
         return sessionsApi.destroySession(
             {
-              'id': data.auth_token
+              'id': auth_token
             }
         );
       }
@@ -85,10 +87,10 @@ angular.module('stranded.services', ['ngResource'])
       };
     })
 
-  .factory('bottlesApi', function($resource, $rootScope, ENV){
+  .factory('bottlesApi', function($resource, $window, ENV){
     var auth_token;
-    if($rootScope.session) {
-      auth_token = $rootScope.session.auth_token;
+    if($window.sessionStorage.auth_token) {
+      auth_token = $window.sessionStorage.auth_token;
     }
 
     var bottlesApi = $resource('', {}, {
