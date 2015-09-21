@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300italic,100,100italic,300,400italic,500italic,700italic,900italic);
 @import 'color_constant';
 
-* {
+*:not(i) {
   font-family: 'Roboto', sans-serif;
 }
 
