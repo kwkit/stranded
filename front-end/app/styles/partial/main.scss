@@ -1,5 +1,6 @@
 // Your application styles go here
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300italic,100,100italic,300,400italic,500italic,700italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
 @import 'color_constant';
 
 *:not(i) {
@@ -32,6 +33,9 @@ $common-border-radius: 10px;
 .message-textarea {
   border: 0px;
   resize: none;
-  height: 50vh;
+  height: 30vh;
 }
 
+.message-author-signature {
+  font-family: 'Indie Flower', cursive;
+}
