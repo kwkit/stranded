@@ -98,6 +98,12 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
 //    }
   })
 
+  .state('demomap', {
+    url: '/demomap',
+      templateUrl: 'templates/demomap.html',
+      controller: 'DemoMapCtrl'
+  })
+
   .state('profile', {
     url: '/profile',
 //    views: {
