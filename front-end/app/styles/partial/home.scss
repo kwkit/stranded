@@ -19,7 +19,7 @@
 
 @keyframes move-left-button {
   0% {
-    transform: translate(45px, 330px) scale(0.1);
+    transform: translate(170px, 237px) scale(0.1);
   }
 
   100% {
@@ -29,7 +29,7 @@
 
 @keyframes move-right-button {
   0% {
-    transform: translate(-45px, 330px) scale(0.1);
+    transform: translate(-170px, 237px) scale(0.1);
   }
 
   100% {
@@ -60,7 +60,7 @@
   }
 
   .scroll {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 58px);
     padding-bottom: 0px;
     overflow: hidden;
   }
@@ -84,9 +84,20 @@
   .toolbox-section {
     .round-buttons.animated {
       text-align: center;
-      margin-top: 40px;
+      // margin-top: 40px;
       z-index: 3;
-      position: relative;
+      bottom: 221px;
+      position: absolute;
+      // position: relative;
+
+      a {
+        width: inherit;
+
+        img {
+          width: inherit;
+          max-width: 185px;
+        }
+      }
 
       #fish-button {
         animation: move-left-button .5s cubic-bezier(0.88, 0.8, 0.6, 1.49);
