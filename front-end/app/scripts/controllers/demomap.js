@@ -43,26 +43,21 @@ angular.module('stranded.controllers')
       ]
     };
     $scope.locations = [];
+    $scope.paths = [];
     if ($scope.fakeBottle.latitude) {
-      // $scope.locations.push({
-      //   'location': {
-      //     'lat': parseFloat($scope.fakeBottle.latitude),
-      //     'lng': parseFloat($scope.fakeBottle.longitude)
-      //   },
-      //   stopover: true
-      // });
+      $scope.paths.push([
+        parseFloat($scope.fakeBottle.latitude),
+        parseFloat($scope.fakeBottle.longitude)
+      ]);
       $scope.locations.push($scope.fakeBottle.latitude + ', ' + $scope.fakeBottle.longitude);
     }
 
     $scope.fakeBottle.messages.forEach(function(message) {
       if (message.latitude) {
-        // $scope.locations.push({
-        //   'location': {
-        //     'lat': parseFloat(message.latitude),
-        //     'lng': parseFloat(message.longitude)
-        //   },
-        //   stopover: true
-        // });
+        $scope.paths.push([
+          parseFloat(message.latitude),
+          parseFloat(message.longitude)
+        ]);
         $scope.locations.push(message.latitude + ', ' + message.longitude);
       }
     });
