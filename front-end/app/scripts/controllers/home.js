@@ -4,11 +4,16 @@ angular.module('stranded.controllers')
   .controller('HomeCtrl', function($scope, $rootScope, localStorageService, $timeout) {
     console.log($rootScope.session);
     $scope.unbind = localStorageService.bind($scope, 'toolBoxAnimated');
-    // $scope.toolBoxAnimated = localStorageService.get('toolBoxAnimated');
-    console.log($scope.toolBoxAnimated);
-    if (!$scope.toolBoxAnimated) {
-      $timeout(function () {
-        $scope.toolBoxAnimated = true;
-      }, 1100);
-    }
+    $scope.pageLoaded = false;
+    $scope.$watch('$viewContentLoaded', function() {
+      $timeout(function (){
+        $scope.pageLoaded = true;
+      }, 500);
+
+      if (!$scope.toolBoxAnimated) {
+        $timeout(function () {
+          $scope.toolBoxAnimated = true;
+        }, 1600);
+      }
+    });
   });

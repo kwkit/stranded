@@ -55,6 +55,10 @@
   background-color: $theme-color;
   overflow: hidden;
 
+  .hidden {
+    display: none;
+  }
+
   .scroll {
     height: calc(100vh - 104px);
     padding-bottom: 0px;
@@ -78,10 +82,6 @@
   }
 
   .toolbox-section {
-    .hidden {
-      display: none;
-    }
-
     .round-buttons.animated {
       text-align: center;
       margin-top: 40px;
