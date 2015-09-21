@@ -20,13 +20,13 @@ angular.module('stranded.controllers')
       bottlesApi.createBottle($scope.newMessageData).$promise.then(
         function (response) {
           console.log(response);
-          $scope.newMessageData = {};
           $ionicLoading.hide();
 
           $ionicPopup.alert({
             title: 'Bottle creation successful!',
-            template: 'Bottle thrown back into the sea.'
+            template: 'Bottle thrown into the sea.'
           }).then(function() {
+            $scope.newMessageData = {};
             $state.go('home');
           });
         },
