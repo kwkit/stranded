@@ -1,15 +1,15 @@
 <ion-view view-title="Create new bottle!">
   <ion-content class="padding new-message">
     <form ng-submit="doCreateBottle()">
-      <div class="list list-inset">
-        <label class="item item-input">
-          <input type="textarea" placeholder="what will you say today?" ng-model="newMessageData.message">
+      <div class="card">
+        <label class="item card-top">
+          <textarea class="message-textarea col col-100" type="textarea" placeholder="what will you say today?" ng-model="newMessageData.message"></textarea>
         </label>
-        <label class="item item-input">
-          <input type="text" placeholder="your creative name" ng-model="newMessageData.author">
-        </label>
-        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm">Send location (for fun!)</ion-toggle>
+        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm" class="card-bottom">Send location (for fun!)</ion-toggle>
       </div>
+      <label class="item item-input">
+        <input type="text" placeholder="your creative name" ng-model="newMessageData.author">
+      </label>
       <button class="button button-block button-positive button-normal" type="submit">Throw it into the sea!</button>
     </form>
   </ion-content>

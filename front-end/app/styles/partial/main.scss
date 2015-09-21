@@ -28,3 +28,10 @@ $common-border-radius: 10px;
     color: white !important;
   }
 }
+
+.message-textarea {
+  border: 0px;
+  resize: none;
+  height: 50vh;
+}
+
