@@ -46,14 +46,14 @@ angular.module('stranded.controllers')
         bottlesApi.replyCurrentBottle($scope.newMessageData).$promise.then(
           function (response) {
             console.log(response);
-            $scope.currentBottle = null;
-            $scope.newMessageData = {};
             $ionicLoading.hide();
 
             $ionicPopup.alert({
               title: 'Reply successful!',
               template: 'Bottle thrown back into the sea.'
             }).then(function() {
+              $scope.currentBottle = null;
+              $scope.newMessageData = {};
               $state.go('home');
             });
           },
@@ -75,14 +75,14 @@ angular.module('stranded.controllers')
         bottlesApi.releaseBottle().$promise.then(
           function (response) {
             console.log(response);
-            $scope.currentBottle = null;
-            $scope.newMessageData = {};
             $ionicLoading.hide();
 
             $ionicPopup.alert({
               title: 'Return successful!',
               template: 'Bottle thrown back into the sea without a new reply.'
             }).then(function() {
+              $scope.currentBottle = null;
+              $scope.newMessageData = {};
               $state.go('home');
             });
           },
