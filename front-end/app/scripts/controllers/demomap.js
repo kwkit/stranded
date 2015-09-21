@@ -22,14 +22,14 @@ angular.module('stranded.controllers')
           'author': 'Stupid boy',
           'created_at': '2015-09-21T11:02:17.681Z',
           'latitude': '26.12',
-          'longitude': '62.23'
+          'longitude': '-12.23'
         },
 
         {
           'message': 'Cos the fishes go blu blu blu?',
           'author': 'Shiny boy',
           'created_at': '2015-09-21T12:02:17.681Z',
-          'latitude': '156',
+          'latitude': '-56',
           'longitude': '72.3'
         },
 
@@ -38,24 +38,33 @@ angular.module('stranded.controllers')
           'author': 'Small boy',
           'created_at': '2015-09-21T19:02:17.681Z',
           'latitude': '-26',
-          'longitude': '73.321'
+          'longitude': '3.321'
         }
       ]
     };
-    var location = [];
+    $scope.locations = [];
     if ($scope.fakeBottle.latitude) {
-      location.push({
-        'latitude': $scope.fakeBottle.latitude,
-        'longitude': $scope.fakeBottle.longitude
-      });
+      // $scope.locations.push({
+      //   'location': {
+      //     'lat': parseFloat($scope.fakeBottle.latitude),
+      //     'lng': parseFloat($scope.fakeBottle.longitude)
+      //   },
+      //   stopover: true
+      // });
+      $scope.locations.push($scope.fakeBottle.latitude + ', ' + $scope.fakeBottle.longitude);
     }
 
     $scope.fakeBottle.messages.forEach(function(message) {
       if (message.latitude) {
-        location.push({
-          'latitude': message.latitude,
-          'longitude': message.longitude
-        });
+        // $scope.locations.push({
+        //   'location': {
+        //     'lat': parseFloat(message.latitude),
+        //     'lng': parseFloat(message.longitude)
+        //   },
+        //   stopover: true
+        // });
+        $scope.locations.push(message.latitude + ', ' + message.longitude);
       }
     });
+
   });
