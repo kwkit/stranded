@@ -14,7 +14,6 @@ angular.module('stranded.controllers')
 
           $window.sessionStorage.auth_token = response.auth_token;
           localStorageService.set('toolBoxAnimated', false);
-          console.log($scope.session);
           $state.go('home');
         },
         function (error) {
