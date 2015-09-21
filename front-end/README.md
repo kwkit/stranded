@@ -26,6 +26,8 @@ start the server
     
 and check `http://localhost:8100/`
 
+**remember to use angular@1.3.13**
+
 ## Project Structure
 
 Overview
