@@ -160,6 +160,7 @@ POST /bottles/reply
 }
 response
 { "response": "success", "message": "reply posted" }
+404 not found or 422 unprocessible
 { "errors":}
 
 get current bottle
@@ -192,7 +193,7 @@ holding bottle
   }
 }
 not holding bottle
+404 not found
 {
-  "response": "success",
-  "message": "not holding any bottle"
+  "errors": "not holding any bottle"
 }
