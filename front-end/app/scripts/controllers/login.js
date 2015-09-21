@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('LoginCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, sessionsApi, localStorageService) {
+  .controller('LoginCtrl', function ($scope, $state, $window, $ionicLoading, $ionicPopup, sessionsApi, localStorageService) {
     $scope.loginData = {};
     $scope.doLogin = function () {
       console.log('Doing login', $scope.loginData);
@@ -12,9 +12,8 @@ angular.module('stranded.controllers')
         function (response) {
           $ionicLoading.hide();
 
-          $rootScope.session = response;
+          $window.sessionStorage.auth_token = response.auth_token;
           localStorageService.set('toolBoxAnimated', false);
-          console.log($scope.session);
           $state.go('home');
         },
         function (error) {
