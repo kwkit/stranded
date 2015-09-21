@@ -30,5 +30,8 @@ $common-border-radius: 10px;
 }
 
 .message-textarea {
-  border: none;
+  border: 0px;
+  resize: none;
+  height: 50vh;
 }
+
