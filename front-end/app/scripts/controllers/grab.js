@@ -23,8 +23,10 @@ angular.module('stranded.controllers')
       if ($scope.currentBottle) {
         console.log('you already have a bottle, this function shouldn\'t be called');
       } else {
+        $ionicLoading.show();
         bottlesApi.fishBottle().$promise.then(
           function (response) {
+            $ionicLoading.hide();
             $scope.currentBottle = response.bottle;
             console.log(response);
           },
@@ -66,11 +68,10 @@ angular.module('stranded.controllers')
     $scope.releaseBottle = function () {
       console.log('releasing bottle');
 
-      $ionicLoading.show();
-
       if (!$scope.currentBottle) {
         console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
       } else {
+        $ionicLoading.show();
         bottlesApi.releaseBottle().$promise.then(
           function (response) {
             console.log(response);
