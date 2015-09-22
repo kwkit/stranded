@@ -35,14 +35,18 @@
     }
 
     button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
       padding: 13px 0px;
 
       img {
+        position: absolute;
+        display: block;
         height: 34px;
-        margin-right: 5px;
+        left: calc(50% - 90px);
+      }
+
+      span {
+        margin-left: 20px;
       }
     }
   }
