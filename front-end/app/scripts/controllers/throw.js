@@ -6,9 +6,7 @@ angular.module('stranded.controllers')
     $scope.clearMessageData = function () {
       $scope.newMessageData = {};
     };
-    $scope.doCreateBottle = function () {
-      $ionicLoading.show();
-      
+    $scope.doCreateBottle = function (newBottleForm) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           function (position) {
@@ -20,22 +18,30 @@ angular.module('stranded.controllers')
         console.log('Geolocation is not supported by this browser.');
       }
 
-      bottlesApi.createBottle($scope.newMessageData).$promise.then(
-        function (response) {
-          console.log(response);
-          $ionicLoading.hide();
+      if (newBottleForm.$valid) {
+        $ionicLoading.show();
+        bottlesApi.createBottle($scope.newMessageData).$promise.then(
+          function (response) {
+            console.log(response);
+            $ionicLoading.hide();
 
-          $ionicPopup.alert({
-            title: 'Bottle creation successful!',
-            template: 'Bottle thrown into the sea.'
-          }).then(function() {
-            $scope.newMessageData = {};
-            $state.go('home');
-          });
-        },
-        function (error) {
-          console.log('Error:', error.errors);
-        }
-      );
+            $ionicPopup.alert({
+              title: 'Bottle creation successful!',
+              template: 'Bottle thrown into the sea.'
+            }).then(function() {
+              $scope.newMessageData = {};
+              $state.go('home');
+            });
+          },
+          function (error) {
+            console.log('Error:', error);
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+              title: 'Error: ' + error.status + ' ' + error.statusText,
+              template: 'Please try again later.'
+            });
+          }
+        );
+      }
     };
   });
