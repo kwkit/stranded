@@ -5,11 +5,15 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="padding page-new-message">
-    <form ng-submit="doCreateBottle()">
+    <form name="newBottleForm" ng-submit="doCreateBottle(newBottleForm)" novalidate>
       <div class="card">
-        <label class="item card-top">
-          <textarea class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message"></textarea>
+        <label class="item card-top" data-ng-class="{ 'has-error' : newBottleForm.message.$invalid}">
+          <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required></textarea>
         </label>
+        <div class="form-errors" data-ng-show="newBottleForm.message.$error && newBottleForm.message.$touched || newBottleForm.$submitted"
+             data-ng-messages="newBottleForm.message.$error">
+          <div data-ng-messages-include="templates/form-errors.html"></div>
+        </div>
         <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm" class="card-bottom">
           <span>
             <i class="fa fa-location-arrow" ng-class="{true : 'bright-marker'}[locationEnable]"></i>
@@ -17,9 +21,13 @@
           </span>
         </ion-toggle>
       </div>
-      <label class="item item-input">
-        <input class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author">
+      <label class="item item-input" data-ng-class="{ 'has-error' : newBottleForm.author.$invalid}">
+        <input name="author" class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author" required>
       </label>
+      <div class="form-errors" data-ng-show="newBottleForm.author.$error && newBottleForm.author.$touched || newBottleForm.$submitted"
+           data-ng-messages="newBottleForm.author.$error">
+        <div data-ng-messages-include="templates/form-errors.html"></div>
+      </div>
       <button class="button button-block button-positive button-normal" type="submit">
         <img src="/images/main/bottle.svg" />
         <span>Throw it into the sea!</span>
