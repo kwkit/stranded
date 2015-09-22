@@ -3,6 +3,9 @@
 angular.module('stranded.controllers')
   .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
     $scope.newMessageData = {};
+    
+    $scope.locations = [];
+    $scope.paths = [[]]; // this is a hack
 
     $scope.getCurrentBottle = function() {
       bottlesApi.getCurrentBottle().$promise.then(
@@ -10,9 +13,6 @@ angular.module('stranded.controllers')
           $scope.currentBottle = response.bottle ? response.bottle : null;
           console.log($scope.currentBottle);
           // map modal
-          $scope.locations = [];
-          $scope.paths = [[]];
-
           if ($scope.currentBottle.latitude) {
             $scope.paths.push([
               parseFloat($scope.currentBottle.latitude),
@@ -51,12 +51,14 @@ angular.module('stranded.controllers')
           }
 
           $scope.distance = 0;
-          for (var i = 1; i < $scope.paths.length; i++) {
+          for (var i = 2; i < $scope.paths.length - 1; i++) {
+            // this is a hack
             var location1 = $scope.paths[i];
             var location2 = $scope.paths[i - 1];
             $scope.distance += distanceBetween(location1[1], location1[0], location2[1], location2[0]);
           }
-          
+
+          console.log($scope.distance);
         },
         function (error) {
           console.log('Error:', error.errors);
