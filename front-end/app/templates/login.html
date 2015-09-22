@@ -3,7 +3,7 @@
     <h1 class="title">Stranded</h1>
   </ion-header-bar>
   <ion-content class="padding page-login">
-    <form name="logInForm" ng-submit="doLogin(logInForm)">
+    <form name="logInForm" ng-submit="doLogin(logInForm)" novalidate>
       <div class="list list-inset">
         <label class="item item-input">
           <input name="email" type="email" placeholder="your email address" ng-model="loginData.email" required>

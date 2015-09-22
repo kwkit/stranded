@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="padding page-new-message">
-    <form name="newBottleForm" ng-submit="doCreateBottle(newBottleForm)">
+    <form name="newBottleForm" ng-submit="doCreateBottle(newBottleForm)" novalidate>
       <div class="card">
         <label class="item card-top" data-ng-class="{ 'has-error' : newBottleForm.message.$invalid}">
           <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required></textarea>
