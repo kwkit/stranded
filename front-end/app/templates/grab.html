@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-nav-title>{{currentBottle ? 'Add reply in the bottle!' : 'Fish for a bottle!'}}</ion-nav-title>
+  <ion-nav-title>{{currentBottle ? 'Messages in bottle' : 'Fish for a bottle!'}}</ion-nav-title>
   <ion-nav-buttons side="right">
     <button class="button button-clear button-light" ng-click="showTrail()">
       <i class="fa fa-paper-plane"></i> View Trail
@@ -28,27 +28,52 @@
           {{message.message}}
         </div>
       </div>
+
       <form name="replyBottleForm" data-ng-submit="replyBottle(replyBottleForm)" novalidate>
-        <label class="item item-input" data-ng-class="{ 'has-error' : replyBottleForm.message.$invalid}">
-          <textarea name="message" placeholder="what will you say today?" ng-model="newMessageData.message" required></textarea>
-        </label>
-        <div class="form-errors" data-ng-show="replyBottleForm.message.$error && replyBottleForm.message.$touched || replyBottleForm.$submitted"
-             data-ng-messages="replyBottleForm.message.$error">
-          <div data-ng-messages-include="templates/form-errors.html"></div>
+        <div class="card">
+          <label class="item card-top" data-ng-class="{ 'has-error' : replyBottleForm.message.$invalid}">
+            <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required>
+            </textarea>
+          </label>
+          
+          <div class="form-errors" data-ng-show="replyBottleForm.message.$error && replyBottleForm.message.$touched || replyBottleForm.$submitted" data-ng-messages="replyBottleForm.message.$error">
+            <div data-ng-messages-include="templates/form-errors.html">
+            </div>
+          </div>
+
+          <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm">
+            <span>
+              <i class="fa fa-location-arrow" ng-class="{true : 'bright-marker'}[locationEnable]"></i>
+              {{ locationEnable ? 'Location added!' : 'Add message location!' }}
+            </span>
+          </ion-toggle>
+          
+          <label class="item card-bottom" data-ng-class="{ 'has-error' : replyBottleForm.author.$invalid}">
+            <input name="author" class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author" required />
+          </label>
+          
+          <div class="form-errors" data-ng-show="replyBottleForm.author.$error && replyBottleForm.author.$touched || replyBottleForm.$submitted"
+               data-ng-messages="replyBottleForm.author.$error">
+            <div data-ng-messages-include="templates/form-errors.html">
+            </div>
+          </div>
+
+          <div class="grab-row">
+            <div class="grab-col-50">
+              <button class="button button-block button-positive button-normal" id="button-other-bottle" data-ng-click="releaseBottle()">
+                Get another bottle!
+              </button>
+            </div>
+
+            <div class="grab-col-50">
+              <button class="button button-block button-positive button-normal" id="button-reply" type="submit">
+                <!-- <img src="/images/main/bottle.svg" /> -->
+                <span>Reply</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <label class="item item-input" data-ng-class="{ 'has-error' : replyBottleForm.author.$invalid}">
-          <input name="author" type="text" placeholder="your creative name" ng-model="newMessageData.author" required>
-        </label>
-        <div class="form-errors" data-ng-show="replyBottleForm.author.$error && replyBottleForm.author.$touched || replyBottleForm.$submitted"
-             data-ng-messages="replyBottleForm.author.$error">
-          <div data-ng-messages-include="templates/form-errors.html"></div>
-        </div>
-        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm">Send location (for fun!)</ion-toggle>
-        <button class="button button-block button-positive button-normal" type="submit">Add reply!</button>
       </form>
-      <a class="button button-block button-positive button-normal" data-ng-click="releaseBottle()">
-        Return bottle to sea without reply
-      </a>
     </div>
   </ion-content>
 </ion-view>
