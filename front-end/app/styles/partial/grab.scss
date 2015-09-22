@@ -1,0 +1,49 @@
+@import 'color_constant';
+
+.page-grab {
+  background-color: $theme-color;
+  
+  .list {
+    background-color: transparent;
+
+    .item {
+    }
+  }
+
+  .card {
+    box-shadow:none;
+    background-color: $theme-color;
+    .card-top {
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    .card-bottom {
+      font-size: 14px;
+      border-radius: 0px 0px 10px 10px;
+
+      i {
+        color: grey;
+      }
+
+      i.bright-marker {
+        color: $theme-color-blue;
+      }
+    }
+  }
+
+  button {
+    text-align: center;
+    padding: 13px 0px;
+
+    img {
+      position: absolute;
+      display: block;
+      height: 34px;
+      left: calc(50% - 90px);
+    }
+
+    span {
+      margin-left: 20px;
+    }
+  }
+}
