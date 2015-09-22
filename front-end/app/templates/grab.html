@@ -1,5 +1,10 @@
 <ion-view>
   <ion-nav-title>{{currentBottle ? 'Add reply in the bottle!' : 'Fish for a bottle!'}}</ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear button-light" ng-click="showTrail()">
+      <i class="fa fa-paper-plane"></i> View Trail
+    </button>
+  </ion-nav-buttons>
   <ion-content class="padding page-grab">
     <div ng-if="!currentBottle">
       <a class="button button-block button-positive button-normal" data-ng-click="grabBottle()">
