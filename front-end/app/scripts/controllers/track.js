@@ -12,7 +12,10 @@ angular.module('stranded.controllers')
         }
       );
     };
-    $scope.getMyBottles();
+    $scope.$on('$ionicView.enter', function() {
+      $scope.getMyBottles(); 
+    });
+    
     $scope.trackBottle = function(bottle_id) {
       $state.go('view', {'bottle_id': bottle_id});
     };

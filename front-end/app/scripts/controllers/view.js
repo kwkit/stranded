@@ -12,5 +12,7 @@ angular.module('stranded.controllers')
         }
       );
     };
-    $scope.viewBottle();
+    $scope.$on('$ionicView.enter', function() {
+      $scope.viewBottle(); 
+    });
   });
