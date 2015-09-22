@@ -51,6 +51,17 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     controller: 'HomeCtrl'
   })
 
+  .state('track', {
+    url: '/track',
+    templateUrl: 'templates/track.html',
+    controller: 'TrackCtrl'
+  })
+
+  .state('view', {
+    url: '/view/:bottle_id',
+    templateUrl: 'templates/view.html',
+    controller: 'ViewCtrl'
+  })
 //  .state('app', {
 //    url: '/app',
 //    abstract: true,
