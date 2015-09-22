@@ -20,16 +20,16 @@
               <div class="col-90 message-content">
                 {{currentBottle.message}}
               </div>
-              <div class="col-10">
-                <i class="fa fa-location-arrow"></i>
+              <div class="col-10 message-location">
+                <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[currentBottle.latitude === null]"></i>
               </div>
             </div>
 
             <div class="row message-bottom">
-              <div class="col-10">
-                <i class="fa fa-heart"></i>
+              <div class="col-20 message-like">
+                <i class="fa fa-star"></i>
               </div>
-              <div class="col-90">
+              <div class="col-80 message-author">
                 {{currentBottle.author}}
               </div>
           </div>
@@ -42,15 +42,15 @@
                 {{message.message}}
               </div>
               <div class="col-10 message-location">
-                <i class="fa fa-location-arrow"></i>
+                <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[message.latitude === null]"></i>
               </div>
             </div>
 
             <div class="row message-bottom">
-              <div class="col-10 message-like">
-                <i class="fa fa-star"></i>
+              <div class="col-20 message-like">
+                <i class="fa fa-star bright-marker" data-ng-click="dummyLike();"></i> {{ 1263 }}
               </div>
-              <div class="col-90 message-author">
+              <div class="col-80 message-author">
                 {{message.author}}
               </div>
           </div>

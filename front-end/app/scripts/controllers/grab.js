@@ -92,4 +92,8 @@ angular.module('stranded.controllers')
         );
       }
     };
+
+    $scope.dummyLike = function () {
+      alert('quickly do the api binding');
+    }
   });

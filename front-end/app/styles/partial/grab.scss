@@ -8,6 +8,44 @@
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
+
+    .message-top {
+      .message-content {
+
+      }
+
+      .message-location {
+        text-align: right;
+
+        i {
+          color: grey;
+        }
+
+        i.bright-marker {
+          color: $theme-color-blue;
+        }
+      }
+    }
+
+    .message-bottom {
+      margin-top: 10px;
+
+      .message-like {
+        i {
+          color: grey;
+          cursor: pointer;
+        }
+
+        i.bright-marker {
+          color: red;
+        }
+      }
+
+      .message-author {
+        text-align: right;
+        font-family: 'Indie Flower', cursive;
+      }
+    }
   }
 
   .card {
