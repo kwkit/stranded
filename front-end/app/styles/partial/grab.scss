@@ -3,11 +3,11 @@
 .page-grab {
   background-color: $theme-color;
 
-  .list {
-    background-color: transparent;
-
-    .item {
-    }
+  .message-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
   }
 
   .card {
