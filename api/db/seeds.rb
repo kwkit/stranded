@@ -20,8 +20,8 @@ end
 bottles = [
     ["Hello world. My name is ruby and I like rails.", 2, true, "DHH", nil, nil],
     ["Hi. I have been stuck on this island for 20 days now. There is food and water, but no internet. Please send help.",
-    1, false, "IslandIguana", "131", "80"],
-    ["Lorem ipsum blah blah I dont know.", 1, true, "Bored man", "130", "100"],
+    1, false, "IslandIguana", "61", "80"],
+    ["Lorem ipsum blah blah I dont know.", 1, true, "Bored man", "60", "100"],
     ["Have you ever wondered why the sea is blue?", 4, false, "Curious Cat", nil, nil],
 ]
 
