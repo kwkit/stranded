@@ -21,15 +21,15 @@ angular.module('stranded.controllers')
           'message': 'Cos the fishes go blu blu blu?',
           'author': 'Stupid boy',
           'created_at': '2015-09-21T11:02:17.681Z',
-          'latitude': '26.12',
-          'longitude': '-12.23'
+          'latitude': '57.23',
+          'longitude': '76.12'
         },
 
         {
           'message': 'Cos the fishes go blu blu blu?',
           'author': 'Shiny boy',
           'created_at': '2015-09-21T12:02:17.681Z',
-          'latitude': '-56',
+          'latitude': '46.123',
           'longitude': '72.3'
         },
 
@@ -37,8 +37,8 @@ angular.module('stranded.controllers')
           'message': 'Cos the fishes go blu blu blu?',
           'author': 'Small boy',
           'created_at': '2015-09-21T19:02:17.681Z',
-          'latitude': '-26',
-          'longitude': '3.321'
+          'latitude': '66',
+          'longitude': '63.321'
         }
       ]
     };

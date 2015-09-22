@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true" view-title="Stranded">
   <ion-content class="padding page-home">
     <div map-lazy-load="http://maps.google.com/maps/api/js">
-      <map zoom="1" center="37.7699298, -122.4469157" style="height:90%" >
+      <map zoom-to-include-markers="auto" center="37.7699298, -122.4469157" style="height:90%" >
         <shape name="polyline" 
           path="{{paths}}"
           geodesic="true"
