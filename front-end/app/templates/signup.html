@@ -3,17 +3,41 @@
     <h1 class="title">Stranded</h1>
   </ion-header-bar>
   <ion-content class="padding page-signup">
-    <form ng-submit="doSignUp()">
+    <form name="signUpForm" data-ng-submit="doSignUp(signUpForm)">
       <div class="list list-inset">
         <label class="item item-input">
-          <input type="email" placeholder="your email address" ng-model="signUpData.email">
+          <input name="email" type="email" placeholder="your email address" data-ng-model="signUpData.email" required>
         </label>
+        <div class="form-errors" data-ng-show="signUpForm.email.$error && signUpForm.email.$touched || signUpForm.$submitted"
+             data-ng-messages="signUpForm.email.$error">
+          <div data-ng-messages-include="templates/form-errors.html"></div>
+        </div>
+
         <label class="item item-input">
-          <input type="password" placeholder="your password" ng-model="signUpData.password">
+          <input name="password" type="password" placeholder="your password" data-ng-model="signUpData.password"
+                 data-ng-minlength="8" required>
         </label>
+        <div class="form-errors" data-ng-show="signUpForm.password.$error && signUpForm.password.$touched || signUpForm.$submitted"
+             data-ng-messages="signUpForm.password.$error">
+          <div data-ng-messages-include="templates/form-errors.html"></div>
+          <div class="form-error" ng-message="minlength">
+            <i class="ion-information-circled"></i>
+            Password must be at least 8 characters!
+          </div>
+        </div>
+
         <label class="item item-input">
-          <input type="password" placeholder="your password again" ng-model="signUpData.password_confirmation">
+          <input name="password_confirmation" type="password" placeholder="your password again"
+                 data-ng-model="signUpData.password_confirmation" data-ng-minlength="8" compare-to="signUpData.password" required>
         </label>
+        <div class="form-errors" data-ng-show="signUpForm.password_confirmation.$error && signUpForm.password_confirmation.$touched || signUpForm.$submitted"
+             data-ng-messages="signUpForm.password_confirmation.$error">
+          <div data-ng-messages-include="templates/form-errors.html"></div>
+          <div class="form-error" ng-message="compareTo">
+            <i class="ion-information-circled"></i>
+            Passwords must match!
+          </div>
+        </div>
       </div>
       <button class="button button-block button-positive button-normal" type="submit">Sign Up!</button>
     </form>
