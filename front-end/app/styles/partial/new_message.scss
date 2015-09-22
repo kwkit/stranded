@@ -1,6 +1,6 @@
 @import 'color_constant';
 
-.new-message {
+.page-new-message {
   background-color: $theme-color;
 
   form {
@@ -12,6 +12,7 @@
       .item {
       }
     }
+
     .card {
       box-shadow:none;
       background-color: $theme-color;
@@ -20,7 +21,28 @@
       }
 
       .card-bottom {
+        font-size: 14px;
         border-radius: 0px 0px 10px 10px;
+
+        i {
+          color: grey;
+        }
+
+        i.bright-marker {
+          color: $theme-color-blue;
+        }
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 0px;
+
+      img {
+        height: 34px;
+        margin-right: 5px;
       }
     }
   }
