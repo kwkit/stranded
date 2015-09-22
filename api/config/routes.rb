@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       put "bottles/release" => "bottles#release"
       post "bottles/reply" => "bottles#reply"
       get "bottles/current_bottle" => "bottles#current_bottle"
+      get "bottles/my_bottles" => "bottles#my_bottles"
+      get "bottles/view/:id" => "bottles#view"
     end
 
   end

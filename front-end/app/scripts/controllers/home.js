@@ -12,7 +12,7 @@ angular.module('stranded.controllers')
       if (!$scope.toolBoxAnimated) {
         $timeout(function () {
           $scope.toolBoxAnimated = true;
-        }, 1600);
+        }, 2100);
       }
     });
   });

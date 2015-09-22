@@ -138,6 +138,24 @@ angular.module('stranded.services', ['ngResource'])
           'Accept' : 'application/json',
           'Authorization': auth_token
         }
+      },
+      'getMyBottles': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/bottles/my_bottles',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'viewBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/bottles/view/:bottle_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
       }
     });
     return {
@@ -159,6 +177,15 @@ angular.module('stranded.services', ['ngResource'])
       },
       releaseBottle: function(){
         return bottlesApi.releaseBottle();
+      },
+      getMyBottles: function(){
+        return bottlesApi.getMyBottles();
+      },
+      viewBottle: function(arg){
+        var data = {
+          bottle_id: arg
+        };
+        return bottlesApi.viewBottle(data);
       }
     };
   });

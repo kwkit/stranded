@@ -1,5 +1,5 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle, :my_bottles]
   respond_to :json
 
   def reply
@@ -50,6 +50,22 @@ class Api::V1::BottlesController < ApplicationController
       render json: bottle, status: 201
     else
       render json: { errors: bottle.errors }, status: 422
+    end
+  end
+
+  def my_bottles
+    bottles = current_user.bottles
+    messages = current_user.bottle_sub
+    tracks = bottles | messages
+    render json: {bottles: tracks}, status: 200
+  end
+
+  def view
+    bottle = Bottle.find_by(id: params[:id])
+    if bottle
+      render json: BottleSerializer.new(bottle).as_json
+    else
+      render json: {errors: 'no such bottle'}, status: 404
     end
   end
 
