@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('stranded.controllers', [])
+angular.module('stranded.controllers', ['ngMessages'])
 
 .controller('AppCtrl', function($scope, $rootScope, $state, sessionsApi) {
 

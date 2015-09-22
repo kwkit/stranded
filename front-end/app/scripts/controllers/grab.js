@@ -35,14 +35,13 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.replyBottle = function () {
+    $scope.replyBottle = function (replyBottleForm) {
       console.log('replying bottle');
-
-      $ionicLoading.show();
 
       if (!$scope.currentBottle) {
         console.log('you don\'t have a bottle to reply, this function shouldn\'t be called');
-      } else {
+      } else if (replyBottleForm.$valid) {
+        $ionicLoading.show();
         bottlesApi.replyCurrentBottle($scope.newMessageData).$promise.then(
           function (response) {
             console.log(response);
