@@ -57,7 +57,7 @@ class Api::V1::BottlesController < ApplicationController
     bottles = current_user.bottles
     messages = current_user.bottle_sub
     tracks = bottles | messages
-    render json: {"bottles": tracks}, status: 200
+    render json: {bottles: tracks}, status: 200
   end
 
   def view
