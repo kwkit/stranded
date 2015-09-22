@@ -1,0 +1,20 @@
+<ion-view view-title="Tracking a bottle">
+  <ion-content class="padding new-message">
+    <div class="card">
+      <div class="item item-divider">
+        {{bottle.author}}
+      </div>
+      <div class="item item-text-wrap">
+        {{bottle.message}}
+      </div>
+    </div>
+    <div class="card" data-ng-repeat="message in bottle.messages">
+      <div class="item item-divider">
+        {{message.author}}
+      </div>
+      <div class="item item-text-wrap">
+        {{message.message}}
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
