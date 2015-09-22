@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :bottles
-  has_many :conversation_participations
+  has_many :messages
 
   def generate_authentication_token!
     begin
