@@ -16,11 +16,11 @@
       box-shadow:none;
       background-color: $theme-color;
       .card-top {
-        border-radius: 20px 20px 0px 0px;
+        border-radius: $common-border-radius $common-border-radius 0px 0px;
       }
 
       .card-bottom {
-        border-radius: 0px 0px 20px 20px;
+        border-radius: 0px 0px $common-border-radius $common-border-radius;
       }
     }
   }
