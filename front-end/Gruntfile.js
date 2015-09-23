@@ -421,8 +421,45 @@ module.exports = function (grunt) {
           useSingleQuotes: false
         }
       }
-    }
+    },
 
+    manifest: {
+      generate: {
+        options: {
+          basePath: '<%= yeoman.dist %>/',
+          cache: [
+            'bower_components/angular/angular.js',
+            'bower_components/angular-resource/angular-resource.js',
+            'bower_components/angular-local-storage/dist/angular-local-storage.js',
+            'bower_components/angular-messages/angular-messages.js',
+            'bower_components/angular-animate/angular-animate.js',
+            'bower_components/angular-sanitize/angular-sanitize.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/ionic/release/js/ionic.js',
+            'bower_components/ionic/release/js/ionic-angular.js',
+            'bower_components/ngCordova/dist/ng-cordova.js',
+            'bower_components/ngmap/build/scripts/ng-map.js'
+          ],
+          network: ['http://*', 'https://*'],
+          fallback: [],
+          exclude: [],
+//          headcomment: " <%= pkg.name %> v<%= pkg.version %>",
+          verbose: true,
+          timestamp: true,
+//          hash: true,
+          master: ['index.html']
+        },
+        src: [
+          'fonts/**/*',
+          '<%= yeoman.images %>/**/*',
+          '<%= yeoman.scripts %>/**/*.js',
+          '<%= yeoman.styles %>/**/*.css',
+          'templates/**/*.html',
+          '*.html'
+        ],
+        dest: 'stranded.appcache'
+      }
+    }
   });
 
   // Register tasks for all Cordova commands
@@ -539,7 +576,8 @@ module.exports = function (grunt) {
     'concurrent:server',
     'autoprefixer',
     'newer:copy:app',
-    'newer:copy:tmp'
+    'newer:copy:tmp',
+    'manifest'
   ]);
 
   grunt.registerTask('dep', [
@@ -549,7 +587,8 @@ module.exports = function (grunt) {
     'concurrent:server',
     'autoprefixer',
     'newer:copy:app',
-    'newer:copy:tmp'
+    'newer:copy:tmp',
+    'manifest'
   ]);
 
 
@@ -567,7 +606,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'manifest'
   ]);
 
   grunt.registerTask('coverage', 
@@ -583,4 +623,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.loadNpmTasks('grunt-sass-globbing');
+
+  grunt.loadNpmTasks('grunt-manifest');
 };
