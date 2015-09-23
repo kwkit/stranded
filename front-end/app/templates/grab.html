@@ -27,8 +27,9 @@
 
             <div class="row message-bottom">
               <div class="col-20 message-like">
-                <i class="fa fa-star big-star bright-marker" data-ng-click="starBottle(currentBottle)"> {{ currentBottle.stars }}
-                </i>
+                <i class="fa fa-star big-star bright-marker" data-ng-click="starBottle(currentBottle)"></i> {{ currentBottle.stars }}
+                <span class="positive" ng-show="currentBottle.starred">starred</span>
+                <span class="balanced" ng-show="!currentBottle.starred">click to star</span>
               </div>
               <div class="col-80 message-author">
                 {{currentBottle.author}}
@@ -49,7 +50,7 @@
 
             <div class="row message-bottom">
               <div class="col-20 message-like">
-                <i class="fa fa-star bright-marker big-star" data-ng-click="addStar(message);"></i> {{ message.stars }} 
+                <i class="fa fa-star bright-marker big-star" data-ng-click="starMessage(message);"></i> {{ message.stars }} 
                 <span class="positive" ng-show="message.starred">starred</span>
                 <span class="balanced" ng-show="!message.starred">click to star</span>
               </div>
