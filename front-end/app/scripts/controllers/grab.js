@@ -143,11 +143,11 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.addStar = function (message) {
+    $scope.starMessage = function (message) {
       console.log(message);
       if(!message.starred) {
         $ionicLoading.show();
-        bottlesApi.addStar(message.id).$promise.then(
+        bottlesApi.starMessage(message.id).$promise.then(
           function (response) {
             $ionicLoading.hide();
             message.stars = response.message.stars;
@@ -161,4 +161,21 @@ angular.module('stranded.controllers')
       }
     };
 
+    $scope.starBottle = function (bottle) {
+      console.log(bottle);
+      if(!bottle.starred) {
+        $ionicLoading.show();
+        bottlesApi.starBottle(bottle.id).$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            bottle.stars = response.bottle.stars;
+            bottle.starred = response.bottle.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      }
+    };
   });
