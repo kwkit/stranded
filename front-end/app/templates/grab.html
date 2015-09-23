@@ -1,7 +1,7 @@
 <ion-view>
   <ion-nav-title>{{currentBottle ? 'Messages in bottle' : 'Fish for a bottle!'}}</ion-nav-title>
   <ion-nav-buttons side="right">
-    <button class="button button-clear button-light" ng-click="openModal()">
+    <button class="button button-clear button-light" ng-click="goReply()">
       <i class="fa fa-paper-plane"></i> View Trail
     </button>
   </ion-nav-buttons>
@@ -56,7 +56,7 @@
           </div>
       </ul>
 
-      <form name="replyBottleForm" data-ng-submit="replyBottle(replyBottleForm)" novalidate>
+      <form id="reply-form" name="replyBottleForm" data-ng-submit="replyBottle(replyBottleForm)" novalidate>
         <div class="card">
           <label class="item card-top" data-ng-class="{ 'has-error' : replyBottleForm.message.$invalid}">
             <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required>

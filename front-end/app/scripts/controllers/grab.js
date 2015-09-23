@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
+  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll, $location) {
     $scope.newMessageData = {};
     $scope.locationEnable = true;
 
@@ -233,5 +233,10 @@ angular.module('stranded.controllers')
           console.log('Error:', error.errors);
         }
       );
+    };
+
+    $scope.goReply = function () {
+      $location.hash('reply-form');
+      $anchorScroll();
     };
   });
