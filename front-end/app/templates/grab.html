@@ -48,7 +48,7 @@
 
             <div class="row message-bottom">
               <div class="col-20 message-like">
-                <i class="fa fa-star bright-marker" data-ng-click="dummyLike();"></i> {{ 1263 }}
+                <i class="fa fa-star bright-marker" data-ng-click="addStar(message);"></i> {{ message.stars }}
               </div>
               <div class="col-80 message-author">
                 {{message.author}}

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :bottles
   has_many :messages
   has_many :bottle_sub, -> { distinct }, through: :messages, source: :bottle
+  has_many :stars
 
   def generate_authentication_token!
     begin

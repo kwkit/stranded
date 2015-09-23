@@ -190,8 +190,22 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.dummyLike = function () {
-      console.log('quickly do the api binding');
+    $scope.addStar = function (message) {
+      console.log(message);
+      if(!message.starred) {
+        $ionicLoading.show();
+        bottlesApi.addStar(message.id).$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            message.stars = response.message.stars;
+            message.starred = response.message.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      }
     };
 
   });
