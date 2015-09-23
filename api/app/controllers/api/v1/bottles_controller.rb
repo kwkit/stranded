@@ -27,7 +27,9 @@ class Api::V1::BottlesController < ApplicationController
     if bottle
       bottle.update(opened: true)
       current_user.update(open_bottle_id: bottle.id)
-      render json: BottleSerializer.new(bottle).as_json
+      output = BottleSerializer.new(bottle)
+      output.current_user_id = current_user.id
+      render json: output.as_json
     else
       current_user.update(open_bottle_id: nil)
       render json: { errors: 'failed to get a bottle'}, status: 404
@@ -37,7 +39,9 @@ class Api::V1::BottlesController < ApplicationController
   def current_bottle
     if current_user.open_bottle_id
       bottle = Bottle.find(current_user.open_bottle_id)
-      render json: BottleSerializer.new(bottle).as_json
+      output = BottleSerializer.new(bottle)
+      output.current_user_id = current_user.id
+      render json: output.as_json
     else
       render json: {errors: 'not holding any bottle'}, status: 404
     end
@@ -63,7 +67,9 @@ class Api::V1::BottlesController < ApplicationController
   def view
     bottle = Bottle.find_by(id: params[:id])
     if bottle
-      render json: BottleSerializer.new(bottle).as_json
+      output = BottleSerializer.new(bottle)
+      output.current_user_id = current_user.id
+      render json: output.as_json
     else
       render json: {errors: 'no such bottle'}, status: 404
     end

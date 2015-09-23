@@ -5,7 +5,9 @@ class Api::V1::StarsController < ApplicationController
   def add
     star = Star.new(user_id: current_user.id, message_id: params[:message_id])
     if star.save
-      render json: MessageSerializer.new(star.message).as_json
+      output = MessageSerializer.new(star.message)
+      output.current_user_id = current_user.id
+      render json: output.as_json
     else
       render json: { errors: star.errors }, status: 422
     end

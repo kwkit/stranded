@@ -144,17 +144,21 @@ angular.module('stranded.controllers')
     };
 
     $scope.addStar = function (message) {
-      $ionicLoading.show();
-      bottlesApi.addStar(message.id).$promise.then(
-        function (response) {
-          $ionicLoading.hide();
-          message.stars = response.message.stars;
-        },
-        function (error) {
-          $ionicLoading.hide();
-          console.log('Error:', error.errors);
-        }
-      );
+      console.log(message);
+      if(!message.starred) {
+        $ionicLoading.show();
+        bottlesApi.addStar(message.id).$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            message.stars = response.message.stars;
+            message.starred = response.message.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      }
     };
 
   });
