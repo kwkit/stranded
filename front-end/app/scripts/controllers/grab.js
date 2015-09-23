@@ -192,37 +192,46 @@ angular.module('stranded.controllers')
 
     $scope.toggleStarMessage = function (message) {
       console.log(message);
-      if(!message.starred) {
-        $ionicLoading.show();
-        bottlesApi.starMessage(message.id).$promise.then(
-          function (response) {
-            $ionicLoading.hide();
-            message.stars = response.message.stars;
-            message.starred = response.message.starred;
-          },
-          function (error) {
-            $ionicLoading.hide();
-            console.log('Error:', error.errors);
-          }
-        );
+      var request;
+      $ionicLoading.show();
+      if (!message.starred) {
+        request = bottlesApi.starMessage(message.id);
+      } else {
+        request = bottlesApi.unstarMessage(message.id);
       }
+
+      request.$promise.then(
+        function (response) {
+          $ionicLoading.hide();
+          message.stars = response.message.stars;
+          message.starred = response.message.starred;
+        },
+        function (error) {
+          $ionicLoading.hide();
+          console.log('Error:', error.errors);
+        }
+      );
     };
 
     $scope.toggleStarBottle = function (bottle) {
       console.log(bottle);
-      if(!bottle.starred) {
-        $ionicLoading.show();
-        bottlesApi.starBottle(bottle.id).$promise.then(
-          function (response) {
-            $ionicLoading.hide();
-            bottle.stars = response.bottle.stars;
-            bottle.starred = response.bottle.starred;
-          },
-          function (error) {
-            $ionicLoading.hide();
-            console.log('Error:', error.errors);
-          }
-        );
+      var request;
+      $ionicLoading.show();
+      if (!bottle.starred) {
+        request = bottlesApi.starBottle(bottle.id);
+      } else {
+        request = bottlesApi.unstarBottle(bottle.id);
       }
+      request.$promise.then(
+        function (response) {
+          $ionicLoading.hide();
+          bottle.stars = response.bottle.stars;
+          bottle.starred = response.bottle.starred;
+        },
+        function (error) {
+          $ionicLoading.hide();
+          console.log('Error:', error.errors);
+        }
+      );
     };
   });
