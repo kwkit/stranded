@@ -3,16 +3,62 @@
 .page-grab {
   background-color: $theme-color;
 
-  .list {
-    background-color: transparent;
+  .message-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
 
-    .item {
+    .message-top {
+      .message-content {
+
+      }
+
+      .message-location {
+        text-align: right;
+
+        i {
+          color: grey;
+        }
+
+        i.bright-marker {
+          color: $theme-color-blue;
+        }
+      }
+    }
+
+    .message-bottom {
+      margin-top: 10px;
+
+      .message-like {
+        i {
+          color: grey;
+          cursor: pointer;
+        }
+
+        i.bright-marker {
+          color: red;
+        }
+      }
+
+      .message-author {
+        text-align: right;
+        font-family: 'Indie Flower', cursive;
+      }
     }
   }
 
   .card {
     box-shadow:none;
     background-color: $theme-color;
+
+    i {
+      color: grey;
+    }
+
+    i.bright-marker {
+      color: $theme-color-blue;
+    }
 
     .card-top {
       border-radius: 10px 10px 0px 0px;
@@ -25,14 +71,6 @@
 
       .message-author-signature {
         width: 100%;
-      }
-
-      i {
-        color: grey;
-      }
-
-      i.bright-marker {
-        color: $theme-color-blue;
       }
     }
   }
