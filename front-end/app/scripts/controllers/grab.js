@@ -97,14 +97,14 @@ angular.module('stranded.controllers')
           }
 
           $scope.distance = 0;
-          for (var i = 2; i < $scope.paths.length - 1; i++) {
+          $scope.shouldShowMap = false;
+          for (var i = 2; i <= $scope.paths.length - 1; i++) {
             // this is a hack
             var location1 = $scope.paths[i];
             var location2 = $scope.paths[i - 1];
             $scope.distance += distanceBetween(location1[1], location1[0], location2[1], location2[0]);
+            $scope.shouldShowMap = true;
           }
-
-          console.log($scope.distance);
         },
         function (error) {
           console.log('Error:', error.errors);
