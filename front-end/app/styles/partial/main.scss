@@ -47,3 +47,46 @@ $common-border-radius: 10px;
 .message-author-signature {
   font-family: 'Indie Flower', cursive;
 }
+
+// http://codepen.io/ionic/pen/pEter
+.bar.bar-offline {
+  display: block;
+  height: 24px;
+
+  /* starts right below a normal header */
+  top: 44px;
+
+  /* make the text centered vertically and horizontally */
+  text-align: center;
+  padding: 0;
+  line-height: 24px;
+
+  /* transition 'sliding down' (check below)*/
+  -webkit-transition: 200ms all;
+}
+
+/*
+ * make the content's top changes animate.
+ * might not always look good, but looks
+ * good when our loader is added & removed
+ */
+.has-header {
+  transition: 200ms top;
+  -webkit-transition: 200ms top;
+}
+.has-header.is-offline {
+  /* 44px (header) + 24px */
+  top: 68px;
+}
+
+/* make loading bar slide up/down */
+.bar-offline.ng-enter,
+.bar-offline.ng-leave.ng-leave-active {
+  height: 0;
+  border-width: 0px;
+}
+.bar-offline.ng-enter.ng-enter-active,
+.bar-offline.ng-leave {
+  height: 24px;
+  border-width: 1px;
+}
