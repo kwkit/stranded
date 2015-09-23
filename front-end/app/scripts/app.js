@@ -6,7 +6,7 @@
 // 'stranded' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'stranded.controllers' is found in app.js
-angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule'])
+angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule', 'ngMap'])
 
 .run(function($window, $rootScope, $ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -119,6 +119,12 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
         controller: 'SettingCtrl'
 //      }
 //    }
+  })
+
+  .state('demomap', {
+    url: '/demomap',
+      templateUrl: 'templates/demomap.html',
+      controller: 'DemoMapCtrl'
   })
 
   .state('profile', {

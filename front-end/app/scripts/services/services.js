@@ -92,7 +92,7 @@ angular.module('stranded.services', ['ngResource'])
     if($window.sessionStorage.auth_token) {
       auth_token = $window.sessionStorage.auth_token;
     }
-
+    console.log(auth_token);
     var bottlesApi = $resource('', {}, {
       'getCurrentBottle': {
         method: 'GET',
