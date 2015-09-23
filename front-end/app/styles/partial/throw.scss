@@ -1,6 +1,6 @@
 @import 'color_constant';
 
-.page-new-message {
+.page-throw {
   background-color: $theme-color;
 
   form {
@@ -32,6 +32,12 @@
           color: $theme-color-blue;
         }
       }
+    }
+
+    .message-textarea {
+      border: 0px;
+      resize: none;
+      height: 30vh;
     }
 
     button {

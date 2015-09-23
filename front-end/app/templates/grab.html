@@ -1,54 +1,123 @@
 <ion-view>
-  <ion-nav-title>{{currentBottle ? 'Add reply in the bottle!' : 'Fish for a bottle!'}}</ion-nav-title>
-  <ion-content class="padding new-message">
+  <ion-nav-title>{{currentBottle ? 'Messages in bottle' : 'Fish for a bottle!'}}</ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear button-light" ng-click="openModal()">
+      <i class="fa fa-paper-plane"></i> View Trail
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="padding page-grab">
     <div ng-if="!currentBottle">
       <a class="button button-block button-positive button-normal" data-ng-click="grabBottle()">
         GRAB!
       </a>
     </div>
-    <div ng-if="currentBottle" class="list list-inset">
-      <div class="card">
-        <div class="item item-divider">
-          {{currentBottle.author}}
-        </div>
-        <div class="item item-text-wrap">
-          {{currentBottle.message}}
-        </div>
-      </div>
-      <div class="card" data-ng-repeat="message in currentBottle.messages">
-        <div class="item item-divider">
-          {{message.author}}
-        </div>
-        <div class="item item-text-wrap">
-          {{message.message}}
-        </div>
-      </div>
+
+    <div ng-if="currentBottle">
+      <ul>
+        <li>
+          <div class="message-card">
+            <div class="row message-top">
+              <div class="col-90 message-content">
+                {{currentBottle.message}}
+              </div>
+              <div class="col-10 message-location">
+                <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[currentBottle.latitude === null]"></i>
+              </div>
+            </div>
+
+            <div class="row message-bottom">
+              <div class="col-20 message-like">
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="col-80 message-author">
+                {{currentBottle.author}}
+              </div>
+          </div>
+        </li>
+
+        <li data-ng-repeat="message in currentBottle.messages">
+          <div class="message-card">
+            <div class="row message-top">
+              <div class="col-90 message-content">
+                {{message.message}}
+              </div>
+              <div class="col-10 message-location">
+                <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[message.latitude === null]"></i>
+              </div>
+            </div>
+
+            <div class="row message-bottom">
+              <div class="col-20 message-like">
+                <i class="fa fa-star bright-marker" data-ng-click="dummyLike();"></i> {{ 1263 }}
+              </div>
+              <div class="col-80 message-author">
+                {{message.author}}
+              </div>
+          </div>
+      </ul>
+
       <form name="replyBottleForm" data-ng-submit="replyBottle(replyBottleForm)" novalidate>
-        <label class="item item-input" data-ng-class="{ 'has-error' : replyBottleForm.message.$invalid}">
-          <textarea name="message" placeholder="what will you say today?" ng-model="newMessageData.message" required></textarea>
-        </label>
-        <div class="form-errors" data-ng-show="replyBottleForm.message.$error && replyBottleForm.message.$touched || replyBottleForm.$submitted"
-             data-ng-messages="replyBottleForm.message.$error">
-          <div data-ng-messages-include="templates/form-errors.html"></div>
+        <div class="card">
+          <label class="item card-top" data-ng-class="{ 'has-error' : replyBottleForm.message.$invalid}">
+            <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required>
+            </textarea>
+          </label>
+          
+          <div class="form-errors" data-ng-show="replyBottleForm.message.$error && replyBottleForm.message.$touched || replyBottleForm.$submitted" data-ng-messages="replyBottleForm.message.$error">
+            <div data-ng-messages-include="templates/form-errors.html">
+            </div>
+          </div>
+
+          <ion-toggle ng-model="locationEnable" ng-change="setLocation(locationEnable)" toggle-class="toggle-calm">
+            <span>
+              <i class="fa fa-location-arrow" ng-class="{true : 'bright-marker'}[locationEnable]"></i>
+              {{ locationEnable ? 'Location added!' : 'Add message location!' }}
+            </span>
+          </ion-toggle>
+          
+          <label class="item card-bottom" data-ng-class="{ 'has-error' : replyBottleForm.author.$invalid}">
+            <input name="author" class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author" required />
+          </label>
+          
+          <div class="form-errors" data-ng-show="replyBottleForm.author.$error && replyBottleForm.author.$touched || replyBottleForm.$submitted"
+               data-ng-messages="replyBottleForm.author.$error">
+            <div data-ng-messages-include="templates/form-errors.html">
+            </div>
+          </div>
+
+          <div class="grab-row">
+            <div class="grab-col-50">
+              <button class="button button-block button-positive button-normal" id="button-other-bottle" data-ng-click="releaseBottle()">
+                Get another bottle!
+              </button>
+            </div>
+
+            <div class="grab-col-50">
+              <button class="button button-block button-positive button-normal" id="button-reply" type="submit">
+                <span>Reply</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <label class="item item-input" data-ng-class="{ 'has-error' : replyBottleForm.author.$invalid}">
-          <input name="author" type="text" placeholder="your creative name" ng-model="newMessageData.author" required>
-        </label>
-        <div class="form-errors" data-ng-show="replyBottleForm.author.$error && replyBottleForm.author.$touched || replyBottleForm.$submitted"
-             data-ng-messages="replyBottleForm.author.$error">
-          <div data-ng-messages-include="templates/form-errors.html"></div>
-        </div>
-        <ion-toggle ng-model="locationEnable" ng-change="setLocation(locationEnable)" toggle-class="toggle-calm">
-          <span>
-            <i class="fa fa-location-arrow" ng-class="{true : 'bright-marker'}[locationEnable]"></i>
-            {{ locationEnable ? 'Location added!' : 'Add message location!' }}
-          </span>
-        </ion-toggle>
-        <button class="button button-block button-positive button-normal" type="submit">Add reply!</button>
       </form>
-      <a class="button button-block button-positive button-normal" data-ng-click="releaseBottle()">
-        Return bottle to sea without reply
-      </a>
+
+      <div map-lazy-load="http://maps.google.com/maps/api/js">
+        <map zoom-to-include-markers="auto" center="37.7699298, -122.4469157" style="height:90%" >
+          <shape name="polyline" 
+            path="{{ paths }}"
+            geodesic="true"
+            stroke-color="#FF0000"
+            stroke-opacity="1.0"
+            stroke-weight="2">
+          </shape>
+          <div ng-repeat="location in locations">
+            <marker position="{{ location }}">
+            </marker>
+          </div>
+        </map>
+        the bottle has travelled {{ distance }} meters;
+      </div>
+
     </div>
   </ion-content>
 </ion-view>
