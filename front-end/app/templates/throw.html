@@ -15,7 +15,7 @@
           <div data-ng-messages-include="templates/form-errors.html">
           </div>
         </div>
-        <ion-toggle ng-model="locationEnable" toggle-class="toggle-calm" class="card-bottom">
+        <ion-toggle ng-model="locationEnable" ng-change="setLocation(locationEnable)" toggle-class="toggle-calm" class="card-bottom">
           <span>
             <i class="fa fa-location-arrow" ng-class="{true : 'bright-marker'}[locationEnable]"></i>
             {{ locationEnable ? 'Location added!' : 'Add message location!' }}

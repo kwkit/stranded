@@ -3,15 +3,61 @@
 angular.module('stranded.controllers')
   .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
     $scope.newMessageData = {};
-    
+    $scope.locationEnable = true;
+
     $scope.locations = [];
     $scope.paths = [[]]; // this is a hack
 
+    $scope.setLocation = function (locationEnable) {
+      $scope.locationEnable = locationEnable;
+      if ($scope.locationEnable && $scope.currentBottle) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              $scope.newMessageData.latitude = position.coords.latitude;
+              $scope.newMessageData.longitude = position.coords.longitude;
+            },
+            function (error) {
+              $scope.$apply(function () {
+                $scope.locationEnable = false;
+              });
+              switch(error.code) {
+                case error.PERMISSION_DENIED:
+                  console.log('User denied the request for Geolocation.');
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                  console.log('Location information is unavailable.');
+                  break;
+                case error.TIMEOUT:
+                  console.log('The request to get user location timed out.');
+                  break;
+                case error.UNKNOWN_ERROR:
+                  console.log('An unknown error occurred.');
+                  break;
+              }
+            }
+          );
+        } else {
+          console.log('Geolocation is not supported by this browser.');
+          $scope.$apply(function () {
+            $scope.locationEnable = false;
+          });
+        }
+      } else {
+        $scope.newMessageData.latitude = null;
+        $scope.newMessageData.longitude = null;
+      }
+    };
     $scope.getCurrentBottle = function() {
       bottlesApi.getCurrentBottle().$promise.then(
         function (response) {
           $scope.currentBottle = response.bottle ? response.bottle : null;
           console.log($scope.currentBottle);
+
+          if ($scope.currentBottle) {
+            $scope.setLocation($scope.locationEnable);
+          }
+
           // map modal
           if ($scope.currentBottle.latitude) {
             $scope.paths.push([
@@ -78,6 +124,7 @@ angular.module('stranded.controllers')
           function (response) {
             $ionicLoading.hide();
             $scope.currentBottle = response.bottle;
+            $scope.setLocation($scope.locationEnable);
             console.log(response);
           },
           function (error) {
