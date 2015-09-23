@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get "bottles/view/:id" => "bottles#view"
       get "stars/message/:message_id" => "stars#message"
       get "stars/bottle/:bottle_id" => "stars#bottle"
+      get "stars/unstar_message/:message_id" => "stars#unstar_message"
+      get "stars/unstar_bottle/:bottle_id" => "stars#unstar_bottle"
     end
 
   end

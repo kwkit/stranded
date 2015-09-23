@@ -1,5 +1,5 @@
 class Api::V1::StarsController < ApplicationController
-  before_action :authenticate_with_token!, only: [:message, :bottle]
+  before_action :authenticate_with_token!, only: [:message, :bottle, :unstar_message, :unstar_bottle]
   respond_to :json
 
   def message
@@ -22,5 +22,19 @@ class Api::V1::StarsController < ApplicationController
     else
       render json: { errors: bottle_star.errors }, status: 422
     end
+  end
+
+  def unstar_message
+    Star.where(user_id: current_user.id, message_id: params[:message_id]).destroy_all
+    output = MessageSerializer.new(Message.find(params[:message_id]));
+    output.current_user_id = current_user.id
+    render json: output.as_json
+  end
+
+  def unstar_bottle
+    BottleStar.where(user_id: current_user.id, bottle_id: params[:bottle_id]).destroy_all
+    output = ThreadSerializer.new(Bottle.find(params[:bottle_id]), root: 'bottle');
+    output.current_user_id = current_user.id
+    render json: output.as_json
   end
 end
