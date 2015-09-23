@@ -27,7 +27,7 @@ class Api::V1::BottlesController < ApplicationController
     if bottle
       bottle.update(opened: true)
       current_user.update(open_bottle_id: bottle.id)
-      output = BottleSerializer.new(bottle)
+      output = ThreadSerializer.new(bottle, root: 'bottle')
       output.current_user_id = current_user.id
       render json: output.as_json
     else
@@ -39,7 +39,7 @@ class Api::V1::BottlesController < ApplicationController
   def current_bottle
     if current_user.open_bottle_id
       bottle = Bottle.find(current_user.open_bottle_id)
-      output = BottleSerializer.new(bottle)
+      output = ThreadSerializer.new(bottle, root: 'bottle')
       output.current_user_id = current_user.id
       render json: output.as_json
     else
@@ -61,13 +61,13 @@ class Api::V1::BottlesController < ApplicationController
     bottles = current_user.bottles
     messages = current_user.bottle_sub
     tracks = bottles | messages
-    render json: {bottles: tracks}, status: 200
+    render json: {bottles: tracks.map{|bottle| BottleSerializer.new(bottle, root: false)}.as_json}, status: 200
   end
 
   def view
     bottle = Bottle.find_by(id: params[:id])
     if bottle
-      output = BottleSerializer.new(bottle)
+      output = ThreadSerializer.new(bottle, root: 'bottle')
       output.current_user_id = current_user.id
       render json: output.as_json
     else

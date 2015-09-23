@@ -1,8 +1,7 @@
 @import 'color_constant';
 
-.page-grab {
+.view-bottle {
   background-color: $theme-color;
-
   .message-card {
     background-color: white;
     border-radius: 10px;
@@ -100,22 +99,6 @@
         margin-left: -3px;
         width: calc(100% + 4px);
       }
-    }
-  }
-
-  button {
-    text-align: center;
-    padding: 13px 0px;
-
-    img {
-      position: absolute;
-      display: block;
-      height: 34px;
-      left: calc(50% - 90px);
-    }
-
-    span {
-      // margin-left: 20px;
     }
   }
 }

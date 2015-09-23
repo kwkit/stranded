@@ -16,7 +16,7 @@ class Api::V1::StarsController < ApplicationController
   def bottle
     bottle_star = BottleStar.new(user_id: current_user.id, bottle_id: params[:bottle_id])
     if bottle_star.save
-      output = BottleSerializer.new(bottle_star.bottle)
+      output = ThreadSerializer.new(bottle_star.bottle, root: 'bottle')
       output.current_user_id = current_user.id
       render json: output.as_json
     else

@@ -1,0 +1,12 @@
+@import 'color_constant';
+
+.track-messages {
+  background-color: $theme-color;
+
+  .bottle-likes {
+  	  text-align: right;
+	  i.bright-marker {
+	    color: red;
+	}
+  }
+}

@@ -1,20 +1,46 @@
 <ion-view view-title="Tracking a bottle">
-  <ion-content class="padding new-message">
-    <div class="card">
-      <div class="item item-divider">
-        {{bottle.author}}
-      </div>
-      <div class="item item-text-wrap">
-        {{bottle.message}}
-      </div>
-    </div>
-    <div class="card" data-ng-repeat="message in bottle.messages">
-      <div class="item item-divider">
-        {{message.author}}
-      </div>
-      <div class="item item-text-wrap">
-        {{message.message}}
-      </div>
-    </div>
+  <ion-content class="padding view-bottle">
+    <ul>
+      <li>
+        <div class="message-card">
+          <div class="row message-top">
+            <div class="col-90 message-content">
+              {{bottle.message}}
+            </div>
+            <div class="col-10 message-location">
+              <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[currentBottle.latitude === null]"></i>
+            </div>
+          </div>
+
+          <div class="row message-bottom">
+            <div class="col-20 message-like">
+              <i class="fa fa-star big-star bright-marker"></i> {{ bottle.stars }}
+            </div>
+            <div class="col-80 message-author">
+              {{bottle.author}}
+            </div>
+        </div>
+      </li>
+
+      <li data-ng-repeat="message in bottle.messages">
+        <div class="message-card">
+          <div class="row message-top">
+            <div class="col-90 message-content">
+              {{message.message}}
+            </div>
+            <div class="col-10 message-location">
+              <i class="fa fa-location-arrow" data-ng-class="{false: 'bright-marker'}[message.latitude === null]"></i>
+            </div>
+          </div>
+
+          <div class="row message-bottom">
+            <div class="col-20 message-like">
+              <i class="fa fa-star bright-marker big-star"></i> {{ message.stars }} 
+            </div>
+            <div class="col-80 message-author">
+              {{message.author}}
+            </div>
+        </div>
+    </ul>
   </ion-content>
 </ion-view>
