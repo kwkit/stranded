@@ -190,7 +190,7 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.starMessage = function (message) {
+    $scope.toggleStarMessage = function (message) {
       console.log(message);
       if(!message.starred) {
         $ionicLoading.show();
@@ -208,7 +208,7 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.starBottle = function (bottle) {
+    $scope.toggleStarBottle = function (bottle) {
       console.log(bottle);
       if(!bottle.starred) {
         $ionicLoading.show();
