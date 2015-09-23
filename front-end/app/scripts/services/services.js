@@ -156,6 +156,15 @@ angular.module('stranded.services', ['ngResource'])
           'Accept' : 'application/json',
           'Authorization': auth_token
         }
+      },
+      'addStar': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/stars/add/:message_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
       }
     });
     return {
@@ -186,6 +195,13 @@ angular.module('stranded.services', ['ngResource'])
           bottle_id: arg
         };
         return bottlesApi.viewBottle(data);
+      },
+      addStar: function(arg){
+        var target = {
+          message_id: arg
+        };
+        console.log(target);
+        return bottlesApi.addStar(target);
       }
     };
   });

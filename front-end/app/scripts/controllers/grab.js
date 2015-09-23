@@ -143,8 +143,18 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.dummyLike = function () {
-      console.log('quickly do the api binding');
+    $scope.addStar = function (message) {
+      $ionicLoading.show();
+      bottlesApi.addStar(message.id).$promise.then(
+        function (response) {
+          $ionicLoading.hide();
+          message.stars = response.message.stars;
+        },
+        function (error) {
+          $ionicLoading.hide();
+          console.log('Error:', error.errors);
+        }
+      );
     };
 
   });
