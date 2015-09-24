@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
-
+  before_action :authenticate_with_token!, only: [:verify]
   def create
     user_password = params[:session][:password]
     user_email = params[:session][:email]
@@ -24,4 +24,7 @@ class Api::V1::SessionsController < ApplicationController
     head 204
   end
 
+  def verify
+    render json: { response: true }, status: 200
+  end
 end

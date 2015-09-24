@@ -10,12 +10,12 @@ class Api::V1::BottlesController < ApplicationController
       bottle.opened = false
       if bottle.save
         current_user.update(open_bottle_id: nil)
-        render json: { response: 'success', message: 'reply posted'}
+        render json: { response: 'success', message: 'reply posted'}, status: 201
       else
-        render json: { errors: bottle.errors }
+        render json: { errors: bottle.errors }, status: 422
       end
     else
-      render json: { errors: 'not holding any bottles'}, status: 404
+      render json: { errors: 'Not holding any bottles'}, status: 404
     end
   end
 
@@ -29,10 +29,10 @@ class Api::V1::BottlesController < ApplicationController
       current_user.update(open_bottle_id: bottle.id)
       output = ThreadSerializer.new(bottle, root: 'bottle')
       output.current_user_id = current_user.id
-      render json: output.as_json
+      render json: output.as_json, status: 200
     else
       current_user.update(open_bottle_id: nil)
-      render json: { errors: 'failed to get a bottle'}, status: 404
+      render json: { errors: 'Failed to find a bottle'}, status: 404
     end
   end
 
