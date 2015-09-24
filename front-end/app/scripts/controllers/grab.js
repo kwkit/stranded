@@ -127,12 +127,15 @@ angular.module('stranded.controllers')
       $scope.currentBottle.distance = 0;
       $scope.currentBottle.shouldShowMap = false;
 
+      if($scope.currentBottle.paths.length >= 2) {
+        $scope.currentBottle.shouldShowMap = true;
+      }
+
       for (var i = 2; i <= $scope.currentBottle.paths.length - 1; i++) {
         // this is a hack
         var location1 = $scope.currentBottle.paths[i];
         var location2 = $scope.currentBottle.paths[i - 1];
         $scope.currentBottle.distance += $scope.distanceBetween(location1[1], location1[0], location2[1], location2[0]);
-        $scope.currentBottle.shouldShowMap = true;
       }
     };
 
