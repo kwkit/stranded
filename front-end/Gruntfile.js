@@ -457,7 +457,7 @@ module.exports = function (grunt) {
           'templates/**/*.html',
           '*.html'
         ],
-        dest: 'stranded.appcache'
+        dest: '<%= yeoman.dist %>/stranded.appcache'
       }
     }
   });
