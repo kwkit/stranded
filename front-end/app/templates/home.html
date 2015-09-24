@@ -38,16 +38,21 @@
             Track
           </div>
         </div>
-        <div class="col">
-          <i class="icon ion-help" data-ng-click="openModal()"></i>
-          <div class="button-text">
-            Help
-          </div>
-        </div>
       </div>
         
       <div class="toolbox">
         <div class="toolbox-body">
+          
+          <div class="row func-buttons">
+            <div class="col">
+              <i class="fa fa-question" id="button-help" data-ng-click="openModal()"></i>
+            </div>
+
+            <div class="col">
+              <i class="fa fa-power-off" id="button-logout" data-ng-click="openModal()"></i>
+            </div>
+          </div>
+
           <img src="/images/home/box.svg" />
         </div>
 

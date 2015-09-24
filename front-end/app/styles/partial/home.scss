@@ -61,6 +61,16 @@
   }
 }
 
+@keyframes icon-background {
+  0% {
+    background-color: yellow;
+  }
+
+  100% {
+    background-color: #FFCA00;
+  }
+}
+
 .page-home {
   background-color: $theme-color;
   overflow: hidden;
@@ -131,6 +141,30 @@
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+      }
+
+      .func-buttons {
+        margin-top: 120px;
+        position: absolute;
+
+        i {
+          cursor: pointer;
+          animation: icon-background 1s linear infinite alternate;
+          border-radius: 100px;
+          color: #F39C12;
+        }
+
+        #button-help {
+          padding: 7px 10px 7px 10px;
+          float: right;
+          margin-right: 45px;
+        }
+
+        #button-logout {
+          padding: 7px 7px 7px 9px;
+          float: left;
+          margin-left: 45px;
+        }
       }
 
       .toolbox-body {
