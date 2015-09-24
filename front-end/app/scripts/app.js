@@ -23,7 +23,6 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     }
   });
   $rootScope.online = $window.navigator.onLine;
-    console.log('online? ', $rootScope.online);
   $window.addEventListener('offline', function () {
     $rootScope.$apply(function() {
       $rootScope.online = false;
