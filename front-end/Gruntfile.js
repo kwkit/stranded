@@ -61,23 +61,23 @@ module.exports = function (grunt) {
     watch: {
       bower: {
         files: ['bower.json'],
-        tasks: ['wiredep', 'newer:copy:app']
+        tasks: ['wiredep', 'newer:copy:app', 'manifest']
       },
       html: {
         files: ['<%= yeoman.app %>/**/*.html'],
-        tasks: ['newer:copy:app']
+        tasks: ['newer:copy:app', 'manifest']
       },
       js: {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
-        tasks: ['newer:copy:app', 'newer:jshint:all']
+        tasks: ['newer:copy:app', 'newer:jshint:all', 'manifest']
       },
       compass: {
         files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer', 'newer:copy:tmp']
+        tasks: ['compass:server', 'autoprefixer', 'newer:copy:tmp', 'manifest']
       },
       gruntfile: {
         files: ['Gruntfile.js'],
-        tasks: ['ngconstant:development', 'newer:copy:app']
+        tasks: ['ngconstant:development', 'newer:copy:app', 'manifest']
       }
     },
 
