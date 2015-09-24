@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('LandingCtrl', function ($scope, $interval, $timeout, localStorageService) {
+  .controller('LandingCtrl', function ($scope, $state,  $window, $interval, $timeout, localStorageService) {
     $scope.slogans = [
       'What if you were stranded on an island?',
       'What if you can only send messages in a bottle to strangers?',
@@ -22,4 +22,12 @@ angular.module('stranded.controllers')
 
     // simulating the log out action
     localStorageService.set('toolBoxAnimated', false);
+
+    $scope.goToLogin = function () {
+      if ($window.sessionStorage.auth_token) {
+        $state.go('home');
+      } else {
+        $state.go('login');
+      }
+    }
   });
