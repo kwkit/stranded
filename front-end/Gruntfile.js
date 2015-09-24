@@ -445,7 +445,7 @@ module.exports = function (grunt) {
             'bower_components/ngCordova/dist/ng-cordova.js',
             'bower_components/ngmap/build/scripts/ng-map.js'
           ],
-          network: ['http://*', 'https://*'],
+          network: ['*'],
           fallback: [],
           exclude: [],
 //          headcomment: " <%= pkg.name %> v<%= pkg.version %>",
