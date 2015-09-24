@@ -20,10 +20,9 @@ angular.module('stranded.controllers')
             $ionicLoading.hide();
             $ionicPopup.alert({
               title: 'Error!',
-              template: error.data.errors
+              template: error.data ? error.data.errors : 'Network error'
             });
             console.log('Error:', error);
-            console.log('Error:', error.data.errors);
           }
         );
       }
