@@ -1,12 +1,70 @@
 @import 'color_constant';
 
+@keyframes hook-down {
+  0% {
+    transform: translateY(-3200px);
+    opacity: 1
+  }
+
+  50% {
+    transform: translateY(calc(-3200px + 160vh));
+    opacity: 1
+  }
+
+  51% {
+    transform: translateY(calc(-3200px + 160vh));
+    opacity: 0
+  }
+
+  100% {
+    transform: translateY(calc(-3200px + 160vh));
+    opacity: 0
+  }
+}
+
+@keyframes hook-up {
+  0% {
+    transform: translate(-33px, calc(-3200px + 160vh));
+    opacity: 0
+  }
+
+  50% {
+    transform: translate(-33px, calc(-3200px + 160vh));
+    opacity: 0
+  }
+
+  51% {
+    transform: translate(-33px, calc(-3200px + 160vh));
+    opacity: 1
+  }
+
+  100% {
+    transform: translate(-33px, -3200px);
+    opacity: 1
+  }
+}
+
+
 .page-grab {
   background-color: $theme-color;
 
   .hook-animation {
+    margin-top: -20px;
     text-align: center;
     height: 100vh;
     overflow: hidden;
+
+    img {
+      position: absolute;
+    }
+
+    #empty-hook {
+      animation: hook-down 2s linear forwards;
+    }
+
+    #item-hook {
+      animation: hook-up 2s linear forwards;
+    }
   }
 
   .message-card {
