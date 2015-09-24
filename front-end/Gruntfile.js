@@ -428,6 +428,7 @@ module.exports = function (grunt) {
         options: {
           basePath: '<%= yeoman.dist %>/',
           cache: [
+            'bower_components/ionic/release/css/ionic.css',
             'bower_components/angular/angular.js',
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-local-storage/dist/angular-local-storage.js',
