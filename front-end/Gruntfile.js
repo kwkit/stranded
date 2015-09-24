@@ -451,7 +451,7 @@ module.exports = function (grunt) {
         },
         src: [
           'fonts/**/*',
-          '<%= yeoman.images %>/**/*',
+          '<%= yeoman.images %>/**/*.*',
           '<%= yeoman.scripts %>/**/*.js',
           '<%= yeoman.styles %>/style.css',
           'templates/**/*.html',
