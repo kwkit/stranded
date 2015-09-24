@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll, $location) {
+  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll, $location, $timeout, $ionicScrollDelegate) {
     $scope.newMessageData = {};
     $scope.locationEnable = true;
+    $scope.shouldAnimate = false;
 
     $scope.distanceBetween = function(lng1, lat1, lng2, lat2) {
       function toRad(number) {
@@ -64,23 +65,30 @@ angular.module('stranded.controllers')
         $scope.newMessageData.longitude = null;
       }
     };
+
     $scope.getCurrentBottle = function() {
       bottlesApi.getCurrentBottle().$promise.then(
         function (response) {
+          $scope.shouldAnimate = false;
           $scope.currentBottle = response.bottle ? response.bottle : null;
-
           if ($scope.currentBottle) {
             $scope.setLocation($scope.locationEnable);
             $scope.getBottleMapData();
           }
         },
         function (error) {
-          console.log('Error:', error.errors);
+          if (error.status === 404) {
+            $scope.shouldAnimate = true;
+            console.log('aa');
+            if (!$scope.currentBottle) {
+              $timeout(function (){
+                $scope.grabBottle();
+              }, 2000);
+            }
+          }
         }
       );
     };
-
-    $scope.getCurrentBottle();
 
     $scope.grabBottle = function () {
       console.log('grabbing bottle');
@@ -90,6 +98,7 @@ angular.module('stranded.controllers')
         $ionicLoading.show();
         bottlesApi.fishBottle().$promise.then(
           function (response) {
+            $scope.shouldAnimate = false;
             $ionicLoading.hide();
             $scope.currentBottle = response.bottle;
             $scope.setLocation($scope.locationEnable);
@@ -155,9 +164,9 @@ angular.module('stranded.controllers')
               title: 'Reply successful!',
               template: 'Bottle thrown back into the sea.'
             }).then(function() {
+              $state.go('home');
               $scope.currentBottle = null;
               $scope.newMessageData = {};
-              $state.go('home');
             });
           },
           function (error) {
@@ -244,4 +253,13 @@ angular.module('stranded.controllers')
       $location.hash('reply-form');
       $anchorScroll();
     };
+
+    $scope.$on('$ionicView.enter', function() {
+      $ionicScrollDelegate.scrollTop();
+
+      if (!$scope.currentBottle) {
+        $scope.getCurrentBottle();
+      }
+    });
+
   });
