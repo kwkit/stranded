@@ -77,6 +77,9 @@
     <div class="bar bar-offline bar-assertive" data-ng-if="!online">
       No network connection.
     </div>
+    <div class="bar bar-offline bar-balanced" data-ng-if="balancedBarMessage">
+      {{balancedBarMessage}}
+    </div>
     <ion-nav-view ng-class="{'is-offline': !online}">
     </ion-nav-view>
   </body>

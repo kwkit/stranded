@@ -22,6 +22,8 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.balancedBarMessage = null;
   $rootScope.online = $window.navigator.onLine;
   $window.addEventListener('offline', function () {
     $rootScope.$apply(function() {
