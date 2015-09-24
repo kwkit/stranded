@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
+  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll, $location) {
     $scope.newMessageData = {};
     $scope.locationEnable = true;
 
@@ -97,14 +97,14 @@ angular.module('stranded.controllers')
           }
 
           $scope.distance = 0;
-          for (var i = 2; i < $scope.paths.length - 1; i++) {
+          $scope.shouldShowMap = false;
+          for (var i = 2; i <= $scope.paths.length - 1; i++) {
             // this is a hack
             var location1 = $scope.paths[i];
             var location2 = $scope.paths[i - 1];
             $scope.distance += distanceBetween(location1[1], location1[0], location2[1], location2[0]);
+            $scope.shouldShowMap = true;
           }
-
-          console.log($scope.distance);
         },
         function (error) {
           console.log('Error:', error.errors);
@@ -190,8 +190,53 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.dummyLike = function () {
-      console.log('quickly do the api binding');
+    $scope.toggleStarMessage = function (message) {
+      console.log(message);
+      var request;
+      $ionicLoading.show();
+      if (!message.starred) {
+        request = bottlesApi.starMessage(message.id);
+      } else {
+        request = bottlesApi.unstarMessage(message.id);
+      }
+
+      request.$promise.then(
+        function (response) {
+          $ionicLoading.hide();
+          message.stars = response.message.stars;
+          message.starred = response.message.starred;
+        },
+        function (error) {
+          $ionicLoading.hide();
+          console.log('Error:', error.errors);
+        }
+      );
     };
 
+    $scope.toggleStarBottle = function (bottle) {
+      console.log(bottle);
+      var request;
+      $ionicLoading.show();
+      if (!bottle.starred) {
+        request = bottlesApi.starBottle(bottle.id);
+      } else {
+        request = bottlesApi.unstarBottle(bottle.id);
+      }
+      request.$promise.then(
+        function (response) {
+          $ionicLoading.hide();
+          bottle.stars = response.bottle.stars;
+          bottle.starred = response.bottle.starred;
+        },
+        function (error) {
+          $ionicLoading.hide();
+          console.log('Error:', error.errors);
+        }
+      );
+    };
+
+    $scope.goReply = function () {
+      $location.hash('reply-form');
+      $anchorScroll();
+    };
   });

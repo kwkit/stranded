@@ -1,0 +1,104 @@
+@import 'color_constant';
+
+.view-bottle {
+  background-color: $theme-color;
+  .message-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .message-top {
+      .message-content {
+
+      }
+
+      .message-location {
+        text-align: right;
+
+        i {
+          color: grey;
+        }
+
+        i.bright-marker {
+          color: $theme-color-blue;
+        }
+      }
+    }
+
+    .message-bottom {
+      margin-top: 10px;
+
+      .message-like {
+        i {
+          color: grey;
+          cursor: pointer;
+        }
+
+        i.bright-marker {
+          color: red;
+        }
+      }
+
+      .message-author {
+        text-align: right;
+        font-family: 'Indie Flower', cursive;
+      }
+    }
+  }
+
+  .card {
+    box-shadow:none;
+    background-color: $theme-color;
+
+    i {
+      color: grey;
+    }
+
+    i.bright-marker {
+      color: $theme-color-blue;
+    }
+
+    .card-top {
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    .card-bottom {
+      border-bottom: 0px;
+      font-size: 14px;
+      border-radius: 0px;
+
+      .message-author-signature {
+        width: 100%;
+      }
+    }
+  }
+
+  .message-textarea {
+    border: 0px;
+    resize: none;
+    height: 10vh;
+  }
+
+  .grab-row {
+    width: 100%;
+
+    .grab-col-50 {
+      display: inline-block;
+      width: calc(50% - 2px);
+
+      #button-other-bottle {
+        border-radius: 0px 0px 0px 10px;
+        background-color: rgb(255, 89, 89) !important;
+        margin-top: 0px;
+      }
+
+      #button-reply {
+        border-radius: 0px 0px 10px 0px;
+        margin-top: 0px;
+        margin-left: -3px;
+        width: calc(100% + 4px);
+      }
+    }
+  }
+}

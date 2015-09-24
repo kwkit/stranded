@@ -156,7 +156,44 @@ angular.module('stranded.services', ['ngResource'])
           'Accept' : 'application/json',
           'Authorization': auth_token
         }
+      },
+      'starMessage': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/stars/message/:message_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'starBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/stars/bottle/:bottle_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'unstarMessage': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/stars/unstar_message/:message_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
+      },
+      'unstarBottle': {
+        method: 'GET',
+        url: ENV.apiEndpoint + 'api/stars/unstar_bottle/:bottle_id',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization': auth_token
+        }
       }
+
     });
     return {
       getCurrentBottle: bottlesApi.getCurrentBottle,
@@ -186,6 +223,34 @@ angular.module('stranded.services', ['ngResource'])
           bottle_id: arg
         };
         return bottlesApi.viewBottle(data);
+      },
+      starMessage: function(arg){
+        var target = {
+          message_id: arg
+        };
+        console.log(target);
+        return bottlesApi.starMessage(target);
+      },
+      starBottle: function(arg){
+        var target = {
+          bottle_id: arg
+        };
+        console.log(target);
+        return bottlesApi.starBottle(target);
+      },
+      unstarMessage: function(arg){
+        var target = {
+          message_id: arg
+        };
+        console.log(target);
+        return bottlesApi.unstarMessage(target);
+      },
+      unstarBottle: function(arg){
+        var target = {
+          bottle_id: arg
+        };
+        console.log(target);
+        return bottlesApi.unstarBottle(target);
       }
     };
   });
