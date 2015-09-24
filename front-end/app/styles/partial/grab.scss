@@ -3,6 +3,12 @@
 .page-grab {
   background-color: $theme-color;
 
+  .hook-animation {
+    text-align: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
   .message-card {
     background-color: white;
     border-radius: 10px;

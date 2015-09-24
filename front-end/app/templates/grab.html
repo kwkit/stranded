@@ -1,15 +1,21 @@
 <ion-view>
   <ion-nav-title>{{currentBottle ? 'Messages in bottle' : 'Fish for a bottle!'}}</ion-nav-title>
-  <ion-nav-buttons side="right">
+  <ion-nav-buttons side="right" ng-if="currentBottle">
     <button class="button button-clear button-light" ng-click="goReply()">
       <i class="fa fa-paper-plane"></i> Reply
     </button>
   </ion-nav-buttons>
   <ion-content class="padding page-grab">
-    <div ng-if="!currentBottle">
+    <!-- <div ng-if="!currentBottle">
       <a class="button button-block button-positive button-normal" data-ng-click="grabBottle()">
         GRAB!
       </a>
+    </div> -->
+
+    <div ng-if="!currentBottle">
+      <div class="hook-animation">
+        <img id="empty-hook" src="/images/grab/empty-hook.svg" />
+      </div>
     </div>
 
     <div ng-if="currentBottle">
