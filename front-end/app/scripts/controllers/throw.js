@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('ThrowCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi) {
+  .controller('ThrowCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, localStorageService, bottlesApi) {
     $scope.newMessageData = {};
     $scope.clearMessageData = function () {
       $scope.newMessageData = {};
@@ -53,29 +53,52 @@ angular.module('stranded.controllers')
 
     $scope.doCreateBottle = function (newBottleForm) {
       if (newBottleForm.$valid) {
-        $ionicLoading.show();
-        bottlesApi.createBottle($scope.newMessageData).$promise.then(
-          function (response) {
-            console.log(response);
-            $ionicLoading.hide();
-
-            $ionicPopup.alert({
-              title: 'Bottle creation successful!',
-              template: 'Bottle thrown into the sea.'
-            }).then(function() {
-              $scope.newMessageData = {};
-              $state.go('home');
-            });
-          },
-          function (error) {
-            console.log('Error:', error);
-            $ionicLoading.hide();
-            $ionicPopup.alert({
-              title: 'Error: ' + error.status + ' ' + error.statusText,
-              template: 'Please try again later.'
-            });
-          }
-        );
+        if ($rootScope.online) {
+          onlineCreateBottle();
+        } else {
+          offlineCreateBottle();
+        }
       }
     };
+
+    function onlineCreateBottle() {
+      $ionicLoading.show();
+      bottlesApi.createBottle($scope.newMessageData).$promise.then(
+        function (response) {
+          console.log(response);
+          $ionicLoading.hide();
+
+          $ionicPopup.alert({
+            title: 'Bottle creation successful!',
+            template: 'Bottle thrown into the sea.'
+          }).then(function() {
+            $scope.newMessageData = {};
+            $state.go('home');
+          });
+        },
+        function (error) {
+          console.log('Error:', error);
+          $ionicLoading.hide();
+          $ionicPopup.alert({
+            title: 'Error: ' + error.status + ' ' + error.statusText,
+            template: 'Please try again later.'
+          });
+        }
+      );
+    }
+
+    function offlineCreateBottle() {
+      $ionicLoading.show();
+      console.log('offline now, save user data to submit later');
+      localStorageService.set('createBottleFormData', angular.toJson($scope.newMessageData));
+      $ionicLoading.hide();
+
+      $ionicPopup.alert({
+        title: 'Bottle creation successful!',
+        template: 'Bottle will be thrown into the sea when you are back online.'
+      }).then(function() {
+        $scope.newMessageData = {};
+        $state.go('home');
+      });
+    }
   });

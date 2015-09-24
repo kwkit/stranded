@@ -8,7 +8,7 @@
 // 'stranded.controllers' is found in app.js
 angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule', 'ngMap'])
 
-.run(function($window, $rootScope, $ionicPlatform) {
+.run(function($window, $rootScope, $ionicPlatform, localStorageService, bottlesApi) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -31,6 +31,20 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     });
   }, false);
   $window.addEventListener('online', function () {
+    // Submit new bottle, if any
+    var createBottleFormData = localStorageService.get('createBottleFormData');
+    if (createBottleFormData) {
+      console.log('submitting offline create bottle data');
+      $rootScope.balancedBarMessage = 'Throwing bottle into the sea...';
+      bottlesApi.createBottle(angular.fromJson(createBottleFormData)).$promise.then(
+        function () {
+          console.log('sent offline create bottle data');
+          localStorageService.remove('createBottleFormData');
+          $rootScope.balancedBarMessage = null;
+        }
+      );
+    }
+
     $rootScope.$apply(function() {
       $rootScope.online = true;
     });
