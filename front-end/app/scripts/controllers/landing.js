@@ -29,5 +29,5 @@ angular.module('stranded.controllers')
       } else {
         $state.go('login');
       }
-    }
+    };
   });
