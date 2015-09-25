@@ -63,35 +63,32 @@
     </div>
   </ion-content>
 </ion-view>
+
 <script id="help-modal.html" type="text/ng-template">
-  <ion-modal-view style="width: 90%; height: 90%; top: 5%; left: 5%; right: 5%; bottom: 5%;">
-    <ion-header-bar>
-      <h1 class="title">Stranded Tutorial</h1>
-    </ion-header-bar>
+  <ion-modal-view class="help-modal" style="width: 90%; height: 80%; top: 5%; left: 5%; right: 5%; bottom: 5%;">
     <ion-content>
-      <div class="card">
-        <div class="item">
-          <b>Fish</b>
-        </div>
-        <div class="item item-text-wrap">
-          Fishes for a random bottle from the sea! You can add on your own message to the bottle for someone else in the world to see! Add in your geolocation data to help indicate where the bottle has travelled! Also give the messages you like stars!
-        </div>
+      <div class="close-button" data-ng-click="closeModal()">
+        <i class="fa fa-times"></i>
       </div>
-      <div class="card">
-        <div class="item">
-          <b>Write</b>
-        </div>
-        <div class="item item-text-wrap">
-          Write a message and toss a new bottle into the sea!
-        </div>
+      <div class="header">
+        Fish
       </div>
-      <div class="card">
-        <div class="item">
-          <b>Track</b>
-        </div>
-        <div class="item item-text-wrap">
-          Track the bottles you have contributed to and see what other people are adding to it! You may not reply but you can see how many stars your messages earned!
-        </div>
+      <div class="content">
+        Fishes for a random bottle from the sea! You can add on your own message to the bottle for someone else in the world to see! Add in your geolocation data to help indicate where the bottle has travelled! Also give the messages you like stars!
+      </div>
+
+      <div class="header">
+        Write
+      </div>
+      <div class="content">
+        Write a message and toss a new bottle into the sea!
+      </div>
+
+      <div class="header">
+        Track
+      </div>
+      <div class="content">
+        Track the bottles you have contributed to and see what other people are adding to it! You may not reply but you can see how many stars your messages earned! 
       </div>
     </ion-content>
   </ion-modal-view>

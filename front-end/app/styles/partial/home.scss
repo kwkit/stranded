@@ -180,3 +180,28 @@
     }
   }
 }
+
+.help-modal {
+  background-color: transparent;
+
+  .close-button {
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .ionic-scroll {
+    background-color: white;
+    border-radius: 10px;
+    height: calc(100vh - 100px);
+    padding: 10px;
+
+    .header {
+      font-weight: 800;
+    }
+
+    .content {
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+  }
+}
