@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('HomeCtrl', function($scope, localStorageService, $timeout, $ionicModal, sessionsApi, $ionicLoading, $state) {
+  .controller('HomeCtrl', function($scope, localStorageService, $timeout, $ionicModal, authService, $ionicLoading, $state) {
     $scope.unbind = localStorageService.bind($scope, 'toolBoxAnimated');
     $scope.pageLoaded = false;
     $scope.$watch('$viewContentLoaded', function() {
@@ -32,7 +32,7 @@ angular.module('stranded.controllers')
     $scope.logout = function() {
       $ionicLoading.show();
 
-      sessionsApi.destroySession().$promise.then(
+      authService.logOut().then(
         function () {
           $ionicLoading.hide();
           localStorageService.set('toolBoxAnimated', false);
