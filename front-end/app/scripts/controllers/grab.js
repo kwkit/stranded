@@ -136,7 +136,7 @@ angular.module('stranded.controllers')
       $scope.currentBottle.distance = 0;
       $scope.currentBottle.shouldShowMap = false;
 
-      if($scope.currentBottle.paths.length >= 2) {
+      if ($scope.currentBottle.paths.length >= 2) {
         $scope.currentBottle.shouldShowMap = true;
       }
 
@@ -145,6 +145,14 @@ angular.module('stranded.controllers')
         var location1 = $scope.currentBottle.paths[i];
         var location2 = $scope.currentBottle.paths[i - 1];
         $scope.currentBottle.distance += $scope.distanceBetween(location1[1], location1[0], location2[1], location2[0]);
+      }
+
+      if ($scope.currentBottle.distance === 0) {
+        $scope.currentBottle.distanceMessage = "there is not trail trackable for this bottle.";
+      } else if ($scope.currentBottle.distance < 1000) {
+        $scope.currentBottle.distanceMessage = "the bottle has traveled " + $scope.currentBottle.distance.toFixed(2) + "m.";
+      } else {
+        $scope.currentBottle.distanceMessage = "the bottle has traveled " + ($scope.currentBottle.distance / 1000).toFixed(2) + "km.";
       }
     };
 
