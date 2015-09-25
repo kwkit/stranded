@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="41.196495mm"
+   width="41.308029mm"
    height="32.669872mm"
-   viewBox="0 0 145.97183 115.75938"
+   viewBox="0 0 146.36703 115.75938"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -997,11 +997,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.55957031"
-     inkscape:cx="-155.95018"
-     inkscape:cy="-83.358728"
+     inkscape:zoom="1.2524757"
+     inkscape:cx="-8.6459918"
+     inkscape:cy="-19.485239"
      inkscape:document-units="px"
-     inkscape:current-layer="layer21"
+     inkscape:current-layer="g6416"
      showgrid="false"
      inkscape:window-width="1276"
      inkscape:window-height="755"
@@ -1031,7 +1031,7 @@
      id="layer21"
      inkscape:label="long bottle"
      style="display:none"
-     transform="translate(-1087.8302,-429.72223)">
+     transform="translate(-1087.435,-429.72223)">
     <g
        id="g6428"
        transform="matrix(9.7294971,0,0,1,-10016.373,364.8671)"
@@ -1059,7 +1059,7 @@
      id="layer1"
      inkscape:label="long bottle back"
      style="display:none"
-     transform="translate(-1087.8302,-429.72223)">
+     transform="translate(-1087.435,-429.72223)">
     <g
        id="g6424"
        style="display:inline;fill:#00aad4;fill-opacity:1"
@@ -1087,11 +1087,18 @@
      id="layer2"
      inkscape:label="long bottle front"
      style="display:inline"
-     transform="translate(-1087.8302,-429.72223)">
+     transform="translate(-1087.435,-429.72223)">
     <g
        id="g6416"
        transform="translate(-47.797254,364.8671)"
        style="display:inline;fill:#00aad4;fill-opacity:1">
+      <rect
+         style="fill:#ffffff;fill-opacity:1"
+         id="rect3519"
+         width="21.557331"
+         height="95.810249"
+         x="1135.2323"
+         y="74.029572" />
       <g
          style="fill:#00aad4;fill-opacity:1"
          transform="matrix(1.9330967,1.9330967,-1.9330967,1.9330967,1538.637,-659.91647)"
