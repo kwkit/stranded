@@ -28,7 +28,7 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
 
   $rootScope.$on('$stateChangeStart', function(event, toState){
     console.log('on change, check', toState);
-    if (toState.name !== 'landing' && toState.name !== 'login') {
+    if (toState.name !== 'landing' && toState.name !== 'login' && toState.name !== 'signup') {
       authService.isLoggedIn().then(
         function () {
         },
