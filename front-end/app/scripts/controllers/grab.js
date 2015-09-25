@@ -148,11 +148,11 @@ angular.module('stranded.controllers')
       }
 
       if ($scope.currentBottle.distance === 0) {
-        $scope.currentBottle.distanceMessage = "there is not trail trackable for this bottle.";
+        $scope.currentBottle.distanceMessage = 'there is not trail trackable for this bottle.';
       } else if ($scope.currentBottle.distance < 1000) {
-        $scope.currentBottle.distanceMessage = "the bottle has traveled " + $scope.currentBottle.distance.toFixed(2) + "m.";
+        $scope.currentBottle.distanceMessage = 'the bottle has traveled ' + $scope.currentBottle.distance.toFixed(2) + 'm.';
       } else {
-        $scope.currentBottle.distanceMessage = "the bottle has traveled " + ($scope.currentBottle.distance / 1000).toFixed(2) + "km.";
+        $scope.currentBottle.distanceMessage = 'the bottle has traveled ' + ($scope.currentBottle.distance / 1000).toFixed(2) + 'km.';
       }
     };
 
