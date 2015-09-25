@@ -234,7 +234,7 @@ angular.module('stranded.controllers')
       if (!$scope.currentBottle) {
         console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
       } else {
-        if($rootScope.online) {
+        if ($rootScope.online) {
           $ionicLoading.show();
           bottlesApi.releaseBottle().$promise.then(
             function (response) {
@@ -264,48 +264,62 @@ angular.module('stranded.controllers')
     };
 
     $scope.toggleStarMessage = function (message) {
-      console.log(message);
-      var request;
-      $ionicLoading.show();
-      if (!message.starred) {
-        request = bottlesApi.starMessage(message.id);
-      } else {
-        request = bottlesApi.unstarMessage(message.id);
-      }
-
-      request.$promise.then(
-        function (response) {
-          $ionicLoading.hide();
-          message.stars = response.message.stars;
-          message.starred = response.message.starred;
-        },
-        function (error) {
-          $ionicLoading.hide();
-          console.log('Error:', error.errors);
+      if ($rootScope.online) {
+        console.log(message);
+        var request;
+        $ionicLoading.show();
+        if (!message.starred) {
+          request = bottlesApi.starMessage(message.id);
+        } else {
+          request = bottlesApi.unstarMessage(message.id);
         }
-      );
+
+        request.$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            message.stars = response.message.stars;
+            message.starred = response.message.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      } else {
+        $ionicPopup.alert({
+          title: 'You\'re offline!',
+          template: 'You need a network connection to star/unstar a message!!'
+        });
+      }
     };
 
     $scope.toggleStarBottle = function (bottle) {
-      console.log(bottle);
-      var request;
-      $ionicLoading.show();
-      if (!bottle.starred) {
-        request = bottlesApi.starBottle(bottle.id);
-      } else {
-        request = bottlesApi.unstarBottle(bottle.id);
-      }
-      request.$promise.then(
-        function (response) {
-          $ionicLoading.hide();
-          bottle.stars = response.bottle.stars;
-          bottle.starred = response.bottle.starred;
-        },
-        function (error) {
-          $ionicLoading.hide();
-          console.log('Error:', error.errors);
+      if ($rootScope.online) {
+        console.log(bottle);
+        var request;
+        $ionicLoading.show();
+        if (!bottle.starred) {
+          request = bottlesApi.starBottle(bottle.id);
+        } else {
+          request = bottlesApi.unstarBottle(bottle.id);
         }
-      );
+        request.$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            bottle.stars = response.bottle.stars;
+            bottle.starred = response.bottle.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      } else {
+        $ionicPopup.alert({
+          title: 'You\'re offline!',
+          template: 'You need a network connection to star/unstar a bottle!!'
+        });
+      }
     };
 
     $scope.goReply = function () {
