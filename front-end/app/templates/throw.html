@@ -8,7 +8,7 @@
     <form name="newBottleForm" ng-submit="doCreateBottle(newBottleForm)" novalidate>
       <div class="card">
         <label class="item card-top" data-ng-class="{ 'has-error' : newBottleForm.message.$invalid}">
-          <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="newMessageData.message" required>
+          <textarea name="message" class="message-textarea col col-100" type="textarea" placeholder="Write your message here!" ng-model="createBottleFormData.message" required>
           </textarea>
         </label>
         <div class="form-errors" data-ng-show="newBottleForm.message.$error && newBottleForm.message.$touched || newBottleForm.$submitted" data-ng-messages="newBottleForm.message.$error">
@@ -23,7 +23,7 @@
         </ion-toggle>
       </div>
       <label class="item item-input" data-ng-class="{ 'has-error' : newBottleForm.author.$invalid}">
-        <input name="author" class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="newMessageData.author" required />
+        <input name="author" class="message-author-signature" type="text" placeholder="Sign it with a creative name!" ng-model="createBottleFormData.author" required />
       </label>
       <div class="form-errors" data-ng-show="newBottleForm.author.$error && newBottleForm.author.$touched || newBottleForm.$submitted"
            data-ng-messages="newBottleForm.author.$error">

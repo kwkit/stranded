@@ -2,8 +2,9 @@
 
 angular.module('stranded.controllers')
   .controller('GrabCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll,
-                                    $location, $timeout, $ionicScrollDelegate, localStorageService) {
-    $scope.newMessageData = {};
+                                    $location, $timeout, $ionicHistory, $ionicScrollDelegate, localStorageService) {
+    $scope.replyBottleFormData = {};
+
     $scope.locationEnable = true;
     $scope.shouldAnimate = false;
 
@@ -32,8 +33,8 @@ angular.module('stranded.controllers')
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              $scope.newMessageData.latitude = position.coords.latitude;
-              $scope.newMessageData.longitude = position.coords.longitude;
+              $scope.replyBottleFormData.latitude = position.coords.latitude;
+              $scope.replyBottleFormData.longitude = position.coords.longitude;
             },
             function (error) {
               $scope.$apply(function () {
@@ -62,8 +63,8 @@ angular.module('stranded.controllers')
           });
         }
       } else {
-        $scope.newMessageData.latitude = null;
-        $scope.newMessageData.longitude = null;
+        $scope.replyBottleFormData.latitude = null;
+        $scope.replyBottleFormData.longitude = null;
       }
     };
 
@@ -188,7 +189,7 @@ angular.module('stranded.controllers')
     $scope.replyBottle = function (replyBottleForm) {
       function onlineReplyBottle() {
         $ionicLoading.show();
-        bottlesApi.replyCurrentBottle($scope.newMessageData).$promise.then(
+        bottlesApi.replyCurrentBottle($scope.replyBottleFormData).$promise.then(
           function (response) {
             console.log(response);
             $ionicLoading.hide();
@@ -199,7 +200,7 @@ angular.module('stranded.controllers')
             }).then(function() {
               $state.go('home');
               $scope.currentBottle = null;
-              $scope.newMessageData = {};
+              $scope.replyBottleFormData = {};
             });
           },
           function (error) {
@@ -211,14 +212,14 @@ angular.module('stranded.controllers')
       function offlineReplyBottle() {
         $ionicLoading.show();
         console.log('offline now, save user data to submit later');
-        localStorageService.set('replyBottleFormData', angular.toJson($scope.newMessageData));
+        localStorageService.set('replyBottleFormData', angular.toJson($scope.replyBottleFormData));
         $ionicLoading.hide();
 
         $ionicPopup.alert({
           title: 'Reply successful!',
           template: 'Bottle will be thrown into the sea when you are back online.'
         }).then(function() {
-          $scope.newMessageData = {};
+          $scope.replyBottleFormData = {};
           $state.go('home');
         });
       }
@@ -254,7 +255,11 @@ angular.module('stranded.controllers')
                 template: 'Bottle thrown back into the sea without a new reply.'
               }).then(function() {
                 $scope.currentBottle = null;
-                $scope.newMessageData = {};
+                $scope.replyBottleFormData = {};
+
+                $ionicHistory.nextViewOptions({
+                  disableBack: true
+                });
                 $state.go('home');
               });
             },
@@ -338,6 +343,9 @@ angular.module('stranded.controllers')
     $scope.$on('$ionicView.enter', function() {
       $ionicScrollDelegate.scrollTop();
 
+      if (localStorageService.get('replyBottleFormData')) {
+        $scope.replyBottleFormData = angular.fromJson(localStorageService.get('replyBottleFormData'));
+      }
       if (!$scope.currentBottle) {
         $scope.getCurrentBottle();
       }
