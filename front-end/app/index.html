@@ -20,7 +20,16 @@
     <link rel="apple-touch-icon" sizes="76x76" href="images/logo-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="images/logo-120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/logo-152.png">
-    <link rel="apple-touch-startup-image" href="images/splashy.png">
+    <!-- iPhone -->
+    <link href="images/splashy.png"
+          media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 1)"
+          rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) -->
+    <link href="images/splashy640x920.png"
+          media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="styles/ionic.app.css" rel="stylesheet">
