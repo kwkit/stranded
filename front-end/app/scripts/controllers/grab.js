@@ -237,36 +237,50 @@ angular.module('stranded.controllers')
       }
     };
 
-    $scope.releaseBottle = function () {
+    $scope.releaseBottle = function (replyBottleForm) {
       console.log('releasing bottle');
+
+      function onlineReleaseBottle() {
+        $ionicLoading.show();
+        bottlesApi.releaseBottle().$promise.then(
+          function (response) {
+            console.log(response);
+            $ionicLoading.hide();
+
+            $scope.currentBottle = null;
+            $scope.replyBottleFormData = {};
+
+            $scope.shouldAnimate = true;
+            console.log('aa');
+            if (!$scope.currentBottle) {
+              $timeout(function (){
+                $scope.grabBottle();
+              }, 2000);
+            }
+          },
+          function (error) {
+            console.log('Error:', error.errors);
+          }
+        );
+      }
 
       if (!$scope.currentBottle) {
         console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
       } else {
         if ($rootScope.online) {
-          $ionicLoading.show();
-          bottlesApi.releaseBottle().$promise.then(
-            function (response) {
-              console.log(response);
-              $ionicLoading.hide();
+          if (replyBottleForm.$invalid && replyBottleForm.$pristine) {
+            onlineReleaseBottle();
+          } else {
+            $ionicPopup.confirm({
+              title: 'You were writing halfway...',
+              template: 'Are you sure you want to throw back this bottle?'
+            }).then(function(res) {
+              if(res) {
+                onlineReleaseBottle();
+              }
+            });
+          }
 
-              $ionicPopup.alert({
-                title: 'Return successful!',
-                template: 'Bottle thrown back into the sea without a new reply.'
-              }).then(function() {
-                $scope.currentBottle = null;
-                $scope.replyBottleFormData = {};
-
-                $ionicHistory.nextViewOptions({
-                  disableBack: true
-                });
-                $state.go('home');
-              });
-            },
-            function (error) {
-              console.log('Error:', error.errors);
-            }
-          );
         } else {
           $ionicPopup.alert({
             title: 'You\'re offline!',
