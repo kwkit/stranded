@@ -175,111 +175,68 @@ angular.module('stranded.services', ['ngResource'])
       };
     })
 
-  .factory('bottlesApi', function($resource, $window, ENV){
-    var auth_token;
-    if($window.sessionStorage.auth_token) {
-      auth_token = $window.sessionStorage.auth_token;
-    }
-    console.log(auth_token);
+  .factory('bottlesApi', function($resource, $rootScope, session, ENV){
+    var headers = {
+      'Content-Type': 'application/json',
+        'Accept' : 'application/json',
+        'Authorization': session.getAuthToken()
+    };
+
     var bottlesApi = $resource('', {}, {
       'getCurrentBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/current_bottle',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'replyCurrentBottle': {
         method: 'POST',
         url: ENV.apiEndpoint + 'api/bottles/reply',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'fishBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/fish',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'createBottle': {
         method: 'POST',
         url: ENV.apiEndpoint + 'api/bottles',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'releaseBottle': {
         method: 'PUT',
         url: ENV.apiEndpoint + 'api/bottles/release',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'getMyBottles': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/my_bottles',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'viewBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/bottles/view/:bottle_id',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'starMessage': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/stars/message/:message_id',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'starBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/stars/bottle/:bottle_id',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'unstarMessage': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/stars/unstar_message/:message_id',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       },
       'unstarBottle': {
         method: 'GET',
         url: ENV.apiEndpoint + 'api/stars/unstar_bottle/:bottle_id',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept' : 'application/json',
-          'Authorization': auth_token
-        }
+        headers: headers
       }
 
     });
