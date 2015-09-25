@@ -238,20 +238,16 @@ angular.module('stranded.controllers')
     };
 
     $scope.releaseBottle = function (replyBottleForm) {
-      console.log('releasing bottle');
-
       function onlineReleaseBottle() {
         $ionicLoading.show();
         bottlesApi.releaseBottle().$promise.then(
-          function (response) {
-            console.log(response);
+          function() {
             $ionicLoading.hide();
-
+            $ionicScrollDelegate.scrollTop();
             $scope.currentBottle = null;
             $scope.replyBottleFormData = {};
 
             $scope.shouldAnimate = true;
-            console.log('aa');
             if (!$scope.currentBottle) {
               $timeout(function (){
                 $scope.grabBottle();
