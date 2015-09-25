@@ -85,6 +85,7 @@ angular.module('stranded.services', ['ngResource'])
      * Destroy session
      */
     this.destroy = function destroy(){
+      this._auth_token = null;
       localStorageService.clearAll();
     };
   })
