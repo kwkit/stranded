@@ -1,18 +1,30 @@
 <ion-view view-title="Track my messages!">
-  <ion-content class="padding track-messages">
-    <div class="card" data-ng-repeat="bottle in myBottles" ng-click="trackBottle(bottle.id)">
-      <div class="item item-divider">
-        <div class="row">
-          <div class="col-90">
-            Bottle sent by: {{bottle.author}}
-          </div>
-          <div class="col-10 bottle-likes">
-            <i class="fa fa-star big-star bright-marker"></i> {{ bottle.stars }}
+  <ion-content class="padding page-track">
+    <div class="bottle" data-ng-repeat="bottle in myBottles" ng-click="trackBottle(bottle.id)">
+      <div class="bottle-back">
+      </div>
+
+      <div class="bottle-body">
+        <div>
+          <div class="row">
+            <div class="col-90 author">
+              {{bottle.author}}
+            </div>
+            <div class="col-10 bottle-likes">
+              <i class="fa fa-star bright-marker"></i> {{ bottle.stars }}
+            </div>
           </div>
         </div>
+          <div class="row">
+            <div class="col-90">
+              <div class="message">
+                {{bottle.message}}
+              </div>
+            </div>
+          </div>
       </div>
-      <div class="item item-text-wrap">
-        First message: {{bottle.message}}
+
+      <div class="bottle-front">
       </div>
     </div>
   </ion-content>
