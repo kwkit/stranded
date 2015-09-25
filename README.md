@@ -1,3 +1,3 @@
 # Stranded
 
-![](http://i.imgur.com/QNTMeZB.png)
+![](http://i.imgur.com/A9uMML5.png)

@@ -1,12 +1,57 @@
 @import 'color_constant';
 
-.track-messages {
+.page-track {
   background-color: $theme-color;
 
-  .bottle-likes {
-  	  text-align: right;
-	  i.bright-marker {
-	    color: red;
-	}
+  .bottle {
+    height: 60px;
+    margin-bottom: 20px;
+
+    .bottle-back {
+      width: 20px;
+      height: 60px;
+      display: inline-block;
+      background-image: url("/images/track/longbottle-back.svg");
+      background-size: auto 60px;
+    }
+
+    .bottle-front {
+      width: 76px;
+      height: 60px;
+      display: inline-block;
+      background-image: url("/images/track/longbottle-front.svg");
+      background-size: cover;
+    }
+
+    .bottle-body {
+      background-color: white;
+      vertical-align: top;
+      margin-left: -5px;
+      margin-right: -5px;
+      height: 60px;
+      width: calc(100% - 95px);
+      display: inline-block;
+      background-image: url("/images/track/longbottle-body.svg");
+      background-size: cover;
+      background-position-x: -10px;
+
+      .author {
+        font-family: 'Indie Flower', cursive;
+      }
+
+      .message {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .bottle-likes {
+      text-align: right;
+
+      i.bright-marker {
+        color: red;
+      }
+    }
   }
 }
