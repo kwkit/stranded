@@ -4,9 +4,11 @@ angular.module('stranded.services', ['ngResource'])
   .service('authService', function($http, $q, session, ENV) {
     /**
      * Check whether the user is logged in
-     * @returns boolean
+     * @returns {*|Promise}
      */
     this.isLoggedIn = function () {
+      var defer = $q.defer();
+
       if (session.getAuthToken() !== null) {
         var config = {
           headers: {
@@ -18,14 +20,17 @@ angular.module('stranded.services', ['ngResource'])
         $http
           .get(ENV.apiEndpoint + 'api/sessions/verify', config)
           .then(function() {
-            return true;
+            console.log('verified');
+            defer.resolve(true);
           },
           function() {
-            return false;
+            console.log('not verified');
+            defer.reject();
           });
       } else {
-        return false;
+        defer.reject();
       }
+      return defer.promise;
     };
 
     /**

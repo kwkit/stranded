@@ -35,7 +35,7 @@ angular.module('stranded.controllers')
                 errors += 'Password Confirmation  ' + error.data.errors.password_confirmation;
               }
             } else {
-              errors = 'A network error occurred'
+              errors = 'A network error occurred';
             }
             $ionicPopup.alert({
               title: 'Error!',
