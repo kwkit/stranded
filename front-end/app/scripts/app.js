@@ -8,7 +8,7 @@
 // 'stranded.controllers' is found in app.js
 angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule', 'ngMap'])
 
-.run(function($window, $rootScope, $ionicPlatform, localStorageService, bottlesApi) {
+.run(function($window, $rootScope, $state, $ionicPlatform, localStorageService, authService, session, bottlesApi) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +20,26 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+  });
+
+  $rootScope.authService = authService;
+  $rootScope.session = session;
+
+  $rootScope.$on('$stateChangeStart', function(event, toState){
+    console.log('on change, check', toState);
+    if (toState.name !== 'landing' && toState.name !== 'login') {
+      authService.isLoggedIn().then(
+        function () {
+        },
+        function () {
+          // Redirect to login
+          $state.go('login');
+
+          // Prevent state change
+          event.preventDefault();
+        }
+      );
     }
   });
 
