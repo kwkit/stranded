@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('SignUpCtrl', function ($scope, $state, $window, $ionicLoading, $ionicPopup, usersApi, localStorageService) {
+  .controller('SignUpCtrl', function ($scope, $state, $window, $ionicLoading, $ionicPopup, session, usersApi, localStorageService) {
     $scope.signUpData = {};
     $scope.doSignUp = function (signUpForm) {
       console.log('Doing signup', $scope.signUpData);
@@ -11,8 +11,8 @@ angular.module('stranded.controllers')
         usersApi.createUser($scope.signUpData).$promise.then(
           function (response) {
             $ionicLoading.hide();
-            // Log the user in immediately
-            $window.sessionStorage.auth_token = response.auth_token;
+            // Log the user in immediately;
+            session.setAuthToken(response.auth_token);
             localStorageService.set('toolBoxAnimated', false);
             $ionicPopup.alert({
               title: 'Successfully signed up!'
