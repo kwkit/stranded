@@ -1,6 +1,89 @@
 'use strict';
 
 angular.module('stranded.services', ['ngResource'])
+  .service('authService', function($http, $q, session, ENV) {
+    /**
+     * Check whether the user is logged in
+     * @returns boolean
+     */
+    this.isLoggedIn = function () {
+      if (session.getAuthToken() !== null) {
+        var config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept' : 'application/json',
+            'Authorization': session.getAuthToken()
+          }
+        };
+        $http
+          .get(ENV.apiEndpoint + 'api/sessions/verify', config)
+          .then(function() {
+            return true;
+          },
+          function() {
+            return false;
+          });
+      } else {
+        return false;
+      }
+    };
+
+    /**
+     * Log in
+     *
+     * @param credentials
+     * @returns {*|Promise}
+     */
+    this.logIn = function(credentials){
+      return $http
+        .post(ENV.apiEndpoint + 'api/sessions', {'session': credentials})
+        .then(function(response){
+          console.log('newlogin', response);
+          var data = response.data;
+          session.setAuthToken(data.auth_token);
+
+          return data.auth_token;
+        }, function(error){
+          return $q.reject(error);
+        });
+    };
+
+    /**
+     * Log out
+     * @returns {*|Promise}
+     */
+    this.logOut = function(){
+      return $http
+        .delete(ENV.apiEndpoint + 'api/sessions/:id', {'id': session.getAuthToken()})
+        .then(function(){
+
+          // Destroy session in the browser
+          session.destroy();
+        });
+    };
+  })
+
+  .service('session', function(localStorageService) {
+    this._auth_token = localStorageService.get('auth_token');
+
+    this.getAuthToken = function(){
+      return this._auth_token;
+    };
+
+    this.setAuthToken = function(auth_token){
+      this._auth_token = auth_token;
+      localStorageService.set('auth_token', auth_token);
+      return this;
+    };
+
+    /**
+     * Destroy session
+     */
+    this.destroy = function destroy(){
+      localStorageService.clearAll();
+    };
+  })
+
   .factory('sessionsApi', function($resource, $window, ENV){
     var sessionsApi = $resource('', {}, {
       'createSession': {

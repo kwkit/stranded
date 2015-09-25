@@ -8,7 +8,7 @@
 // 'stranded.controllers' is found in app.js
 angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule', 'ngMap'])
 
-.run(function($window, $rootScope, $ionicPlatform, localStorageService, bottlesApi) {
+.run(function($window, $rootScope, $ionicPlatform, localStorageService, authService, session, bottlesApi) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,6 +22,9 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.authService = authService;
+  $rootScope.session = session;
 
   $rootScope.balancedBarMessage = null;
   $rootScope.online = $window.navigator.onLine;
