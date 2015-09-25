@@ -27,7 +27,7 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
   $rootScope.session = session;
 
   $rootScope.$on('$stateChangeStart', function(event, toState){
-    console.log('on change, check', toState);
+    // console.log('on change, check', toState);
     if (toState.name !== 'landing' && toState.name !== 'login' && toState.name !== 'signup') {
       authService.isLoggedIn().then(
         function () {
@@ -54,11 +54,11 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     // Reply bottle, if any
     var replyBottleFormData = localStorageService.get('replyBottleFormData');
     if (replyBottleFormData) {
-      console.log('submitting offline reply bottle data');
+      // console.log('submitting offline reply bottle data');
       $rootScope.balancedBarMessage = 'Throwing bottle into the sea...';
       bottlesApi.replyCurrentBottle(angular.fromJson(replyBottleFormData)).$promise.then(
         function () {
-          console.log('sent offline reply bottle data');
+          // console.log('sent offline reply bottle data');
           localStorageService.remove('replyBottleFormData');
           $rootScope.balancedBarMessage = null;
         },
@@ -76,11 +76,11 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     // Submit new bottle, if any
     var createBottleFormData = localStorageService.get('createBottleFormData');
     if (createBottleFormData) {
-      console.log('submitting offline create bottle data');
+      // console.log('submitting offline create bottle data');
       $rootScope.balancedBarMessage = 'Throwing bottle into the sea...';
       bottlesApi.createBottle(angular.fromJson(createBottleFormData)).$promise.then(
         function () {
-          console.log('sent offline create bottle data');
+          // console.log('sent offline create bottle data');
           localStorageService.remove('createBottleFormData');
           $rootScope.balancedBarMessage = null;
         },

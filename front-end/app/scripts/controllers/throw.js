@@ -24,16 +24,16 @@ angular.module('stranded.controllers')
               });
               switch(error.code) {
                 case error.PERMISSION_DENIED:
-                  console.log('User denied the request for Geolocation.');
+                  // console.log('User denied the request for Geolocation.');
                   break;
                 case error.POSITION_UNAVAILABLE:
-                  console.log('Location information is unavailable.');
+                  // console.log('Location information is unavailable.');
                   break;
                 case error.TIMEOUT:
-                  console.log('The request to get user location timed out.');
+                  // console.log('The request to get user location timed out.');
                   break;
                 case error.UNKNOWN_ERROR:
-                  console.log('An unknown error occurred.');
+                  // console.log('An unknown error occurred.');
                   break;
               }
             }
@@ -65,8 +65,7 @@ angular.module('stranded.controllers')
     function onlineCreateBottle() {
       $ionicLoading.show();
       bottlesApi.createBottle($scope.createBottleFormData).$promise.then(
-        function (response) {
-          console.log(response);
+        function() {
           $ionicLoading.hide();
 
           $ionicPopup.alert({
@@ -90,7 +89,7 @@ angular.module('stranded.controllers')
 
     function offlineCreateBottle() {
       $ionicLoading.show();
-      console.log('offline now, save user data to submit later');
+      // console.log('offline now, save user data to submit later');
       localStorageService.set('createBottleFormData', angular.toJson($scope.createBottleFormData));
       $ionicLoading.hide();
 

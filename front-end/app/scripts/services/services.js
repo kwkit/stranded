@@ -21,15 +21,15 @@ angular.module('stranded.services', ['ngResource'])
           $http
             .get(ENV.apiEndpoint + 'api/sessions/verify', config)
             .then(function() {
-              console.log('verified');
+              // console.log('verified');
               defer.resolve(true);
             },
             function() {
-              console.log('not verified');
+              // console.log('not verified');
               defer.reject();
             });
         } else {
-          console.log('has auth_token, but offline');
+          // console.log('has auth_token, but offline');
           defer.resolve(true);
         }
       } else {
@@ -48,7 +48,7 @@ angular.module('stranded.services', ['ngResource'])
       return $http
         .post(ENV.apiEndpoint + 'api/sessions', {'session': credentials})
         .then(function(response){
-          console.log('newlogin', response);
+          // console.log('newlogin', response);
           var data = response.data;
           session.setAuthToken(data.auth_token);
 
@@ -305,7 +305,7 @@ angular.module('stranded.services', ['ngResource'])
         var target = {
           message_id: arg
         };
-        console.log(target);
+        // console.log(target);
         return bottleApi.starMessage(target);
       },
       starBottle: function(arg){
@@ -323,7 +323,7 @@ angular.module('stranded.services', ['ngResource'])
         var target = {
           bottle_id: arg
         };
-        console.log(target);
+        // console.log(target);
         return bottleApi.starBottle(target);
       },
       unstarMessage: function(arg){
@@ -341,7 +341,7 @@ angular.module('stranded.services', ['ngResource'])
         var target = {
           message_id: arg
         };
-        console.log(target);
+        // console.log(target);
         return bottleApi.unstarMessage(target);
       },
       unstarBottle: function(arg){
@@ -359,7 +359,7 @@ angular.module('stranded.services', ['ngResource'])
         var target = {
           bottle_id: arg
         };
-        console.log(target);
+        // console.log(target);
         return bottleApi.unstarBottle(target);
       }
     };

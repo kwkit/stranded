@@ -11,10 +11,10 @@ angular.module('stranded.controllers', ['ngMessages'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   $scope.doLogout = function() {
-    console.log('Doing logout');
+    // console.log('Doing logout');
     sessionsApi.destroySession().$promise.then(
-        function(response){
-          console.log(response);
+        function() {
+          // console.log(response);
           $state.go('landing');
         },
         function(error){

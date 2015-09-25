@@ -4,7 +4,7 @@ angular.module('stranded.controllers')
   .controller('SignUpCtrl', function ($scope, $state, $window, $ionicLoading, $ionicPopup, session, usersApi, localStorageService) {
     $scope.signUpData = {};
     $scope.doSignUp = function (signUpForm) {
-      console.log('Doing signup', $scope.signUpData);
+      // console.log('Doing signup', $scope.signUpData);
 
       if (signUpForm.$valid) {
         $ionicLoading.show();

@@ -57,7 +57,7 @@ angular.module('stranded.controllers')
             }
           );
         } else {
-          console.log('Geolocation is not supported by this browser.');
+          // console.log('Geolocation is not supported by this browser.');
           $scope.$apply(function () {
             $scope.locationEnable = false;
           });
@@ -86,7 +86,6 @@ angular.module('stranded.controllers')
           function (error) {
             if (error.status === 404) {
               $scope.shouldAnimate = true;
-              console.log('aa');
               if (!$scope.currentBottle) {
                 $timeout(function (){
                   $scope.grabBottle();
@@ -113,7 +112,7 @@ angular.module('stranded.controllers')
     };
 
     $scope.grabBottle = function () {
-      console.log('grabbing bottle');
+      // console.log('grabbing bottle');
       if ($scope.currentBottle) {
         console.log('you already have a bottle, this function shouldn\'t be called');
       } else {
@@ -190,8 +189,7 @@ angular.module('stranded.controllers')
       function onlineReplyBottle() {
         $ionicLoading.show();
         bottlesApi.replyCurrentBottle($scope.replyBottleFormData).$promise.then(
-          function (response) {
-            console.log(response);
+          function() {
             $ionicLoading.hide();
 
             $ionicPopup.alert({
@@ -211,7 +209,7 @@ angular.module('stranded.controllers')
 
       function offlineReplyBottle() {
         $ionicLoading.show();
-        console.log('offline now, save user data to submit later');
+        // console.log('offline now, save user data to submit later');
         localStorageService.set('replyBottleFormData', angular.toJson($scope.replyBottleFormData));
         $ionicLoading.hide();
 
@@ -224,7 +222,7 @@ angular.module('stranded.controllers')
         });
       }
 
-      console.log('replying bottle');
+      // console.log('replying bottle');
 
       if (!$scope.currentBottle) {
         console.log('you don\'t have a bottle to reply, this function shouldn\'t be called');
@@ -288,7 +286,7 @@ angular.module('stranded.controllers')
 
     $scope.toggleStarMessage = function (message) {
       if ($rootScope.online) {
-        console.log(message);
+        // console.log(message);
         var request;
         $ionicLoading.show();
         if (!message.starred) {
@@ -318,7 +316,7 @@ angular.module('stranded.controllers')
 
     $scope.toggleStarBottle = function (bottle) {
       if ($rootScope.online) {
-        console.log(bottle);
+        // console.log(bottle);
         var request;
         $ionicLoading.show();
         if (!bottle.starred) {
