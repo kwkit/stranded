@@ -455,7 +455,7 @@ module.exports = function (grunt) {
           master: ['index.html']
         },
         src: [
-          'fonts/**/*',
+          'fonts/**/*.*',
           '<%= yeoman.images %>/**/*.*',
           '<%= yeoman.scripts %>/**/*.js',
           '<%= yeoman.styles %>/style.css',
