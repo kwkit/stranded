@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stranded.services', ['ngResource'])
-  .service('authService', function($http, $q, session, ENV) {
+  .service('authService', function($rootScope, $http, $q, session, ENV) {
     /**
      * Check whether the user is logged in
      * @returns {*|Promise}
@@ -10,23 +10,28 @@ angular.module('stranded.services', ['ngResource'])
       var defer = $q.defer();
 
       if (session.getAuthToken() !== null) {
-        var config = {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept' : 'application/json',
-            'Authorization': session.getAuthToken()
-          }
-        };
-        $http
-          .get(ENV.apiEndpoint + 'api/sessions/verify', config)
-          .then(function() {
-            console.log('verified');
-            defer.resolve(true);
-          },
-          function() {
-            console.log('not verified');
-            defer.reject();
-          });
+        if ($rootScope.online) {
+          var config = {
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept' : 'application/json',
+              'Authorization': session.getAuthToken()
+            }
+          };
+          $http
+            .get(ENV.apiEndpoint + 'api/sessions/verify', config)
+            .then(function() {
+              console.log('verified');
+              defer.resolve(true);
+            },
+            function() {
+              console.log('not verified');
+              defer.reject();
+            });
+        } else {
+          console.log('has auth_token, but offline');
+          defer.resolve(true);
+        }
       } else {
         defer.reject();
       }
