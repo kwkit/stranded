@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('stranded.controllers')
-  .controller('GrabCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll, $location, $timeout, $ionicScrollDelegate) {
-    $scope.newMessageData = {};
+  .controller('GrabCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, bottlesApi, $anchorScroll,
+                                    $location, $timeout, $ionicHistory, $ionicScrollDelegate, localStorageService) {
+    $scope.replyBottleFormData = {};
+
     $scope.locationEnable = true;
     $scope.shouldAnimate = false;
 
@@ -31,8 +33,8 @@ angular.module('stranded.controllers')
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              $scope.newMessageData.latitude = position.coords.latitude;
-              $scope.newMessageData.longitude = position.coords.longitude;
+              $scope.replyBottleFormData.latitude = position.coords.latitude;
+              $scope.replyBottleFormData.longitude = position.coords.longitude;
             },
             function (error) {
               $scope.$apply(function () {
@@ -61,33 +63,53 @@ angular.module('stranded.controllers')
           });
         }
       } else {
-        $scope.newMessageData.latitude = null;
-        $scope.newMessageData.longitude = null;
+        $scope.replyBottleFormData.latitude = null;
+        $scope.replyBottleFormData.longitude = null;
       }
     };
 
     $scope.getCurrentBottle = function() {
-      bottlesApi.getCurrentBottle().$promise.then(
-        function (response) {
-          $scope.shouldAnimate = false;
-          $scope.currentBottle = response.bottle ? response.bottle : null;
-          if ($scope.currentBottle) {
-            $scope.setLocation($scope.locationEnable);
-            $scope.getBottleMapData();
-          }
-        },
-        function (error) {
-          if (error.status === 404) {
-            $scope.shouldAnimate = true;
-            console.log('aa');
-            if (!$scope.currentBottle) {
-              $timeout(function (){
-                $scope.grabBottle();
-              }, 2000);
+      if ($rootScope.online) {
+        bottlesApi.getCurrentBottle().$promise.then(
+          function (response) {
+            $scope.shouldAnimate = false;
+            $scope.currentBottle = response.bottle ? response.bottle : null;
+            localStorageService.set('currentBottle', angular.toJson($scope.currentBottle));
+
+            if ($scope.currentBottle) {
+              $scope.setLocation($scope.locationEnable);
+              $scope.getBottleMapData();
+            } else {
+              console.log('no available bottles to get');
+            }
+          },
+          function (error) {
+            if (error.status === 404) {
+              $scope.shouldAnimate = true;
+              console.log('aa');
+              if (!$scope.currentBottle) {
+                $timeout(function (){
+                  $scope.grabBottle();
+                }, 2000);
+              }
             }
           }
+        );
+      } else {
+        $scope.currentBottle = angular.fromJson(localStorageService.get('currentBottle'));
+        if ($scope.currentBottle) {
+          $scope.setLocation($scope.locationEnable);
+          $scope.getBottleMapData();
+        } else {
+          $ionicLoading.hide();
+          $ionicPopup.alert({
+            title: 'You\'re offline!',
+            template: 'You need a network connection to fish up a bottle!'
+          }).then(function() {
+            $state.go('home');
+          });
         }
-      );
+      }
     };
 
     $scope.grabBottle = function () {
@@ -95,19 +117,27 @@ angular.module('stranded.controllers')
       if ($scope.currentBottle) {
         console.log('you already have a bottle, this function shouldn\'t be called');
       } else {
-        $ionicLoading.show();
-        bottlesApi.fishBottle().$promise.then(
-          function (response) {
-            $scope.shouldAnimate = false;
-            $ionicLoading.hide();
-            $scope.currentBottle = response.bottle;
-            $scope.setLocation($scope.locationEnable);
-            $scope.getBottleMapData();
-          },
-          function (error) {
-            console.log('Error:', error.errors);
-          }
-        );
+        if ($rootScope.online) {
+          $ionicLoading.show();
+          bottlesApi.fishBottle().$promise.then(
+            function (response) {
+              $scope.shouldAnimate = false;
+              $ionicLoading.hide();
+              $scope.currentBottle = response.bottle;
+              $scope.setLocation($scope.locationEnable);
+              $scope.getBottleMapData();
+            },
+            function (error) {
+              console.log('Error:', error.errors);
+            }
+          );
+        } else {
+          $ionicLoading.hide();
+          $ionicPopup.alert({
+            title: 'You\'re offline!',
+            template: 'You need a network connection to fish up a bottle!'
+          });
+        }
       }
     };
 
@@ -157,13 +187,9 @@ angular.module('stranded.controllers')
     };
 
     $scope.replyBottle = function (replyBottleForm) {
-      console.log('replying bottle');
-
-      if (!$scope.currentBottle) {
-        console.log('you don\'t have a bottle to reply, this function shouldn\'t be called');
-      } else if (replyBottleForm.$valid) {
+      function onlineReplyBottle() {
         $ionicLoading.show();
-        bottlesApi.replyCurrentBottle($scope.newMessageData).$promise.then(
+        bottlesApi.replyCurrentBottle($scope.replyBottleFormData).$promise.then(
           function (response) {
             console.log(response);
             $ionicLoading.hide();
@@ -174,7 +200,7 @@ angular.module('stranded.controllers')
             }).then(function() {
               $state.go('home');
               $scope.currentBottle = null;
-              $scope.newMessageData = {};
+              $scope.replyBottleFormData = {};
             });
           },
           function (error) {
@@ -182,79 +208,145 @@ angular.module('stranded.controllers')
           }
         );
       }
-    };
 
-    $scope.releaseBottle = function () {
-      console.log('releasing bottle');
+      function offlineReplyBottle() {
+        $ionicLoading.show();
+        console.log('offline now, save user data to submit later');
+        localStorageService.set('replyBottleFormData', angular.toJson($scope.replyBottleFormData));
+        $ionicLoading.hide();
+
+        $ionicPopup.alert({
+          title: 'Reply successful!',
+          template: 'Bottle will be thrown into the sea when you are back online.'
+        }).then(function() {
+          $scope.replyBottleFormData = {};
+          $state.go('home');
+        });
+      }
+
+      console.log('replying bottle');
 
       if (!$scope.currentBottle) {
-        console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
-      } else {
+        console.log('you don\'t have a bottle to reply, this function shouldn\'t be called');
+      } else if (replyBottleForm.$valid) {
+        if($rootScope.online) {
+          onlineReplyBottle();
+        } else {
+          offlineReplyBottle();
+        }
+      }
+    };
+
+    $scope.releaseBottle = function (replyBottleForm) {
+      console.log('releasing bottle');
+
+      function onlineReleaseBottle() {
         $ionicLoading.show();
         bottlesApi.releaseBottle().$promise.then(
           function (response) {
             console.log(response);
             $ionicLoading.hide();
 
-            $ionicPopup.alert({
-              title: 'Return successful!',
-              template: 'Bottle thrown back into the sea without a new reply.'
-            }).then(function() {
-              $scope.currentBottle = null;
-              $scope.newMessageData = {};
-              $state.go('home');
-            });
+            $scope.currentBottle = null;
+            $scope.replyBottleFormData = {};
+
+            $scope.shouldAnimate = true;
+            console.log('aa');
+            if (!$scope.currentBottle) {
+              $timeout(function (){
+                $scope.grabBottle();
+              }, 2000);
+            }
           },
           function (error) {
             console.log('Error:', error.errors);
           }
         );
       }
+
+      if (!$scope.currentBottle) {
+        console.log('you don\'t have a bottle to release, this function shouldn\'t be called');
+      } else {
+        if ($rootScope.online) {
+          if (replyBottleForm.$invalid && replyBottleForm.$pristine) {
+            onlineReleaseBottle();
+          } else {
+            $ionicPopup.confirm({
+              title: 'You were writing halfway...',
+              template: 'Are you sure you want to throw back this bottle?'
+            }).then(function(res) {
+              if(res) {
+                onlineReleaseBottle();
+              }
+            });
+          }
+
+        } else {
+          $ionicPopup.alert({
+            title: 'You\'re offline!',
+            template: 'You need a network connection to throw back a bottle!'
+          });
+        }
+      }
     };
 
     $scope.toggleStarMessage = function (message) {
-      console.log(message);
-      var request;
-      $ionicLoading.show();
-      if (!message.starred) {
-        request = bottlesApi.starMessage(message.id);
-      } else {
-        request = bottlesApi.unstarMessage(message.id);
-      }
-
-      request.$promise.then(
-        function (response) {
-          $ionicLoading.hide();
-          message.stars = response.message.stars;
-          message.starred = response.message.starred;
-        },
-        function (error) {
-          $ionicLoading.hide();
-          console.log('Error:', error.errors);
+      if ($rootScope.online) {
+        console.log(message);
+        var request;
+        $ionicLoading.show();
+        if (!message.starred) {
+          request = bottlesApi.starMessage(message.id);
+        } else {
+          request = bottlesApi.unstarMessage(message.id);
         }
-      );
+
+        request.$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            message.stars = response.message.stars;
+            message.starred = response.message.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      } else {
+        $ionicPopup.alert({
+          title: 'You\'re offline!',
+          template: 'You need a network connection to star/unstar a message!!'
+        });
+      }
     };
 
     $scope.toggleStarBottle = function (bottle) {
-      console.log(bottle);
-      var request;
-      $ionicLoading.show();
-      if (!bottle.starred) {
-        request = bottlesApi.starBottle(bottle.id);
-      } else {
-        request = bottlesApi.unstarBottle(bottle.id);
-      }
-      request.$promise.then(
-        function (response) {
-          $ionicLoading.hide();
-          bottle.stars = response.bottle.stars;
-          bottle.starred = response.bottle.starred;
-        },
-        function (error) {
-          $ionicLoading.hide();
-          console.log('Error:', error.errors);
+      if ($rootScope.online) {
+        console.log(bottle);
+        var request;
+        $ionicLoading.show();
+        if (!bottle.starred) {
+          request = bottlesApi.starBottle(bottle.id);
+        } else {
+          request = bottlesApi.unstarBottle(bottle.id);
         }
-      );
+        request.$promise.then(
+          function (response) {
+            $ionicLoading.hide();
+            bottle.stars = response.bottle.stars;
+            bottle.starred = response.bottle.starred;
+          },
+          function (error) {
+            $ionicLoading.hide();
+            console.log('Error:', error.errors);
+          }
+        );
+      } else {
+        $ionicPopup.alert({
+          title: 'You\'re offline!',
+          template: 'You need a network connection to star/unstar a bottle!!'
+        });
+      }
     };
 
     $scope.goReply = function () {
@@ -265,6 +357,9 @@ angular.module('stranded.controllers')
     $scope.$on('$ionicView.enter', function() {
       $ionicScrollDelegate.scrollTop();
 
+      if (localStorageService.get('replyBottleFormData')) {
+        $scope.replyBottleFormData = angular.fromJson(localStorageService.get('replyBottleFormData'));
+      }
       if (!$scope.currentBottle) {
         $scope.getCurrentBottle();
       }

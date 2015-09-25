@@ -2,9 +2,10 @@
 
 angular.module('stranded.controllers')
   .controller('ThrowCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, localStorageService, bottlesApi) {
-    $scope.newMessageData = {};
+    $scope.createBottleFormData = {};
+
     $scope.clearMessageData = function () {
-      $scope.newMessageData = {};
+      $scope.createBottleFormData = {};
     };
     $scope.locationEnable = true;
 
@@ -14,8 +15,8 @@ angular.module('stranded.controllers')
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              $scope.newMessageData.latitude = position.coords.latitude;
-              $scope.newMessageData.longitude = position.coords.longitude;
+              $scope.createBottleFormData.latitude = position.coords.latitude;
+              $scope.createBottleFormData.longitude = position.coords.longitude;
             },
             function (error) {
               $scope.$apply(function () {
@@ -44,8 +45,8 @@ angular.module('stranded.controllers')
           });
         }
       } else {
-        $scope.newMessageData.latitude = null;
-        $scope.newMessageData.longitude = null;
+        $scope.createBottleFormData.latitude = null;
+        $scope.createBottleFormData.longitude = null;
       }
     };
 
@@ -63,7 +64,7 @@ angular.module('stranded.controllers')
 
     function onlineCreateBottle() {
       $ionicLoading.show();
-      bottlesApi.createBottle($scope.newMessageData).$promise.then(
+      bottlesApi.createBottle($scope.createBottleFormData).$promise.then(
         function (response) {
           console.log(response);
           $ionicLoading.hide();
@@ -72,7 +73,7 @@ angular.module('stranded.controllers')
             title: 'Bottle creation successful!',
             template: 'Bottle thrown into the sea.'
           }).then(function() {
-            $scope.newMessageData = {};
+            $scope.createBottleFormData = {};
             $state.go('home');
           });
         },
@@ -90,15 +91,21 @@ angular.module('stranded.controllers')
     function offlineCreateBottle() {
       $ionicLoading.show();
       console.log('offline now, save user data to submit later');
-      localStorageService.set('createBottleFormData', angular.toJson($scope.newMessageData));
+      localStorageService.set('createBottleFormData', angular.toJson($scope.createBottleFormData));
       $ionicLoading.hide();
 
       $ionicPopup.alert({
         title: 'Bottle creation successful!',
         template: 'Bottle will be thrown into the sea when you are back online.'
       }).then(function() {
-        $scope.newMessageData = {};
+        $scope.createBottleFormData = {};
         $state.go('home');
       });
     }
+
+    $scope.$on('$ionicView.enter', function() {
+      if (localStorageService.get('createBottleFormData')) {
+        $scope.createBottleFormData = angular.fromJson(localStorageService.get('createBottleFormData'));
+      }
+    });
   });

@@ -8,7 +8,7 @@
 // 'stranded.controllers' is found in app.js
 angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services', 'stranded.directives', 'ngResource', 'ngMessages', 'config', 'LocalStorageModule', 'ngMap'])
 
-.run(function($window, $rootScope, $state, $ionicPlatform, localStorageService, authService, session, bottlesApi) {
+.run(function($window, $rootScope, $state, $ionicPlatform, $timeout, localStorageService, authService, session, bottlesApi) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -28,7 +28,7 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
 
   $rootScope.$on('$stateChangeStart', function(event, toState){
     console.log('on change, check', toState);
-    if (toState.name !== 'landing' && toState.name !== 'login') {
+    if (toState.name !== 'landing' && toState.name !== 'login' && toState.name !== 'signup') {
       authService.isLoggedIn().then(
         function () {
         },
@@ -51,6 +51,28 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
     });
   }, false);
   $window.addEventListener('online', function () {
+    // Reply bottle, if any
+    var replyBottleFormData = localStorageService.get('replyBottleFormData');
+    if (replyBottleFormData) {
+      console.log('submitting offline reply bottle data');
+      $rootScope.balancedBarMessage = 'Throwing bottle into the sea...';
+      bottlesApi.replyCurrentBottle(angular.fromJson(replyBottleFormData)).$promise.then(
+        function () {
+          console.log('sent offline reply bottle data');
+          localStorageService.remove('replyBottleFormData');
+          $rootScope.balancedBarMessage = null;
+        },
+        function (error) {
+          console.log('Error:', error.data.errors);
+          $rootScope.balancedBarMessage = 'Error occurred trying to throw bottle.';
+          $timeout(function (){
+            $rootScope.balancedBarMessage = null;
+          }, 2000);
+          // TODO: Make error message more robust
+        }
+      );
+    }
+
     // Submit new bottle, if any
     var createBottleFormData = localStorageService.get('createBottleFormData');
     if (createBottleFormData) {
@@ -61,6 +83,14 @@ angular.module('stranded', ['ionic', 'stranded.controllers', 'stranded.services'
           console.log('sent offline create bottle data');
           localStorageService.remove('createBottleFormData');
           $rootScope.balancedBarMessage = null;
+        },
+        function (error) {
+          console.log('Error:', error.data.errors);
+          $rootScope.balancedBarMessage = 'Error occurred trying to throw bottle.';
+          $timeout(function (){
+            $rootScope.balancedBarMessage = null;
+          }, 2000);
+          // TODO: Make error message more robust
         }
       );
     }
