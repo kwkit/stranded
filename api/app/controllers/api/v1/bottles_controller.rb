@@ -1,5 +1,5 @@
 class Api::V1::BottlesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle, :my_bottles]
+  before_action :authenticate_with_token!, only: [:create, :fish, :release, :reply, :current_bottle, :my_bottles, :view]
   respond_to :json
 
   def reply
